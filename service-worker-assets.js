@@ -1,7 +1,7 @@
 ﻿self.assetsManifest = {
   "assets": [
     {
-      "hash": "sha256-f8\/rmTnJoAtHAW6czGY52npQ3WTJ0HBFTwIB2lHjxqU=",
+      "hash": "sha256-gWmMjA7mo+F1jlxVTsO+n16Qma4na0SunQrcMd+3MG0=",
       "url": "css\/app.css"
     },
     {
@@ -93,7 +93,7 @@
       "url": "Images\/whatsApp.png"
     },
     {
-      "hash": "sha256-oFG5mTJIcteZY1MQ8a5h4em\/s0GN66HeHA1+\/6Hix1c=",
+      "hash": "sha256-9cUPCy2DKbmVvb0IiC\/iqOBY7lMHXC2CCoIwiU6hNbs=",
       "url": "index.html"
     },
     {
@@ -133,7 +133,7 @@
       "url": "_framework\/dotnet.5.0.15.js"
     },
     {
-      "hash": "sha256-kHEVgFsAWmSwUs3EAEM\/cbNv3e2dEmf6iZ91CjaR0Uk=",
+      "hash": "sha256-kgTV\/Bjw0gmsQjk3iixCDwfjo4b50mNqZ2D19EP6EqU=",
       "url": "Portfolio.styles.css"
     },
     {
@@ -277,5 +277,5 @@
       "url": "_framework\/blazor.webassembly.js"
     }
   ],
-  "version": "e0FN\/6i8"
+  "version": "+\/BHn8KP"
 };
