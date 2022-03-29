@@ -80,6 +80,10 @@ span.item-menu {
         transition: visibility 0.3s linear,opacity 0.3s linear;
     }
 
+    .main {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
 }
 
 @media (min-width: 770px) {
@@ -102,10 +106,5 @@ span.item-menu {
     .main > div {
         padding-left: 2rem !important;
         padding-right: 1.5rem !important;
-    }
-
-    .main {
-        margin-left: 0;
-        margin-right: 0;
     }
 }
