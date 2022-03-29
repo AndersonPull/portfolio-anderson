@@ -12,4 +12,4 @@ FROM nginx:alpine AS final
 WORKDIR /usr/share/nginx/html
 COPY --from=publish /app/publish/wwwroot .
 
-#CMD ASPNETCORE_URLS="http://*:$PORT" dotnet portfolio.dll
+CMD ASPNETCORE_URLS="http://*:$PORT" dotnet portfolio.dll
