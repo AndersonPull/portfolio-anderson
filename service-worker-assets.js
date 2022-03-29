@@ -89,7 +89,7 @@
       "url": "Images\/whatsApp.png"
     },
     {
-      "hash": "sha256-UsW2n38NCoLRHp3WyXL+1oI4i07yiHyJ1UwR+R90CVo=",
+      "hash": "sha256-wQl\/kTXWvhY6qar5JZekq0fi3NnxCKsqdgsZZq3mIpE=",
       "url": "index.html"
     },
     {
@@ -193,7 +193,7 @@
       "url": "_framework\/System.IO.Pipelines.dll"
     },
     {
-      "hash": "sha256-knYBRdExdRQZbSkQplLxasv8v8JOx3nRY1P63CFlBJs=",
+      "hash": "sha256-ndmXNM+x0xJYmhiRqA1joYYEiq4JF0PVVYkDwEaSGAQ=",
       "url": "_framework\/Portfolio.dll"
     },
     {
@@ -265,7 +265,7 @@
       "url": "_framework\/System.Private.CoreLib.dll"
     },
     {
-      "hash": "sha256-TGyRiLEKpbmjlq+hoxtnB9jRSIgCTMV+E2Z6dKUPOhM=",
+      "hash": "sha256-vCm1J7UPwq9pcvGu5m1osS6y5ZdTKpOH9aOri63iEgk=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -273,5 +273,5 @@
       "url": "_framework\/blazor.webassembly.js"
     }
   ],
-  "version": "BflFD6u8"
+  "version": "EypXfCDd"
 };
