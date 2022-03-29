@@ -1,7 +1,7 @@
 ﻿self.assetsManifest = {
   "assets": [
     {
-      "hash": "sha256-N2bjpZQhU5bqhI\/vGYTGEfXc\/YnCnpRDl07VrV\/qHVY=",
+      "hash": "sha256-f8\/rmTnJoAtHAW6czGY52npQ3WTJ0HBFTwIB2lHjxqU=",
       "url": "css\/app.css"
     },
     {
@@ -49,16 +49,24 @@
       "url": "css\/open-iconic\/README.md"
     },
     {
-      "hash": "sha256-DRxGW3h3s2L6cS6xX4s3coFsfS0vih5TNH5kdnIQo1Q=",
+      "hash": "sha256-VMNNWN6xiO0aMf5CUYFkb0jdzpm7wR7OThdinctgpKs=",
       "url": "favicon.ico"
     },
     {
-      "hash": "sha256-DRxGW3h3s2L6cS6xX4s3coFsfS0vih5TNH5kdnIQo1Q=",
+      "hash": "sha256-VMNNWN6xiO0aMf5CUYFkb0jdzpm7wR7OThdinctgpKs=",
       "url": "icon-512.png"
     },
     {
       "hash": "sha256-ypwDj41DxSFwk85UVGbwln3QdxvHGkh\/UvvaSWubZfo=",
       "url": "Images\/arrow_down.png"
+    },
+    {
+      "hash": "sha256-VMNNWN6xiO0aMf5CUYFkb0jdzpm7wR7OThdinctgpKs=",
+      "url": "Images\/eu.png"
+    },
+    {
+      "hash": "sha256-Whym5BDzV99N2LveNlW5NhQq0aV\/mH5jEB+V20syZg4=",
+      "url": "Images\/eumobile.png"
     },
     {
       "hash": "sha256-AfJMNR08XdNz0BC+LZ3FGrM2FNxZRDaKtqlxPVvk2yI=",
@@ -73,10 +81,6 @@
       "url": "Images\/linkedin.png"
     },
     {
-      "hash": "sha256-iZR0dPzHWDz66NokoRIk\/elKzgoQiHNodIA+AyNxegQ=",
-      "url": "Images\/pqp.jpeg"
-    },
-    {
       "hash": "sha256-8a07XfRBSjfRE6zlQBwYCcaw0L2Qf63IQN5UTP48NZU=",
       "url": "Images\/scroll.png"
     },
@@ -89,7 +93,7 @@
       "url": "Images\/whatsApp.png"
     },
     {
-      "hash": "sha256-wQl\/kTXWvhY6qar5JZekq0fi3NnxCKsqdgsZZq3mIpE=",
+      "hash": "sha256-oFG5mTJIcteZY1MQ8a5h4em\/s0GN66HeHA1+\/6Hix1c=",
       "url": "index.html"
     },
     {
@@ -193,7 +197,7 @@
       "url": "_framework\/System.IO.Pipelines.dll"
     },
     {
-      "hash": "sha256-ndmXNM+x0xJYmhiRqA1joYYEiq4JF0PVVYkDwEaSGAQ=",
+      "hash": "sha256-oPy3H4SzVXjI+aHQ7K0dNRjj8eutxVm5C+9oRB4kn0E=",
       "url": "_framework\/Portfolio.dll"
     },
     {
@@ -265,7 +269,7 @@
       "url": "_framework\/System.Private.CoreLib.dll"
     },
     {
-      "hash": "sha256-vCm1J7UPwq9pcvGu5m1osS6y5ZdTKpOH9aOri63iEgk=",
+      "hash": "sha256-f08OG16r3xwgzyVWy0huytDkLzPrWVh3Psu2fnZRZxA=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -273,5 +277,5 @@
       "url": "_framework\/blazor.webassembly.js"
     }
   ],
-  "version": "EypXfCDd"
+  "version": "t8ATPqZ3"
 };
