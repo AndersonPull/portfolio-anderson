@@ -1,13 +1,13 @@
 ﻿.page {
-    position: relative;
+    position: fixed;
     display: flex;
     flex-direction: column;
 }
 
 .main {
     flex: 1;
-    margin-left: 12%;
-    margin-right: 5%;
+    align-items:center;
+
 }
 
 .top-row {
