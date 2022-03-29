@@ -103,6 +103,17 @@
         margin-right: 0;
     }
 }
+/* /Modules/Home/Components/StoryModal.razor.rz.scp.css */
+.container-story-modal[b-va88m4c0r4] {
+    width: 375px;
+    height: 660px;
+}
+
+#story-video[b-va88m4c0r4] {
+    width: 100%;
+    height: auto;
+    z-index: 103;
+}
 /* /Modules/Home/Pages/Home.razor.rz.scp.css */
 .content-home[b-mqeqs6r08i]{
     padding-bottom:20%;
