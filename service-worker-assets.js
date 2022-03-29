@@ -133,7 +133,7 @@
       "url": "_framework\/dotnet.5.0.15.js"
     },
     {
-      "hash": "sha256-ExV++5IpR8KNdy6dbVuwsiPDJrZUDz0wmSlT+ScpWeE=",
+      "hash": "sha256-BNzeYltvXpsTPi8nO96h68fC4weXEvqy5uAZvDlairA=",
       "url": "Portfolio.styles.css"
     },
     {
@@ -277,5 +277,5 @@
       "url": "_framework\/blazor.webassembly.js"
     }
   ],
-  "version": "bYWWzn9+"
+  "version": "n6k12Oqd"
 };
