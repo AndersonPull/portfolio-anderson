@@ -1,0 +1,21 @@
+﻿.container-contact {
+    align-items: center;
+    width: 100%;
+    margin-bottom: 3.5rem;
+    height: 6.5rem;
+}
+.grid-contact {
+    width: 100%;
+    align-items: center;
+    align-content: center;
+    align-self: center;
+}
+
+.item-contact {
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    align-self: center;
+    white-space:nowrap;
+}
