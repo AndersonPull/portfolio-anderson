@@ -12,8 +12,8 @@ jobs:
     
     - uses: actions/checkout@v2
   
-    - name: Setup .NET SDK
-      uses: actions/setup-dotnet@v1
+    - name: Setup .NET Core SDK
+      uses: actions/setup-dotnet@v2.0.0
       with:
         dotnet-version: 5.0
         
@@ -24,5 +24,5 @@ jobs:
       uses: JamesIves/github-pages-deploy-action@3.7.1
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        BRANCH: main
+        BRANCH: gh-pages
         FOLDER: release/wwwroot
