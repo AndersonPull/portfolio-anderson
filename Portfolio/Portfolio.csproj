@@ -9,6 +9,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.15" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.15" PrivateAssets="all" />
     <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
+    <PackageReference Include="Blazored.Modal" Version="6.0.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,11 +19,14 @@
   <ItemGroup>
     <None Remove="Home\" />
     <None Remove="Resources\Images\" />
+    <None Remove="Blazored.Modal" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="wwwroot\Images\" />
+    <Folder Include="wwwroot\Videos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\Images\" />
+    <Content Remove="wwwroot\Videos\" />
   </ItemGroup>
 </Project>

@@ -1,4 +1,6 @@
-﻿<div class="container-about">
+﻿@inject IModalService modal
+
+<div class="container-about">
     <div class="grid-about row justify-content-between">
         <div class="col-md-4 align-self-center">
             <h3>
@@ -13,21 +15,35 @@
             </p>
         </div>
         <div class="col-md-8 align-self-center story-grid">
-            <div class="story-image">
+            <div class="story-image" @onclick="ShowStory">
                 <img class="story-image" src="Images/eumobile.png" alt="tamb_mobile" width="170" height="300" />
             </div>
 
-            <div class="story-image">
+            <div class="story-image" @onclick="ShowStory">
                 <img class="story-image" src="Images/eumobile.png" alt="tamb_backend" width="170" height="300" />
             </div>
 
-            <div class="story-image">
+            <div class="story-image" @onclick="ShowStory">
                 <img class="story-image" src="Images/eumobile.png" alt="tamb_frontend" width="170" height="300" />
             </div>
 
-            <div class="story-image">
+            <div class="story-image" @onclick="ShowStory">
                 <img class="story-image" src="Images/eumobile.png" alt="tamb_fullstack"/>
             </div>
         </div>
     </div>
 </div>
+
+@code{
+
+    void ShowStory()
+    {
+        var options = new ModalOptions()
+        {
+            HideCloseButton = true,
+            HideHeader = true
+        };
+
+        modal.Show<StoryModal>(null, options);
+    }
+}

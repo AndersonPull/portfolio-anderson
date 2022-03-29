@@ -29,3 +29,11 @@ a, .btn-link {
     right: 0.75rem;
     top: 0.5rem;
 }
+
+.modal-story {
+    padding: 0px;
+    display: flex;
+    z-index: 103;
+    flex-direction: column;
+    background-color: #fff;
+}

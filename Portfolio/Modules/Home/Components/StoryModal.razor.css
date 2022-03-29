@@ -1,0 +1,10 @@
+﻿.container-story-modal {
+    width: 375px;
+    height: 660px;
+}
+
+#story-video {
+    width: 100%;
+    height: auto;
+    z-index: 103;
+}
