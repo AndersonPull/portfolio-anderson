@@ -1,7 +1,7 @@
 ﻿self.assetsManifest = {
   "assets": [
     {
-      "hash": "sha256-gWmMjA7mo+F1jlxVTsO+n16Qma4na0SunQrcMd+3MG0=",
+      "hash": "sha256-juTOEZBwVrZYvyk2gf6IWrcR4l5gkqlhPJwIpIf17iE=",
       "url": "css\/app.css"
     },
     {
@@ -93,7 +93,7 @@
       "url": "Images\/whatsApp.png"
     },
     {
-      "hash": "sha256-9cUPCy2DKbmVvb0IiC\/iqOBY7lMHXC2CCoIwiU6hNbs=",
+      "hash": "sha256-O8\/N6hQgi7GfNZ8cpacL3iBgWkrUeFNSmY3EKiTay+0=",
       "url": "index.html"
     },
     {
@@ -133,7 +133,7 @@
       "url": "_framework\/dotnet.5.0.15.js"
     },
     {
-      "hash": "sha256-kgTV\/Bjw0gmsQjk3iixCDwfjo4b50mNqZ2D19EP6EqU=",
+      "hash": "sha256-NRXXAV6CLKZ34d9Th5a\/VPKk+vzgwUKxI3A50UqFiaw=",
       "url": "Portfolio.styles.css"
     },
     {
@@ -197,7 +197,7 @@
       "url": "_framework\/System.IO.Pipelines.dll"
     },
     {
-      "hash": "sha256-m5PYR6cgER2zMbHwNjK7HlXku6xsKc3rmhGOFQZRoLE=",
+      "hash": "sha256-DKzqQHjLy0vDPXcn1YvGUfKt1VfkhsfmM0boe3mOufU=",
       "url": "_framework\/Portfolio.dll"
     },
     {
@@ -269,7 +269,7 @@
       "url": "_framework\/System.Private.CoreLib.dll"
     },
     {
-      "hash": "sha256-kbfIoSr1HIrpmhvuKVnI+UzrNVPnY\/T7gFHr4WWl4Wo=",
+      "hash": "sha256-+c4Obg1H17PJJBW4NdNML\/zHFDT1LCTJfHjau0ISk8Y=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -277,5 +277,5 @@
       "url": "_framework\/blazor.webassembly.js"
     }
   ],
-  "version": "+\/BHn8KP"
+  "version": "PrCht3uM"
 };
