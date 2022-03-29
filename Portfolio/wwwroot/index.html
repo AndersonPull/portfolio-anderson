@@ -11,22 +11,25 @@
     <link href="Portfolio.styles.css" rel="stylesheet" />
     <link href="manifest.json" rel="manifest" />
     <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
-    <!--<link rel="icon" href="icon-512.png" />-->
+    <link rel="icon" href="icon-512.png" />
 
     <style>
-        .body-index::-webkit-scrollbar {
+        body::-webkit-scrollbar {
             display: none;
             width:none;
         }
 
-        .body-index {
+        body {
             -ms-overflow-style: none; /* IE and Edge */
             overflow-x: hidden;
+        }
+        html{
+            background-color:#FFFFFF;
         }
     </style>
 </head>
 
-<body class="body-index">
+<body>
     <div id="app">Loading...</div>
 
     <div id="blazor-error-ui">

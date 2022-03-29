@@ -24,9 +24,5 @@
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\Images\" />
-    <Content Remove="wwwroot\Images\eu.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="wwwroot\Images\eu.png" />
   </ItemGroup>
 </Project>
