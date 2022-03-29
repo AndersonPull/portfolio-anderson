@@ -1,0 +1,209 @@
+/* /Modules/Home/Components/About.razor.rz.scp.css */
+.container-about[b-ezf9ty0u79] {
+    margin-right: 100px;
+    width: 100%;
+    height: 650px;
+}
+
+.grid-about[b-ezf9ty0u79] {
+    height: 100%;
+    margin:0;
+    padding:0;
+}
+
+.story-grid[b-ezf9ty0u79] {
+    overflow-x: auto;
+    white-space: nowrap;
+    -ms-overflow-style: none;
+}
+.story-grid[b-ezf9ty0u79]::-webkit-scrollbar {
+    display: none;
+}
+
+.story-image[b-ezf9ty0u79] {
+    width: 170px;
+    height: 300px;
+    background-color: #A2A2A2;
+    border-radius: 10px;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.span-title-about[b-ezf9ty0u79] {
+    color: #F1BC03;
+}
+/* /Modules/Home/Components/Contact.razor.rz.scp.css */
+.container-contact[b-b2jew08a83] {
+    align-items: center;
+    width: 100%;
+    margin-bottom: 3.5rem;
+    height: 6.5rem;
+}
+.grid-contact[b-b2jew08a83] {
+    width: 100%;
+    align-items: center;
+    align-content: center;
+    align-self: center;
+}
+
+.item-contact[b-b2jew08a83] {
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    align-self: center;
+    white-space:nowrap;
+}
+/* /Modules/Home/Components/Presentation.razor.rz.scp.css */
+.container-home[b-fx4s4655nz] {
+    margin-top: 120px;
+    margin-right: 100px;
+    padding-bottom:100px;
+}
+
+.ul-home[b-fx4s4655nz] {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.btn-home[b-fx4s4655nz] {
+    color: #FFFFFF;
+    font-weight: bold;
+    background-color: #F1BC03;
+    white-space: nowrap;
+}
+
+.nav-home[b-fx4s4655nz] {
+    white-space: nowrap;
+}
+
+.scroll-home[b-fx4s4655nz] {
+    margin-top: 120px;
+    margin-left: 3px;
+}
+
+.p-home[b-fx4s4655nz] {
+    margin: 0px;
+    padding: 0px;
+    text-decoration: none;
+    text-align: center;
+    color: #212529;
+    font-weight: bold;
+}
+
+@media (max-width: 770px) {
+    .nav-home[b-fx4s4655nz] {
+        display: inline;
+    }
+}
+/* /Modules/Home/Pages/Home.razor.rz.scp.css */
+.content-home[b-mqeqs6r08i]{
+    padding-bottom:20%;
+}
+/* /Shared/MainLayout.razor.rz.scp.css */
+.page[b-p531rfodtv] {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.main[b-p531rfodtv] {
+    flex: 1;
+    margin-left: 12%;
+    margin-right: 5%;
+}
+
+.top-row[b-p531rfodtv] {
+    background-color: #FFFFFF;
+    justify-content: flex-end;
+    align-items: center;
+    height: 3.5rem;
+    display: flex;
+    position: fixed;
+    width: 84%;
+}
+
+.top-row[b-p531rfodtv]  a, .top-row .btn-link[b-p531rfodtv] {
+    white-space: nowrap;
+    margin-left: 1.5rem;
+}
+
+.top-row a:first-child[b-p531rfodtv] {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.bottom-row[b-p531rfodtv] {
+    background-color: #F1BC03;
+    justify-content: flex-end;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    bottom: 0;
+    position: fixed;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.3s linear,opacity 0.3s linear;
+}
+
+.item-menu[b-p531rfodtv] {
+    color: #212529;
+    height: auto;
+    font-weight: bold;
+    text-decoration: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.icon_menu[b-p531rfodtv] {
+    color: #FFFFFF;
+}
+
+a.item-menu:active[b-p531rfodtv], a.item-menu:hover[b-p531rfodtv] {
+    color: #F1BC03;
+}
+
+span.item-menu[b-p531rfodtv] {
+    margin-left: 1.5rem;
+}
+
+@media (max-width: 770px) {
+    .top-row:not(.auth)[b-p531rfodtv] {
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0.3s linear,opacity 0.3s linear;
+    }
+
+    .bottom-row:not(.auth)[b-p531rfodtv] {
+        visibility: visible;
+        opacity: 100%;
+        transition: visibility 0.3s linear,opacity 0.3s linear;
+    }
+}
+
+@media (min-width: 770px) {
+    .page[b-p531rfodtv] {
+        flex-direction: row;
+    }
+
+    .sidebar[b-p531rfodtv] {
+        width: 250px;
+        height: 100vh;
+        position: sticky;
+        top: 0;
+    }
+
+    .top-row[b-p531rfodtv] {
+        top: 0;
+        z-index: 1;
+    }
+
+    .main > div[b-p531rfodtv] {
+        padding-left: 2rem !important;
+        padding-right: 1.5rem !important;
+    }
+}
