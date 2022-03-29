@@ -104,15 +104,15 @@
 }
 /* /Shared/MainLayout.razor.rz.scp.css */
 .page[b-p531rfodtv] {
-    position: relative;
+    position: fixed;
     display: flex;
     flex-direction: column;
 }
 
 .main[b-p531rfodtv] {
     flex: 1;
-    margin-left: 12%;
-    margin-right: 5%;
+    align-items:center;
+
 }
 
 .top-row[b-p531rfodtv] {
