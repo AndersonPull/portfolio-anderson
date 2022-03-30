@@ -9,10 +9,6 @@
     margin-left: 12%;
     margin-right: 5%;
 }
-.content-body{
-    padding-right:1.5rem;
-    padding-left:1.5rem;
-}
 
 .top-row {
     background-color: #FFFFFF;
@@ -88,10 +84,6 @@ span.item-menu {
         margin-left: 0px;
         margin-right: 0px;
     }
-
-    .content-body {
-        padding-right: 0px;
-    }
 }
 
 @media (min-width: 770px) {
@@ -112,7 +104,7 @@ span.item-menu {
     }
 
     .main > div {
-/*        padding-left: 2rem !important;*/
+        padding-left: 2rem !important;
         padding-right: 1.5rem !important;
     }
 }

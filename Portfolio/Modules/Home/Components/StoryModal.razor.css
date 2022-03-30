@@ -10,10 +10,9 @@
 }
 
 .close-modal {
+    width: 25%;
     position: absolute;
-    text-align: start;
-    margin-top: 10px;
-    margin-left: 10px;
+    text-align: end;
 }
 .close-span {
     color: #FFFFFF;
