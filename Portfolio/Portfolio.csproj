@@ -20,10 +20,14 @@
     <None Remove="Home\" />
     <None Remove="Resources\Images\" />
     <None Remove="Blazored.Modal" />
+    <None Remove="Modules\Home\Model\" />
+    <None Remove="Shared\Models\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="wwwroot\Images\" />
     <Folder Include="wwwroot\Videos\" />
+    <Folder Include="Modules\Home\Models\" />
+    <Folder Include="Shared\Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\Images\" />

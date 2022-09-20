@@ -1,13 +1,15 @@
-﻿@inject IModalService modal
-<div class="container-story-modal">
+﻿<div class="container-story-modal">
     <div class="close-modal">
         <span class="oi oi-x close-span ml-md-auto" @onclick="CloseStory"></span>
     </div>
-    <video id="story-video" src="Videos/storymobile.MOV" playsinline="" autoplay="autoplay"></video>
+    <video id="story-video" src="@Src" playsinline="" autoplay="autoplay"></video>
 </div>
 
 @code{
     [CascadingParameter] BlazoredModalInstance ModalInstance { get; set; }
+
+    [Parameter] public string Src { get; set; }
+
 
     void CloseStory()
     {

@@ -53,6 +53,20 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    cursor:pointer;
+}
+
+.item-menu-initial {
+    color: #212529;
+    height: auto;
+    font-weight: bold;
+    text-decoration: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    justify-self: start;
+    text-align:start;
 }
 
 .icon_menu {
@@ -106,5 +120,10 @@ span.item-menu {
     .main > div {
         padding-left: 2rem !important;
         padding-right: 1.5rem !important;
+    }
+
+    .collapse {
+        /* Never collapse the sidebar for wide screens */
+        display: block;
     }
 }

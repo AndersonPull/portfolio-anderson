@@ -19,6 +19,17 @@
     display: none;
 }
 
+.story-div {
+    width: 170px;
+    height: 300px;
+    display: inline-block;
+    overflow: hidden;
+    margin-left: 10px;
+    border-radius: 10px;
+    border-color: #F1BC03;
+    border-width:10px;
+}
+
 .story-image {
     width: 170px;
     height: 300px;

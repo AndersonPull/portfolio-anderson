@@ -1,14 +1,42 @@
 ﻿@inherits LayoutComponentBase
+@using Microsoft.JSInterop
+@inject IJSRuntime JS
+
 <div class="page">
     <div class="main">
         <div class="top-row">
-            <a class="item-menu">Anderson</a>
-            <a class="item-menu ml-md-auto">inicio</a>
-            <a class="item-menu">sobre</a>
-            <a class="item-menu">contato</a>
+            <a class="item-menu-initial">Anderson</a>
+           @foreach (var item in menu)
+            {
+                <a class="item-menu @item.Class" style=@item.Style @onclick="@(() => ToggleNavMenu(item))">@item.Text</a>
+            }
         </div>
         <div class="content px-4">
             @Body
         </div>
     </div>
 </div>
+
+@code{
+
+    List<Menu> menu = new List<Menu>()
+    {
+        new Menu(){ Id=1, Text="Inicio", Style = "color:#F1BC03;", Class="ml-md-auto"},
+        new Menu(){ Id=2, Text="sobre"},
+        new Menu(){ Id=3, Text="contato"}
+    };
+
+    private void ToggleNavMenu(Menu item)
+    {
+        foreach(var items in menu)
+            items.Style = "color:#212529;";
+
+        item.Style = "color:#F1BC03;";
+
+
+
+        @*var el = document.getElementById();
+        el.scrollIntoView(true);
+        window.scrollBy(0, -10);*@
+    }
+}

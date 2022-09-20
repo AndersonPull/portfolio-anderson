@@ -1,6 +1,4 @@
-﻿@inject IModalService modal
-
-<div class="container-about">
+﻿<div class="container-about">
     <div class="grid-about row justify-content-between">
         <div class="col-md-4 align-self-center">
             <h3>
@@ -15,38 +13,40 @@
             </p>
         </div>
         <div class="col-md-8 align-self-center story-grid">
-            <div class="story-image" @onclick="ShowStory">
-                <img class="story-image" src="Images/eumobile.png" alt="tamb_mobile" width="170" height="300" />
-            </div>
-
-            <div class="story-image" @onclick="ShowStory">
-                <img class="story-image" src="Images/eumobile.png" alt="tamb_backend" width="170" height="300" />
-            </div>
-
-            <div class="story-image" @onclick="ShowStory">
-                <img class="story-image" src="Images/eumobile.png" alt="tamb_frontend" width="170" height="300" />
-            </div>
-
-            <div class="story-image" @onclick="ShowStory">
-                <img class="story-image" src="Images/eumobile.png" alt="tamb_fullstack"/>
-            </div>
+           @foreach (var video in Videos)
+            {
+                <div class="story-div" @onclick="@(() => ShowStory(video.Src))">
+                    <img class="story-image" src="Images/eumobile.png" alt="tamb_mobile" width="170" height="300" />
+                </div>
+            }
         </div>
     </div>
 </div>
 
 @code{
+    [CascadingParameter] public IModalService Modal { get; set; }
 
-    void ShowStory()
+    private List<Video> Videos = new List<Video>()
+    {
+        new Video(){ Src = "Videos/storymobile.MOV" },
+        new Video(){ Src = "Videos/storymobile.MOV" },
+        new Video(){ Src = "Videos/storymobile.MOV" }
+    };
+
+    void ShowStory(string src)
     {
         var options = new ModalOptions()
         {
-            Animation = ModalAnimation.FadeOut(1),
+            Animation = ModalAnimation.FadeOut(0.2),
             Class = "modal-story",
             OverlayCustomClass = "modal-story",
             HideCloseButton = true,
-            HideHeader = true
+            HideHeader = true,
         };
 
-        modal.Show<StoryModal>(null, options);
+        var parameters = new ModalParameters();
+        parameters.Add(nameof(StoryModal.Src), src);
+
+        Modal.Show<StoryModal>(null, parameters, options);
     }
 }
