@@ -57,10 +57,6 @@
       "url": "icon-512.png"
     },
     {
-      "hash": "sha256-+4CQ\/eSU6Q00fi04h0m3ygsiKuaoclRRQQO+BFEsJoQ=",
-      "url": "Images\/.eumobile.png.icloud"
-    },
-    {
       "hash": "sha256-ypwDj41DxSFwk85UVGbwln3QdxvHGkh\/UvvaSWubZfo=",
       "url": "Images\/arrow_down.png"
     },
@@ -107,10 +103,6 @@
     {
       "hash": "sha256-4Yh4OTT5TEAPNyXEzOG+n5l2HPK294WFItz4SIelj88=",
       "url": "sample-data\/weather.json"
-    },
-    {
-      "hash": "sha256-Jcsc9+4j2WmWeqnY44y5bWUlxIIwVd1gPeSpQYY2O7w=",
-      "url": "Videos\/.storymobile.MOV.icloud"
     },
     {
       "hash": "sha256-olDtW+oGizmgJScM9O9Url6Kj76EOc6us7TUs\/pL3YQ=",
@@ -301,5 +293,5 @@
       "url": "_framework\/blazor.webassembly.js"
     }
   ],
-  "version": "yapgejLX"
+  "version": "ln1+ebi4"
 };
