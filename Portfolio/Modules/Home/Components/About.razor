@@ -15,7 +15,7 @@
         <div class="col-md-8 align-self-center story-grid">
            @foreach (var video in Videos)
             {
-                <div class="story-div" @onclick="@(() => ShowStory(video.Src))">
+                <div class="story-div"  @onclick="@(() => ShowStory(video.Src))">
                     <img class="story-image" src="Images/eumobile.png" alt="tamb_mobile" width="170" height="300" />
                 </div>
             }
@@ -28,6 +28,7 @@
 
     private List<Video> Videos = new List<Video>()
     {
+        new Video(){ Src = "Videos/storymobile.MOV" },
         new Video(){ Src = "Videos/storymobile.MOV" },
         new Video(){ Src = "Videos/storymobile.MOV" },
         new Video(){ Src = "Videos/storymobile.MOV" }
