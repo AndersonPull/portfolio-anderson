@@ -93,7 +93,7 @@
       "url": "Images\/whatsApp.png"
     },
     {
-      "hash": "sha256-tH3+Bz\/IhR52rbOfH6+AZQjeNq1x6QzpknDKmjz\/ln8=",
+      "hash": "sha256-N5N8luLbLGMl74TEypUQBuJ0brfuwxxWlUdSo9WIQ44=",
       "url": "index.html"
     },
     {
@@ -293,5 +293,5 @@
       "url": "_framework\/blazor.webassembly.js"
     }
   ],
-  "version": "ZmZA8cFc"
+  "version": "h2NtLkIg"
 };
