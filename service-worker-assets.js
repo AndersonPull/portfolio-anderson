@@ -49,7 +49,7 @@
       "url": "css\/open-iconic\/README.md"
     },
     {
-      "hash": "sha256-VMNNWN6xiO0aMf5CUYFkb0jdzpm7wR7OThdinctgpKs=",
+      "hash": "sha256-Z\/XzH2srmMSM1F70lESTG6l\/AsE\/mh5T80RnGJkTmR0=",
       "url": "favicon.png"
     },
     {
@@ -293,5 +293,5 @@
       "url": "_framework\/blazor.webassembly.js"
     }
   ],
-  "version": "BttWtMu6"
+  "version": "OjYkZC+D"
 };
