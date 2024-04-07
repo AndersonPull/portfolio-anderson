@@ -50,7 +50,7 @@
     },
     {
       "hash": "sha256-VMNNWN6xiO0aMf5CUYFkb0jdzpm7wR7OThdinctgpKs=",
-      "url": "favicon.ico"
+      "url": "favicon.png"
     },
     {
       "hash": "sha256-VMNNWN6xiO0aMf5CUYFkb0jdzpm7wR7OThdinctgpKs=",
@@ -93,7 +93,7 @@
       "url": "Images\/whatsApp.png"
     },
     {
-      "hash": "sha256-4E4TBwdLDdAdGgW26mK1XIkMUhK+8Gp16WgGv6SfpkY=",
+      "hash": "sha256-N6VtQyBEzg2H7scCbnvL9IvPHwHdM8I1333YWiFNXK8=",
       "url": "index.html"
     },
     {
@@ -293,5 +293,5 @@
       "url": "_framework\/blazor.webassembly.js"
     }
   ],
-  "version": "K0\/g3zZE"
+  "version": "BttWtMu6"
 };
