@@ -3,6 +3,8 @@
   "short_name": "Portfolio",
   "start_url": "./",
   "display": "standalone",
+  "background_color": "#FFFFFFFF",
+  "theme_color": "#FFFFFFFF",
   "icons": [
     {
       "src": "icon-512.png",
