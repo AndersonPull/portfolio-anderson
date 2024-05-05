@@ -85,7 +85,7 @@
       "url": "Images\/whatsApp.png"
     },
     {
-      "hash": "sha256-he2fJM9pF\/xMlwQIbPh4tniikKMi+HibCC2HGC0GO58=",
+      "hash": "sha256-J8RKLfN88dV6oV5aUhDel728QRAdEO0+GdGI5eluVb4=",
       "url": "index.html"
     },
     {
@@ -129,7 +129,7 @@
       "url": "_framework\/icudt_no_CJK.dat"
     },
     {
-      "hash": "sha256-0QrijBdOxBzJYq84p0h3KbJeMrBr9+Vh9UxYCSdvWG8=",
+      "hash": "sha256-lLZA3oSjcRovesQS7DTJzKlvlTLoW+uGmd2QGbRbFSg=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -197,7 +197,7 @@
       "url": "_framework\/netstandard.wasm"
     },
     {
-      "hash": "sha256-+Kc2iBNnhFODjzpeuKuF8w\/O4tNETO9XfBd6tS9TZDg=",
+      "hash": "sha256-PR9isyrI1PV9BSYQB8lDtWI3rPoYrJxWGAnvBHArY\/4=",
       "url": "_framework\/Portfolio.wasm"
     },
     {
@@ -273,5 +273,5 @@
       "url": "_content\/Blazored.Modal\/blazored.modal.js"
     }
   ],
-  "version": "7y3Pf8Np"
+  "version": "gg6g2qaH"
 };
