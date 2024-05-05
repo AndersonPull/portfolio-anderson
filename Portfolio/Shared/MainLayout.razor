@@ -2,14 +2,40 @@
 @using Microsoft.JSInterop
 @inject IJSRuntime JS
 
+<script>
+    function toggleTheme(){
+        var body = document.body;
+        var theme = body.dataset.bsTheme === 'light' ? 'dark' : 'light';
+        body.dataset.bsTheme = theme;
+
+        var iconElementLight = document.getElementById('themeIconLight');
+        var iconElementDark = document.getElementById('themeIconDark');
+
+        if (theme === 'light') {
+            iconElementDark.style.display = 'inline';
+            iconElementLight.style.display = 'none';
+        } else {
+            iconElementDark.style.display = 'none';
+            iconElementLight.style.display = 'inline';
+        }
+    }
+</script>
 <div class="page">
     <div class="main">
-        <div class="top-row">
-            <a class="item-menu-initial">Anderson</a>
-           @foreach (var item in menu)
-            {
-                <a class="item-menu @item.Class" style=@item.Style @onclick="@(() => ToggleNavMenu(item))">@item.Text</a>
-            }
+        <div class="navigation-bar">
+            <div class="navigation-title">
+                <p class="item-menu-initial">Anderson</p>
+            </div>
+            <div class="navigation-itens">
+                @* @foreach (var item in menu)
+                {
+                    <a class="item-menu @item.Class" style=@item.Style @onclick="@(() => ToggleNavMenu(item))">@item.Text</a>
+                } *@
+                <div class="item-contact" onclick="toggleTheme()">
+                    <i id="themeIconLight" class="bi bi-brightness-high-fill" style="color: #F1BC03;" width="30" alt="Light theme"/>
+                    <i id="themeIconDark" class="bi bi-moon-fill" style="color: #F1BC03; display: none;" width="30" alt="Dark theme"/>
+                </div>
+            </div>
         </div>
         <div class="content px-4">
             @Body
@@ -19,11 +45,15 @@
 
 @code{
 
+    [Inject]
+    private IJSRuntime JSRuntime { get; set; }
+    private string currentTheme = "light"; 
+
     List<Menu> menu = new List<Menu>()
     {
-        new Menu(){ Id=1, Text="Inicio", Style = "color:#F1BC03;", Class="ml-md-auto"},
-        new Menu(){ Id=2, Text="sobre"},
-        new Menu(){ Id=3, Text="contato"}
+        new Menu(){ Id=1, Text="Estou", Style = "color:#F1BC03;", Class="ml-md-auto"},
+        new Menu(){ Id=2, Text="trabalhando"},
+        new Menu(){ Id=3, Text="nisso"}
     };
 
     private void ToggleNavMenu(Menu item)
@@ -33,10 +63,17 @@
 
         item.Style = "color:#F1BC03;";
 
-
-
         @*var el = document.getElementById();
         el.scrollIntoView(true);
         window.scrollBy(0, -10);*@
     }
+
+    @* private async Task ToggleTheme()
+    {
+        // Inverte o tema atual
+        currentTheme = currentTheme == "light" ? "dark" : "light";
+
+        // Atualiza o tema diretamente no DOM usando IJSRuntime
+        await JSRuntime.InvokeVoidAsync("toggleTheme", currentTheme);
+    } *@
 }
