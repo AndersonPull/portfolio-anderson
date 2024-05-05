@@ -35,5 +35,4 @@ a, .btn-link {
     display: flex;
     z-index: 103;
     flex-direction: column;
-    background-color: #fff;
 }

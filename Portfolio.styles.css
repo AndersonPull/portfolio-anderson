@@ -159,8 +159,25 @@
     margin-right: 5%;
 }
 
-.top-row[b-p531rfodtv] {
-    background-color: #FFFFFF;
+.navigation-bar[b-p531rfodtv] {
+    justify-content: space-between;
+    align-items: center;
+    height: 3.5rem;
+    display: flex;
+    position: fixed;
+    width: 84%;
+}
+
+.navigation-title[b-p531rfodtv]{
+    justify-content: flex-start;
+    align-items: center;
+    height: 3.5rem;
+    display: flex;
+    position: fixed;
+    width: 84%;
+}
+
+.navigation-itens[b-p531rfodtv]{
     justify-content: flex-end;
     align-items: center;
     height: 3.5rem;
@@ -169,12 +186,12 @@
     width: 84%;
 }
 
-.top-row[b-p531rfodtv]  a, .top-row .btn-link[b-p531rfodtv] {
+.navigation-bar[b-p531rfodtv]  a, .navigation-bar .btn-link[b-p531rfodtv] {
     white-space: nowrap;
     margin-left: 1.5rem;
 }
 
-.top-row a:first-child[b-p531rfodtv] {
+.navigation-bar a:first-child[b-p531rfodtv] {
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -194,7 +211,6 @@
 }
 
 .item-menu[b-p531rfodtv] {
-    color: #212529;
     height: auto;
     font-weight: bold;
     text-decoration: none;
@@ -204,9 +220,21 @@
     user-select: none;
     cursor:pointer;
 }
+.item-contact[b-p531rfodtv] {
+    height: auto;
+    font-weight: bold;
+    text-decoration: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor:pointer;
+    margin-left: 10px;
+    margin-right: 10px;
+}
 
 .item-menu-initial[b-p531rfodtv] {
-    color: #212529;
+    margin-top: 18px;
     height: auto;
     font-weight: bold;
     text-decoration: none;
@@ -218,10 +246,6 @@
     text-align:start;
 }
 
-.icon_menu[b-p531rfodtv] {
-    color: #FFFFFF;
-}
-
 a.item-menu:active[b-p531rfodtv], a.item-menu:hover[b-p531rfodtv] {
     color: #F1BC03;
 }
@@ -231,7 +255,7 @@ span.item-menu[b-p531rfodtv] {
 }
 
 @media (max-width: 770px) {
-    .top-row:not(.auth)[b-p531rfodtv] {
+    .navigation-bar:not(.auth)[b-p531rfodtv] {
         visibility: hidden;
         opacity: 0;
         transition: visibility 0.3s linear,opacity 0.3s linear;
@@ -261,7 +285,7 @@ span.item-menu[b-p531rfodtv] {
         top: 0;
     }
 
-    .top-row[b-p531rfodtv] {
+    .navigation-bar[b-p531rfodtv] {
         top: 0;
         z-index: 1;
     }

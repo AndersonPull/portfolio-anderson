@@ -1,16 +1,8 @@
 ﻿self.assetsManifest = {
   "assets": [
     {
-      "hash": "sha256-aeP2OtXN4sUig5hD3RhlVbLJqSYud0QFvvJLWypSu+0=",
+      "hash": "sha256-yKqFOG4q+XimcgDxwA7t6ijEGav+HA3dcIMLrZmsXyU=",
       "url": "css\/app.css"
-    },
-    {
-      "hash": "sha256-DWuUK8Wq1I48xISPmbZWph3Z9X8SpOCAnVYGG2B7YDA=",
-      "url": "css\/bootstrap\/bootstrap.min.css"
-    },
-    {
-      "hash": "sha256-5LMtsmhqeZknQQHS0Q4BoUxOgzV2IWZOkWH8CPlC+0Y=",
-      "url": "css\/bootstrap\/bootstrap.min.css.map"
     },
     {
       "hash": "sha256-+7Zqv8jozZ12rlwIIfxUcaULb2pPImVOydwizJZ3W9Y=",
@@ -93,16 +85,12 @@
       "url": "Images\/whatsApp.png"
     },
     {
-      "hash": "sha256-2SCtqBMdetzd6MfI3bfc1xtL2UuTBfFrAMOJeNhYfOA=",
+      "hash": "sha256-he2fJM9pF\/xMlwQIbPh4tniikKMi+HibCC2HGC0GO58=",
       "url": "index.html"
     },
     {
-      "hash": "sha256-JZgtrLt1QcdOn\/Hpi2VPbfPg4c574Aap0THQ4DSdL6w=",
+      "hash": "sha256-riH0lmAPNu8r+bFQcAX42NtU+iLhve\/nSJLLqM4xO2w=",
       "url": "manifest.json"
-    },
-    {
-      "hash": "sha256-4Yh4OTT5TEAPNyXEzOG+n5l2HPK294WFItz4SIelj88=",
-      "url": "sample-data\/weather.json"
     },
     {
       "hash": "sha256-olDtW+oGizmgJScM9O9Url6Kj76EOc6us7TUs\/pL3YQ=",
@@ -141,7 +129,7 @@
       "url": "_framework\/icudt_no_CJK.dat"
     },
     {
-      "hash": "sha256-L4NDEQhAHuzA9aEsCFtxXq29WVHUowulJHOAFYBJFDY=",
+      "hash": "sha256-0QrijBdOxBzJYq84p0h3KbJeMrBr9+Vh9UxYCSdvWG8=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -153,7 +141,7 @@
       "url": "_framework\/Microsoft.AspNetCore.Components.wasm"
     },
     {
-      "hash": "sha256-ZkbkQhJGeEOlRqxDzdU8JP1cnR7UCcQgPsOLuSgzDDc=",
+      "hash": "sha256-NvHfrN5HsJdicPc4gWwUzXRXDs9wvQK2MoiANEc77J4=",
       "url": "_framework\/Microsoft.AspNetCore.Components.Web.wasm"
     },
     {
@@ -209,7 +197,7 @@
       "url": "_framework\/netstandard.wasm"
     },
     {
-      "hash": "sha256-qIa1yZRBTzH+lQCsWOacoEk9KTLvaNDYjq96vV2JEJE=",
+      "hash": "sha256-+Kc2iBNnhFODjzpeuKuF8w\/O4tNETO9XfBd6tS9TZDg=",
       "url": "_framework\/Portfolio.wasm"
     },
     {
@@ -273,7 +261,7 @@
       "url": "_framework\/System.Text.RegularExpressions.wasm"
     },
     {
-      "hash": "sha256-E2XFyQguMX2vLRLq8nluH3Tp+slbw\/KYFMrV1ebb884=",
+      "hash": "sha256-NaQnLp7BfuEheSmm7A2bO9tJyQeY5nL6Q9L9WLfALl8=",
       "url": "Portfolio.styles.css"
     },
     {
@@ -285,5 +273,5 @@
       "url": "_content\/Blazored.Modal\/blazored.modal.js"
     }
   ],
-  "version": "8g12AqB9"
+  "version": "7y3Pf8Np"
 };
