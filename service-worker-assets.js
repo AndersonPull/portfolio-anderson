@@ -1,7 +1,7 @@
 ﻿self.assetsManifest = {
   "assets": [
     {
-      "hash": "sha256-yKqFOG4q+XimcgDxwA7t6ijEGav+HA3dcIMLrZmsXyU=",
+      "hash": "sha256-OjoSUiDkO0YimWamE4fj1fKVTNx1tGaQE2\/KslH1QCs=",
       "url": "css\/app.css"
     },
     {
@@ -41,14 +41,6 @@
       "url": "css\/open-iconic\/README.md"
     },
     {
-      "hash": "sha256-Z\/XzH2srmMSM1F70lESTG6l\/AsE\/mh5T80RnGJkTmR0=",
-      "url": "favicon.png"
-    },
-    {
-      "hash": "sha256-VMNNWN6xiO0aMf5CUYFkb0jdzpm7wR7OThdinctgpKs=",
-      "url": "icon-512.png"
-    },
-    {
       "hash": "sha256-ypwDj41DxSFwk85UVGbwln3QdxvHGkh\/UvvaSWubZfo=",
       "url": "Images\/arrow_down.png"
     },
@@ -61,8 +53,16 @@
       "url": "Images\/eumobile.png"
     },
     {
+      "hash": "sha256-Z\/XzH2srmMSM1F70lESTG6l\/AsE\/mh5T80RnGJkTmR0=",
+      "url": "Images\/favicon.png"
+    },
+    {
       "hash": "sha256-AfJMNR08XdNz0BC+LZ3FGrM2FNxZRDaKtqlxPVvk2yI=",
       "url": "Images\/gitHub.png"
+    },
+    {
+      "hash": "sha256-VMNNWN6xiO0aMf5CUYFkb0jdzpm7wR7OThdinctgpKs=",
+      "url": "Images\/icon-512.png"
     },
     {
       "hash": "sha256-56HZ5iLqI27cfoM9DRuioy5TXX0fO+aY8LSpuWC5tTk=",
@@ -85,11 +85,11 @@
       "url": "Images\/whatsApp.png"
     },
     {
-      "hash": "sha256-J8RKLfN88dV6oV5aUhDel728QRAdEO0+GdGI5eluVb4=",
+      "hash": "sha256-XkRi8E\/RmWgL3jB1AVqJ8J6p+CbFlR0Ulya93FIU7U0=",
       "url": "index.html"
     },
     {
-      "hash": "sha256-NrZPub6Rg83ngoyjlBlvsUReJRZnbdLB0NzTSDT8610=",
+      "hash": "sha256-07r5IaXQT6dUoFCOdd0tQ20DoCHOWitT\/mA12pxtjeM=",
       "url": "manifest.json"
     },
     {
@@ -129,7 +129,7 @@
       "url": "_framework\/icudt_no_CJK.dat"
     },
     {
-      "hash": "sha256-HHDak9xV1+hXJnEYsY2C2RoFeYRTGSOHLD2YMMP9CyU=",
+      "hash": "sha256-nzHvy79Q0Yqz82gbuohN6qZbeSL7T8CCechk00Jhyoo=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -197,7 +197,7 @@
       "url": "_framework\/netstandard.wasm"
     },
     {
-      "hash": "sha256-ZJxqIvQfY+qnFKa0CjFzkeTB+ZjvRJ3Ey6VkzCIyTPU=",
+      "hash": "sha256-OfLShhwbV7li+i\/1i4GyRJOVrJhsYvjYoRN+6BWPN9A=",
       "url": "_framework\/Portfolio.wasm"
     },
     {
@@ -261,7 +261,7 @@
       "url": "_framework\/System.Text.RegularExpressions.wasm"
     },
     {
-      "hash": "sha256-NaQnLp7BfuEheSmm7A2bO9tJyQeY5nL6Q9L9WLfALl8=",
+      "hash": "sha256-QVu0QoXOeS1gCE6KLbF3uGtx7jb7gRcjcvxZuVMSysE=",
       "url": "Portfolio.styles.css"
     },
     {
@@ -273,5 +273,5 @@
       "url": "_content\/Blazored.Modal\/blazored.modal.js"
     }
   ],
-  "version": "lIhJlJUm"
+  "version": "5VkIDDSt"
 };
