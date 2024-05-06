@@ -36,3 +36,11 @@ a, .btn-link {
     z-index: 103;
     flex-direction: column;
 }
+
+.position-horizontal{
+    display:flex
+}
+
+.primary-color{
+    color: #F1BC03;
+}
