@@ -66,6 +66,7 @@
     align-content: center;
     align-self: center;
     white-space:nowrap;
+    margin-left: 5px;
 }
 /* /Modules/Home/Components/Presentation.razor.rz.scp.css */
 .container-home[b-fx4s4655nz] {
@@ -89,6 +90,7 @@
 
 .nav-home[b-fx4s4655nz] {
     white-space: nowrap;
+    margin-top: 10px;
 }
 
 .scroll-home[b-fx4s4655nz] {
