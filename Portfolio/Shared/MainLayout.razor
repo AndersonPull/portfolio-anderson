@@ -18,11 +18,14 @@
             iconElementDark.style.display = 'none';
             iconElementLight.style.display = 'inline';
         }
+
+        var backgroundColor = theme === 'light' ? '#FFFFFF' : '#212529';
+        document.getElementById("minhaDiv").style.backgroundColor = backgroundColor;
     }
 </script>
 <div class="page">
     <div class="main">
-        <div class="navigation-bar">
+        <div id="minhaDiv" class="navigation-bar" style="background-color:#212529;">
             <div class="navigation-title">
                 <p class="item-menu-initial">Anderson</p>
             </div>
