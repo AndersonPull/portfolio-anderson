@@ -41,10 +41,6 @@
       "url": "css\/open-iconic\/README.md"
     },
     {
-      "hash": "sha256-ypwDj41DxSFwk85UVGbwln3QdxvHGkh\/UvvaSWubZfo=",
-      "url": "Images\/arrow_down.png"
-    },
-    {
       "hash": "sha256-VMNNWN6xiO0aMf5CUYFkb0jdzpm7wR7OThdinctgpKs=",
       "url": "Images\/eu.png"
     },
@@ -57,32 +53,12 @@
       "url": "Images\/favicon.png"
     },
     {
-      "hash": "sha256-AfJMNR08XdNz0BC+LZ3FGrM2FNxZRDaKtqlxPVvk2yI=",
-      "url": "Images\/gitHub.png"
-    },
-    {
       "hash": "sha256-VMNNWN6xiO0aMf5CUYFkb0jdzpm7wR7OThdinctgpKs=",
       "url": "Images\/icon-512.png"
     },
     {
-      "hash": "sha256-56HZ5iLqI27cfoM9DRuioy5TXX0fO+aY8LSpuWC5tTk=",
-      "url": "Images\/insta.png"
-    },
-    {
-      "hash": "sha256-Gn4JicHUVXwrd\/XOZ2tm0lUtKSPF5DzQE5CxZESK8es=",
-      "url": "Images\/linkedin.png"
-    },
-    {
-      "hash": "sha256-8a07XfRBSjfRE6zlQBwYCcaw0L2Qf63IQN5UTP48NZU=",
-      "url": "Images\/scroll.png"
-    },
-    {
       "hash": "sha256-6FviDURruN1yY51QJE+IJoOYmZDDIxMdAixVARAaMyI=",
       "url": "Images\/whats.png"
-    },
-    {
-      "hash": "sha256-3HCT3z5XRgww6OKmMYlbZ7pppUiFBieOODUlekko9mo=",
-      "url": "Images\/whatsApp.png"
     },
     {
       "hash": "sha256-XkRi8E\/RmWgL3jB1AVqJ8J6p+CbFlR0Ulya93FIU7U0=",
@@ -129,7 +105,7 @@
       "url": "_framework\/icudt_no_CJK.dat"
     },
     {
-      "hash": "sha256-Jiy2ay40YwiwtLmod4dVyktx9vkGWqqkY1QhSkGj5s8=",
+      "hash": "sha256-pZ6bLYwfskcUY12Bh8PWJL3mJBGUcTjHhXBo46nP\/KM=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -197,7 +173,7 @@
       "url": "_framework\/netstandard.wasm"
     },
     {
-      "hash": "sha256-HYNyt0QlBNm6i3gZtP+JfVRZGvBmc3nVx26apiv+mPw=",
+      "hash": "sha256-st5Cuhn6hngK6vuwLUdwx+GWp+QdcvSahYOa0k20BV8=",
       "url": "_framework\/Portfolio.wasm"
     },
     {
@@ -273,5 +249,5 @@
       "url": "_content\/Blazored.Modal\/blazored.modal.js"
     }
   ],
-  "version": "WWu6Nq4C"
+  "version": "qAnxAASa"
 };
