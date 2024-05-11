@@ -20,9 +20,14 @@ public class NewsletterService : INewsletterService
     {
         try
         {
+            Console.WriteLine("API");
             Console.WriteLine(Environment.GetEnvironmentVariable("APIKEY"));
+
+            Console.WriteLine("API");
+            Console.WriteLine(Environment.GetEnvironmentVariable("DEVTO"));
+
             _httpClient.DefaultRequestHeaders.Add("Accept", "application/vnd.forem.api-v1+json");
-            _httpClient.DefaultRequestHeaders.Add("api-key", Environment.GetEnvironmentVariable("APIKEY"));
+            _httpClient.DefaultRequestHeaders.Add("api-key", Environment.GetEnvironmentVariable("DEVTO"));
             var response = await _httpClient.GetAsync("https://dev.to/api/articles/me/published");
 
             if(response.IsSuccessStatusCode)

@@ -35,4 +35,6 @@ jobs:
           BRANCH: gh-pages
           FOLDER: release/wwwroot
       - name: Use GitHub Secret
-        run: echo ${{ secrets.APIKEY }}
+        run: |
+          echo "Segredo 1: ${{ secrets.DEVTO}}"
+          echo "Segredo 2: ${{ secrets.APIKEY }}"
