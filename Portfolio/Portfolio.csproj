@@ -10,6 +10,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.3" PrivateAssets="all" />
     <PackageReference Include="System.Net.Http.Json" Version="8.0.0" />
     <PackageReference Include="Blazored.Modal" Version="6.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,6 +25,7 @@
     <None Remove="Shared\Models\" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Modules/Newsletter/Services/Implementation/" />
     <Folder Include="wwwroot\Images\" />
     <Folder Include="wwwroot\Videos\" />
     <Folder Include="Modules\Home\Models\" />

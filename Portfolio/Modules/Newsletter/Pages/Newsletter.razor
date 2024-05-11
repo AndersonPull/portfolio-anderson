@@ -1,0 +1,70 @@
+@page "/newsletter"
+@using Portfolio.Modules.Newsletter.Models
+
+@inject Portfolio.INewsletterService _newsletterService
+
+<div class="vh-100 d-flex align-items-center justify-content-center gap-3">
+    <div class="container-body vh-100 d-flex align-items-center justify-content-center gap-3">
+        @if(Newsletters == null)
+        {
+            <p>Carregando...</p>
+        }
+        else if(Newsletters.Count == 0)
+        {
+            <h2>Nenhum item encontrado</h2>
+        }
+        else
+        {
+            @foreach (var item in Newsletters)
+            {
+                <div class="border" style="width: 700px; border-radius: 10px;">
+                    <img src="@item.Cover_image" style="width: 700px; border-top-left-radius: 10px; border-top-right-radius: 10px;"/>
+                    <div style="padding: 10px;">
+                        <h2>@item.Title</h2>
+                        <p>@item.Description</p>
+                        <div class="position-horizontal">
+                            @foreach (var tag in item.Tag_list)
+                            {
+                                <div class="position-horizontal" style="padding-right: 10px;">
+                                    <p class="primary-color">#</p>
+                                    <p>@tag</p>
+                                </div>
+                            }
+                        </div>
+                        <div class="position-horizontal" style="justify-content: space-between;">
+                            <div class="position-horizontal">
+                                <div class="position-horizontal" style="padding-right: 10px;">
+                                    <i class="bi bi-heart-fill primary-color" style="padding-right: 5px;"></i>
+                                    <p>@item.Public_reactions_count reações</p>
+                                </div>
+                                <div class="position-horizontal">
+                                    <i class="bi bi-chat-fill primary-color" style="padding-right: 5px;"></i>
+                                    <p>@item.Comments_count comentários</p>
+                                </div>
+                            </div>
+                            <div class="position-horizontal" style="justify-content: flex-end; padding-right: 10px;">
+                                <p>@item.Reading_time_minutes min de leitura</p>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+@code
+{
+    List<ArticleModel> Newsletters;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetNewslettersAsync();
+    }
+
+    private async Task GetNewslettersAsync()
+    { 
+        Newsletters = await _newsletterService.GetAticlesAsync();
+    }
+}
