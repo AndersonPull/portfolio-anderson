@@ -20,6 +20,7 @@ public class NewsletterService : INewsletterService
     {
         try
         {
+            Console.WriteLine(Environment.GetEnvironmentVariable("APIKEY"));
             _httpClient.DefaultRequestHeaders.Add("Accept", "application/vnd.forem.api-v1+json");
             _httpClient.DefaultRequestHeaders.Add("api-key", Environment.GetEnvironmentVariable("APIKEY"));
             var response = await _httpClient.GetAsync("https://dev.to/api/articles/me/published");
