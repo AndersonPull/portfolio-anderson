@@ -21,7 +21,7 @@ public class NewsletterService : INewsletterService
         try
         {
             _httpClient.DefaultRequestHeaders.Add("Accept", "application/vnd.forem.api-v1+json");
-            _httpClient.DefaultRequestHeaders.Add("api-key", "Y4xW9RsAt3s9ER1mtLyxT6vY");
+            _httpClient.DefaultRequestHeaders.Add("api-key", Environment.GetEnvironmentVariable("DEVTO"));
             var response = await _httpClient.GetAsync("https://dev.to/api/articles/me/published");
 
             if(response.IsSuccessStatusCode)
