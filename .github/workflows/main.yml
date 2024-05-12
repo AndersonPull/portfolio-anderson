@@ -36,5 +36,4 @@ jobs:
           FOLDER: release/wwwroot
       - name: Use GitHub Secret
         run: |
-          echo "Segredo 1: ${{ secrets.DEVTO}}"
-          echo "Segredo 2: ${{ secrets.APIKEY }}"
+          echo "Segredo 1: ${{ secrets.DEVTO }}"
