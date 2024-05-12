@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Portfolio;
-using Portfolio.Modules.Newsletter.Pages;
 
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
