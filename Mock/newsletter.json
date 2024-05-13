@@ -1,0 +1,38 @@
+[
+    {
+        "type_of": "article",
+        "id": 1826071,
+        "title": "Zoio de lula no VScode",
+        "description": "Você está procurando um assistente para formatar e ficar de \"zóio\" no seu XAML, criei  Zoio de lula...",
+        "published": true,
+        "published_at": "2024-05-10T01:07:45.648Z",
+        "slug": "zoio-de-lula-no-vscode-mld",
+        "path": "/andersonpull/zoio-de-lula-no-vscode-mld",
+        "url": "https://dev.to/andersonpull/zoio-de-lula-no-vscode-mld",
+        "comments_count": 2,
+        "public_reactions_count": 2,
+        "page_views_count": 58,
+        "published_timestamp": "2024-05-10T01:07:45Z",
+        "body_markdown": "Você está procurando um assistente para formatar e ficar de \"zóio\" no seu `XAML`, criei  \u003ca href=\"https://marketplace.visualstudio.com/items?itemName=AndersonOliveira.zoiodelula\"\u003eZoio de lula\u003c/a\u003e para te ajudar nisso, ela e grátis e de \u003ca href=\"https://github.com/AndersonPull/Zoio_de_lula_MAUI\"\u003ecódigo aberto\u003c/a\u003e.\n\nEu atualmente estou testando escrever meu app em MAUI no Vscode e entre um tab aqui um enter lá, resolvi criar uma extensão para ajudar na rapidez quando fosse hora de formatar o código.\n\n\u003cimg src=\"https://dev-to-uploads.s3.amazonaws.com/uploads/articles/yjk1kvzp8ffo3yvgiqa2.png\" alt=\"VScode image extension\" width=\"1000\" /\u003e\n\nE como ele funciona atualmente, quando o VScode identifica um arquivo XAML ele entra em ação e permite que você formate um código escrito corretamente, com as devidas tags abertas e fechadas.\n\nE nessa primeira versão ele conta com as seguintes configurações.\n\n* número de atributos por linha\n* Posicione todos os atributos na primeira linha\n* Coloque o primeiro atributo na primeira linha\n* Remover atributos \"xmlns:\" não utilizados\n* Se não houver nós filhos, então tag de fechamento automático /\u003e\n\n\u003cimg src=\"https://dev-to-uploads.s3.amazonaws.com/uploads/articles/dpbutfnqq3qyyl9ekcp9.png\" alt=\"VScode settings Zoio de lula\" width=\"1000\" /\u003e\n\nE na pratica ela funciona assim:\n\n\u003cimg src=\"https://media.licdn.com/dms/image/D4D22AQEeQ_BpY0KYgw/feedshare-shrink_800/0/1713649188865?e=1718236800\u0026v=beta\u0026t=r5k8tpIXXvlqbItQdEZDIpTgclUXbhRFkfSq825FzGY\" alt=\"gif format\" width=\"1000\" /\u003e\n\nMuito obrigado!\n\n\n\n\n",
+        "positive_reactions_count": 2,
+        "cover_image": "https://media.dev.to/cdn-cgi/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F6a732ogp6gr7cc2y9640.png",
+        "tag_list": [
+            "maui",
+            "vscode",
+            "braziliandevs",
+            "dotnet"
+        ],
+        "canonical_url": "https://dev.to/andersonpull/zoio-de-lula-no-vscode-mld",
+        "reading_time_minutes": 1,
+        "user": {
+            "name": "Anderson Oliveira Bezerra",
+            "username": "andersonpull",
+            "twitter_username": null,
+            "github_username": "AndersonPull",
+            "user_id": 1423053,
+            "website_url": "https://www.andersonoliveira.dev.br/",
+            "profile_image": "https://media.dev.to/cdn-cgi/image/width=640,height=640,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Fuser%2Fprofile_image%2F1423053%2F6b6f7634-ea5a-4131-b258-a451f00dbf02.JPG",
+            "profile_image_90": "https://media.dev.to/cdn-cgi/image/width=90,height=90,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Fuser%2Fprofile_image%2F1423053%2F6b6f7634-ea5a-4131-b258-a451f00dbf02.JPG"
+        }
+    }
+]
