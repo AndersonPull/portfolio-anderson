@@ -5,7 +5,6 @@ using Portfolio.Modules.Newsletter.Models;
 using Newtonsoft.Json;
 using System;
 
-
 namespace Portfolio;
 
 public class NewsletterService : INewsletterService
@@ -34,6 +33,15 @@ public class NewsletterService : INewsletterService
             Console.WriteLine(ex.Message);
         }
 
-        return new List<ArticleModel>();
+        return await GetAticlesMock();
+    }
+
+    public async Task<List<ArticleModel>> GetAticlesMock()
+    {
+        var resposta = await _httpClient.GetAsync("Mock/newsletter.json");
+        if (resposta.IsSuccessStatusCode)
+            return JsonConvert.DeserializeObject<List<ArticleModel>>(await resposta.Content.ReadAsStringAsync());
+
+        return [];
     }
 }
