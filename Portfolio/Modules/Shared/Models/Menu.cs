@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Portfolio.Shared.Models
+namespace Portfolio.Modules.Shared.Models
 {
     public class Menu
     {
