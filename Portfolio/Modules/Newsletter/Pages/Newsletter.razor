@@ -21,8 +21,17 @@
                 <div @onclick="@(() => NavigateDetailPage(item.Url))" class="bg-body-secondary" style=" width: 700px; border-radius: 10px; margin-bottom: 15px; cursor: pointer;">
                     <img src="@item.CoverImage" style="width: 700px; border-top-left-radius: 10px; border-top-right-radius: 10px;"/>
                     <div style="padding: 15px;">
+                        <div class="position-horizontal" style="margin-bottom: 10px;">
+                            <div style="width: 50px; border-radius: 25px;">
+                                <img src="@item.User.ProfileImage" style="width: 50px; border-radius: 25px;"/>
+                            </div>
+                            <div style="margin-Left: 10px;">
+                                <p style="margin-bottom: 0px;">@item.User.Name</p>
+                                <p style="margin-bottom: 0px;">@item.PublishedAt.ToString("dd MMM")</p>
+                            </div>
+                        </div>
                         <h2>@item.Title</h2>
-                        <p>@item.Description</p>
+                        <p style="margin-bottom: 0px;">@item.Description</p>
                         <div class="position-horizontal">
                             @foreach (var tag in item.TagList)
                             {

@@ -35,6 +35,12 @@ namespace Portfolio.Modules.Newsletter.Models
 
         [JsonProperty("body_markdown")]
         public string BodyMarkdown { get; set; }
+
+        [JsonProperty("user")]
+        public UserModel User { get; set; } = new UserModel();
+
+        [JsonIgnore]
+        public string Date { get; set; }
         
     }
 }
