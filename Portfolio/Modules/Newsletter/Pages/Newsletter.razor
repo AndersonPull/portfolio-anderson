@@ -2,6 +2,7 @@
 @using Portfolio.Modules.Newsletter.Models
 
 @inject Portfolio.INewsletterService _newsletterService
+@inject NavigationManager NavigationManager
 
 <div class="vh-100 d-flex align-items-center justify-content-center gap-3">
     <div class="container-body vh-100 align-items-center justify-content-center gap-3">
@@ -17,13 +18,13 @@
         {
             @foreach (var item in Newsletters)
             {
-                <div class="bg-body-secondary" style=" width: 700px; border-radius: 10px; margin-bottom: 15px;">
-                    <img src="@item.Cover_image" style="width: 700px; border-top-left-radius: 10px; border-top-right-radius: 10px;"/>
+                <div @onclick="@(() => NavigateDetailPage(item.Url))" class="bg-body-secondary" style=" width: 700px; border-radius: 10px; margin-bottom: 15px; cursor: pointer;">
+                    <img src="@item.CoverImage" style="width: 700px; border-top-left-radius: 10px; border-top-right-radius: 10px;"/>
                     <div style="padding: 15px;">
                         <h2>@item.Title</h2>
                         <p>@item.Description</p>
                         <div class="position-horizontal">
-                            @foreach (var tag in item.Tag_list)
+                            @foreach (var tag in item.TagList)
                             {
                                 <div class="position-horizontal" style="padding-right: 10px;">
                                     <p class="primary-color">#</p>
@@ -35,15 +36,15 @@
                             <div class="position-horizontal">
                                 <div class="position-horizontal" style="padding-right: 10px;">
                                     <i class="bi bi-heart-fill primary-color" style="padding-right: 5px;"></i>
-                                    <p>@item.Public_reactions_count reações</p>
+                                    <p>@item.PublicReactionsCount reações</p>
                                 </div>
                                 <div class="position-horizontal">
                                     <i class="bi bi-chat-fill primary-color" style="padding-right: 5px;"></i>
-                                    <p>@item.Comments_count comentários</p>
+                                    <p>@item.CommentsCount comentários</p>
                                 </div>
                             </div>
                             <div class="position-horizontal" style="justify-content: flex-end; padding-right: 10px;">
-                                <p>@item.Reading_time_minutes min de leitura</p>
+                                <p>@item.ReadingTimeMinutes min de leitura</p>
                             </div>
                         </div>
                     </div>
@@ -62,4 +63,9 @@
 
     private async Task GetNewslettersAsync()
         => Newsletters = await _newsletterService.GetAticlesAsync();
+
+    private void NavigateDetailPage(string externalUrl)
+    { 
+        NavigationManager.NavigateTo(externalUrl, forceLoad: true);
+    }
 }
