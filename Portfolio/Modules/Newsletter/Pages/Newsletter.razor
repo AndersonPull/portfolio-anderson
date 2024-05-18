@@ -62,7 +62,7 @@
         => await GetNewslettersAsync();
 
     private async Task GetNewslettersAsync()
-        => Newsletters = await _newsletterService.GetAticlesAsync();
+        => Newsletters = await _newsletterService.GetAticlesMock();
 
     private void NavigateDetailPage(string externalUrl)
     { 
