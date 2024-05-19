@@ -18,7 +18,7 @@
         {
             @foreach (var item in Newsletters)
             {
-                <div @onclick="@(() => NavigateDetailPage(item.Url))" class="bg-body-secondary" style=" margin-left: 10%; margin-right: 10%;border-radius: 10px; margin-bottom: 15px; cursor: pointer;">
+                <div @onclick="@(() => NavigateDetailPage(item.Url))" class="bg-body-secondary" style=" max-width: 700px; border-radius: 10px; margin-bottom: 15px; cursor: pointer;">
                     <img src="@item.CoverImage" style=" max-width: 100%; height: auto;  object-fit: cover; "/>
                     <div style="padding: 15px;">
                         <div class="position-horizontal" style="margin-bottom: 10px;">
