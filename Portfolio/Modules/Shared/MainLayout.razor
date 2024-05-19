@@ -10,19 +10,12 @@
         var theme = body.dataset.bsTheme === 'light' ? 'dark' : 'light';
         body.dataset.bsTheme = theme;
 
-        var iconElementLight = document.getElementById('themeIconLight');
-        var iconElementDark = document.getElementById('themeIconDark');
-
-        if (theme === 'light') {
-            iconElementDark.style.display = 'inline';
-            iconElementLight.style.display = 'none';
-        } else {
-            iconElementDark.style.display = 'none';
-            iconElementLight.style.display = 'inline';
-        }
-
         var backgroundColor = theme === 'light' ? '#FFFFFF' : '#212529';
         document.getElementById("minhaDiv").style.backgroundColor = backgroundColor;
+
+        var newThemeIcon = theme === 'light' ? 'bi bi-moon-fill' : 'bi bi-brightness-high-fill';
+        document.getElementById("themeIconBottom").className = newThemeIcon;
+        document.getElementById("themeIcon").className = newThemeIcon;
     }
 </script>
 <div class="page">
@@ -43,14 +36,27 @@
                         <p class="item-menu" @onclick="@(() => ToggleNavMenu(item))">@item.Text</p>
                     }
                 }
-                <div class="item-contact" onclick="toggleTheme()">
-                    <i id="themeIconLight" class="bi bi-brightness-high-fill" style="color: #F1BC03;" width="30" alt="Light theme"/>
-                    <i id="themeIconDark" class="bi bi-moon-fill" style="color: #F1BC03; display: none;" width="30" alt="Dark theme"/>
-                </div>
+                <i id="themeIcon" class="bi bi-brightness-high-fill" style="color: #F1BC03;" width="30" alt="Selecione o tema" onclick="toggleTheme()"/>
             </div>
         </div>
         <div class="content px-4">
             @Body
+        </div>
+    </div>
+    <div class="nav-bar-bottom bg-body-secondary">
+        <div class="icon-container">
+            @foreach (var item in menu)
+            {
+                if(item.IsSelected)
+                {
+                    <i class="bi @item.Icon primary-color" width="40" alt="@item.Text"/>
+                }
+                else
+                {
+                    <i class="bi @item.Icon" width="40" alt="@item.Text" @onclick="@(() => ToggleNavMenu(item))"/>
+                }
+            }
+            <i id="themeIconBottom" onclick="toggleTheme()" class="bi bi-brightness-high-fill" style="color: #F1BC03;" width="30" alt="Light theme"></i>
         </div>
     </div>
 </div>
@@ -63,8 +69,8 @@
 
     List<Menu> menu = new List<Menu>()
     {
-        new Menu(){ Id=1, Text="Home", Page="/"},
-        new Menu(){ Id=2, Text="Newsletter", Page="/newsletter"}
+        new Menu(){ Id=1, Text="Home", Icon="bi-house-fill", Page="/"},
+        new Menu(){ Id=2, Text="Newsletter", Icon="bi-newspaper", Page="/newsletter"}
     };
 
     protected override void OnInitialized()

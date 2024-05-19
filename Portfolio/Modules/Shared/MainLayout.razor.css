@@ -2,12 +2,15 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    height: 100vh;
 }
 
 .main {
     flex: 1;
     margin-left: 10%;
     margin-right: 10%;
+    overflow-y: auto;
+    padding-bottom: 60px;
 }
 
 .navigation-bar {
@@ -104,11 +107,45 @@ span.item-menu {
     margin-left: 2rem;
 }
 
+.nav-bar-bottom {
+    visibility: hidden;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    height: 60px;
+}
+
+.nav-bar-bottom .icon-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.icon-container i {
+    flex: 1;
+    text-align: center;
+}
+
+.item-contact {
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+
 @media (max-width: 770px) {
     .navigation-bar:not(.auth) {
         visibility: hidden;
         opacity: 0;
         transition: visibility 0.3s linear,opacity 0.3s linear;
+    }
+
+    .nav-bar-bottom:not(.auth) {
+        visibility: visible;
     }
 
     .bottom-row:not(.auth) {

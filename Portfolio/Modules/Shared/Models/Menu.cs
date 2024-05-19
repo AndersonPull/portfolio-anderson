@@ -8,6 +8,8 @@
 
         public string Page { get; set; }
 
+        public string Icon { get; set; }
+
         public bool IsSelected { get; set; }
     }
 }
