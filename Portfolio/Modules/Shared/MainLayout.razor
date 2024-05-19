@@ -34,7 +34,14 @@
             <div class="navigation-itens">
                 @foreach (var item in menu)
                 {
-                    <a class="item-menu @item.Class" style=@item.Style @onclick="@(() => ToggleNavMenu(item))">@item.Text</a>
+                    if(item.IsSelected)
+                    {
+                        <p class="item-menu primary-color">@item.Text</p>
+                    }
+                    else
+                    {
+                        <p class="item-menu" @onclick="@(() => ToggleNavMenu(item))">@item.Text</p>
+                    }
                 }
                 <div class="item-contact" onclick="toggleTheme()">
                     <i id="themeIconLight" class="bi bi-brightness-high-fill" style="color: #F1BC03;" width="30" alt="Light theme"/>
@@ -56,20 +63,28 @@
 
     List<Menu> menu = new List<Menu>()
     {
-        new Menu(){ Id=1, Text="Home", Style = "color:#F1BC03;", Class="ml-md-auto"},
-        new Menu(){ Id=2, Text="Newsletter"}
+        new Menu(){ Id=1, Text="Home", Page="/"},
+        new Menu(){ Id=2, Text="Newsletter", Page="/newsletter"}
     };
+
+    protected override void OnInitialized()
+    {
+        var relativeUri = new Uri(NavigationManager.Uri).PathAndQuery;
+
+        var selectedMenu = menu
+            .FirstOrDefault(menu => menu.Page.Equals(relativeUri, StringComparison.OrdinalIgnoreCase));
+        
+        if (selectedMenu != null)
+            selectedMenu.IsSelected = true;
+    }
 
     private void ToggleNavMenu(Menu item)
     {
         foreach(var items in menu)
-            items.Style = "color:#dee2e6;";
+            items.IsSelected = false;
 
-        item.Style = "color:#F1BC03;";
+        item.IsSelected = true;
 
-        @*var el = document.getElementById();
-        el.scrollIntoView(true);
-        window.scrollBy(0, -10);*@
         string navigation = string.Empty;
         switch(item.Id) 
         {

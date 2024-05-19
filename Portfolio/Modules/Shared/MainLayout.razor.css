@@ -59,6 +59,8 @@
 }
 
 .item-menu {
+    margin-top: 18px;
+    margin-right: 10px;
     height: auto;
     font-weight: bold;
     text-decoration: none;
