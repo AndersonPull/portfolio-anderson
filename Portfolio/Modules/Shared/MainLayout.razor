@@ -44,21 +44,30 @@
         </div>
     </div>
     <div class="nav-bar-bottom bg-body-secondary">
-        <div class="icon-container">
-            @foreach (var item in menu)
+    <div class="icon-container">
+        @foreach (var item in menu)
+        {
+            if (item.IsSelected)
             {
-                if(item.IsSelected)
-                {
-                    <i class="bi @item.Icon primary-color" width="40" alt="@item.Text"/>
-                }
-                else
-                {
-                    <i class="bi @item.Icon" width="40" alt="@item.Text" @onclick="@(() => ToggleNavMenu(item))"/>
-                }
+                <div class="menu-item">
+                    <i class="bi @item.Icon primary-color" width="90" alt="@item.Text"></i>
+                    <p class="primary-color" style="font-size: 10px;">@item.Text</p>
+                </div>
             }
-            <i id="themeIconBottom" onclick="toggleTheme()" class="bi bi-brightness-high-fill" style="color: #F1BC03;" width="30" alt="Light theme"></i>
+            else
+            {
+                <div class="menu-item" @onclick="@(() => ToggleNavMenu(item))">
+                    <i class="bi @item.Icon" width="90" alt="@item.Text"></i>
+                    <p style="font-size: 10px;">@item.Text</p>
+                </div>
+            }
+        }
+        <div class="menu-item" onclick="toggleTheme()">
+            <i id="themeIconBottom" class="bi bi-brightness-high-fill" style="color: #F1BC03;" width="90" alt="Selecione o tema" />
+            <p style="font-size: 10px; color: #F1BC03;" >Tema</p>
         </div>
     </div>
+</div>
 </div>
 
 @code{

@@ -10,7 +10,7 @@
     margin-left: 10%;
     margin-right: 10%;
     overflow-y: auto;
-    padding-bottom: 60px;
+    padding-bottom: 80px;
 }
 
 .navigation-bar {
@@ -73,6 +73,7 @@
     user-select: none;
     cursor:pointer;
 }
+
 .item-contact {
     height: auto;
     font-weight: bold;
@@ -117,13 +118,27 @@ span.item-menu {
     justify-content: center;
     align-items: center;
     padding: 10px;
-    height: 60px;
+    height: 80px;
 }
 
 .nav-bar-bottom .icon-container {
     display: flex;
-    justify-content: space-between;
-    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* Optional: Adjust the gap between items as needed */
+}
+
+.nav-bar-bottom .menu-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 15px;
+}
+
+.theme-icon {
+    position: absolute;
+    right: 10px;
 }
 
 .icon-container i {
@@ -176,7 +191,6 @@ span.item-menu {
         top: 0;
         z-index: 1;
     }
-
 
     .collapse {
         /* Never collapse the sidebar for wide screens */

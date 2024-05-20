@@ -18,7 +18,7 @@
         {
             @foreach (var item in Newsletters)
             {
-                <div @onclick="@(() => NavigateDetailPage(item.Url))" class="bg-body-secondary" style=" max-width: 700px; border-radius: 10px; margin-bottom: 15px; cursor: pointer;">
+                <div class="bg-body-secondary" style=" max-width: 700px; border-radius: 10px; margin-bottom: 15px; cursor: pointer;" @onclick="@(() => NavigateDetailPage(item.Url))" >
                     <img src="@item.CoverImage" style=" max-width: 100%; height: auto;  object-fit: cover; "/>
                     <div style="padding: 15px;">
                         <div class="position-horizontal" style="margin-bottom: 10px;">
@@ -45,11 +45,11 @@
                             <div class="position-horizontal">
                                 <div class="position-horizontal" style="padding-right: 10px;">
                                     <i class="bi bi-heart-fill primary-color" style="padding-right: 5px;"></i>
-                                    <p>@item.PublicReactionsCount reações</p>
+                                    <p>@item.PublicReactionsCount</p>
                                 </div>
                                 <div class="position-horizontal">
                                     <i class="bi bi-chat-fill primary-color" style="padding-right: 5px;"></i>
-                                    <p>@item.CommentsCount comentários</p>
+                                    <p>@item.CommentsCount</p>
                                 </div>
                             </div>
                             <div class="position-horizontal" style="justify-content: flex-end; padding-right: 10px;">
