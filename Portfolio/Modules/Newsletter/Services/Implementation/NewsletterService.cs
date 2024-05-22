@@ -15,7 +15,7 @@ public class NewsletterService : INewsletterService
         _httpClient = httpClient;
     }
 
-    public async Task<List<ArticleModel>> GetAticlesAsync()
+    public async Task<List<ArticleModel>> GetArticlesAsyncAsync()
     {
         try
         {
@@ -33,10 +33,10 @@ public class NewsletterService : INewsletterService
             Console.WriteLine(ex.Message);
         }
 
-        return await GetAticlesMock();
+        return await GetArticlesMockAsync();
     }
 
-    public async Task<List<ArticleModel>> GetAticlesMock()
+    public async Task<List<ArticleModel>> GetArticlesMockAsync()
     {
         var resposta = await _httpClient.GetAsync("Mock/newsletter.json");
         if (resposta.IsSuccessStatusCode)

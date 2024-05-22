@@ -6,6 +6,6 @@ namespace Portfolio;
 
 public interface INewsletterService
 {
-   Task<List<ArticleModel>> GetAticlesAsync();
-   Task<List<ArticleModel>> GetAticlesMock();
+   Task<List<ArticleModel>> GetArticlesAsyncAsync();
+   Task<List<ArticleModel>> GetArticlesMockAsync();
 }
