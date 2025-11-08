@@ -2,7 +2,7 @@
 @using Portfolio.Modules.Newsletter.Models
 
 @inject Portfolio.INewsletterService _newsletterService
-@inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
 
 <div class=" d-flex align-items-center justify-content-center gap-3">
     <div style="margin-top: 80px;">
@@ -73,8 +73,8 @@
     private async Task GetNewslettersAsync()
         => Newsletters = await _newsletterService.GetArticlesMockAsync();
 
-    private void NavigateDetailPage(string externalUrl)
+    private async Task NavigateDetailPage(string externalUrl)
     { 
-        NavigationManager.NavigateTo(externalUrl, forceLoad: true);
+        await JSRuntime.InvokeVoidAsync("openInNewTab", externalUrl);
     }
 }
