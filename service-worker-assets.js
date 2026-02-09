@@ -1,7 +1,7 @@
 ﻿self.assetsManifest = {
   "assets": [
     {
-      "hash": "sha256-EvEf96mwIU9K0YVRWunl46X1580NvmNn3mQdTPzOqFo=",
+      "hash": "sha256-9ova+c9vVgRTuz6FNSQRQphLwgIes6JrTbzDXpvI4LE=",
       "url": "css\/app.css"
     },
     {
@@ -61,7 +61,7 @@
       "url": "Images\/whats.png"
     },
     {
-      "hash": "sha256-hZzFpUdNyFjxVzvGjR6jAe8ULxYLpnFBBQ0MDZ7215U=",
+      "hash": "sha256-N1mxHMhZkjgG02LQ+35yaV+lCeL8Yp82iMOiVhcddFY=",
       "url": "index.html"
     },
     {
@@ -109,7 +109,7 @@
       "url": "_framework\/icudt_no_CJK.dat"
     },
     {
-      "hash": "sha256-9OEB642lxiLRASwUwmS8vRGurYqZXcVwGbSyHokZTo8=",
+      "hash": "sha256-D17iJqw95zQSKyM9bFtLM2IsuD84rbCGr5yhhnOp\/Ig=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -185,7 +185,7 @@
       "url": "_framework\/Newtonsoft.Json.wasm"
     },
     {
-      "hash": "sha256-mcMwdyu7qptuSR1dOsRNaE+GczljO+LB7EecBIM+NoI=",
+      "hash": "sha256-TjeKyajLy4iFS9GyQ2KzbQOLz0QKnUEEJFoIHyh7I1g=",
       "url": "_framework\/Portfolio.wasm"
     },
     {
@@ -369,5 +369,5 @@
       "url": "_content\/Blazored.Modal\/blazored.modal.js"
     }
   ],
-  "version": "lpbpIw7K"
+  "version": "xV4+r9W\/"
 };
