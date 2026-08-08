@@ -132,13 +132,17 @@
 @media (orientation: portrait) {
     .virtual-gamepad {
         --control-size: clamp(1.9rem, 9.5vw, 2.8rem);
-        padding-right: 1rem;
-        padding-bottom: 1.25rem;
-        padding-left: 1rem;
+        padding-right: 30px;
+        padding-bottom: 30px;
+        padding-left: 30px;
     }
 
     .gamepad-btn {
         font-size: 0.9rem;
+    }
+
+    .system-buttons {
+        bottom: 30px;
     }
 }
 
