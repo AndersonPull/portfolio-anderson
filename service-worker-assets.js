@@ -45,7 +45,7 @@
       "url": "emo\/covers\/.gitkeep"
     },
     {
-      "hash": "sha256-FwS\/nkSuckRdjOckX0TYao7nftLIjZUq8MG3ikBmyqQ=",
+      "hash": "sha256-s2WX6Oezr15ec1uswIsIX1FXaYXX62NyILGpv21VMXg=",
       "url": "emo\/games.json"
     },
     {
@@ -63,6 +63,10 @@
     {
       "hash": "sha256-CDjlMf4iwHdSj+vhTLP\/fEkvH1+o3jVBkr3\/cTfCf1s=",
       "url": "emo\/roms\/Super Mario World (USA).sfc"
+    },
+    {
+      "hash": "sha256-dd1+DBgqdZp+W+q7ynWB\/xEzbEFvpHEYBM9vFI+8RcA=",
+      "url": "emo\/roms\/Ultimate Mortal Kombat 3 (USA).md"
     },
     {
       "hash": "sha256-VMNNWN6xiO0aMf5CUYFkb0jdzpm7wR7OThdinctgpKs=",
@@ -85,11 +89,11 @@
       "url": "Images\/whats.png"
     },
     {
-      "hash": "sha256-J2BsXsUj4+EmVbpVDWfWsdKPB0r5RMV0UNz\/WBSrwPk=",
+      "hash": "sha256-7YB6+cl4T6koX9rMsOw3BVaFpZ0Iu2jN+S73ZYVznq0=",
       "url": "index.html"
     },
     {
-      "hash": "sha256-xOmHCLQSm34zCP6XkCKWh3KjHAr61G7lJi+iPHWgb\/Y=",
+      "hash": "sha256-7gE9CoWVOD7Z4SIFvhw3lXX\/ZtoD7BwgmpUJjuup+JE=",
       "url": "js\/emo\/emulator.js"
     },
     {
@@ -137,7 +141,7 @@
       "url": "_framework\/icudt_no_CJK.dat"
     },
     {
-      "hash": "sha256-kxqos+Lkt50KylKbYOhYCqJUm8QzK806CpB3g3RsO+g=",
+      "hash": "sha256-82Gy+iSlMx6AVTGardIblYVcjLk0uNr0sDN4SvjTzkA=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -153,7 +157,7 @@
       "url": "_framework\/Microsoft.AspNetCore.Components.Web.wasm"
     },
     {
-      "hash": "sha256-3lk\/351jh6AEHyfME1fgB4sLbGy6gh+Dx3eQMB3MCe0=",
+      "hash": "sha256-7hR276mTitS8ObstNQ+vTh1DKK\/+auCCCnpyUR3xoMI=",
       "url": "_framework\/Microsoft.AspNetCore.Components.WebAssembly.wasm"
     },
     {
@@ -213,7 +217,7 @@
       "url": "_framework\/Newtonsoft.Json.wasm"
     },
     {
-      "hash": "sha256-Rv\/A4twv7EGBV8P1lEJsjqcdgGbLidss4lfzquLtfXI=",
+      "hash": "sha256-pWnoU\/XVDO7ytwsSg0Nk\/nTlqON8Dbqhlq4mDJLt5vg=",
       "url": "_framework\/Portfolio.wasm"
     },
     {
@@ -281,7 +285,7 @@
       "url": "_framework\/System.Memory.wasm"
     },
     {
-      "hash": "sha256-kJJlZC6wJzPPt65\/JQ5Xq0KfrumCVBj1zgOCYvtRMmg=",
+      "hash": "sha256-Vmu5nPl\/y2g7hqrnIqpyw3V\/lMJcvTXLidIsTRpjR7o=",
       "url": "_framework\/System.Net.Http.wasm"
     },
     {
@@ -341,7 +345,7 @@
       "url": "_framework\/System.Runtime.Serialization.Primitives.wasm"
     },
     {
-      "hash": "sha256-GfLYPDpd8JSeZb8wEe+Hv8H5wX1U4Lfn3tnok9IPhpw=",
+      "hash": "sha256-JIAcaXDmlkomZSSt1zaxnlVWO0nvoTTxQWkCGP2kW\/0=",
       "url": "_framework\/System.Runtime.wasm"
     },
     {
@@ -385,7 +389,7 @@
       "url": "_framework\/System.Xml.XDocument.wasm"
     },
     {
-      "hash": "sha256-1pHcYdRPG1GEjWramBJqx7gr6PyCdkS7YHO4vqtJmJA=",
+      "hash": "sha256-RmGMyYkH1hzGzrrqACQJsfZ7rB1\/aOL6tmDUa5hIYUw=",
       "url": "Portfolio.styles.css"
     },
     {
@@ -397,5 +401,5 @@
       "url": "_content\/Blazored.Modal\/blazored.modal.js"
     }
   ],
-  "version": "QqSkDJNC"
+  "version": "s9gTGnCQ"
 };
