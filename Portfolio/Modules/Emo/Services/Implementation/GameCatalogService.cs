@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components.WebAssembly.Http;
 using Newtonsoft.Json;
 using Portfolio.Modules.Emo.Models;
 
@@ -21,7 +22,13 @@ public class GameCatalogService : IGameCatalogService
     {
         try
         {
-            var response = await _httpClient.GetAsync("emo/games.json");
+            var cacheVersion = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+            using var request = new HttpRequestMessage(
+                HttpMethod.Get,
+                $"emo/games.json?v={cacheVersion}");
+            request.SetBrowserRequestCache(BrowserRequestCache.NoStore);
+
+            using var response = await _httpClient.SendAsync(request);
             if (response.IsSuccessStatusCode)
             {
                 var json = await response.Content.ReadAsStringAsync();

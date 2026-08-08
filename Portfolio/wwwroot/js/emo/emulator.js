@@ -95,10 +95,19 @@ window.emoEmulator = {
 
         try {
             if (element.requestFullscreen) {
-                await element.requestFullscreen({ navigationUI: 'hide' });
+                try {
+                    await element.requestFullscreen({ navigationUI: 'hide' });
+                } catch {
+                    await element.requestFullscreen();
+                }
             } else if (element.webkitRequestFullscreen) {
                 element.webkitRequestFullscreen();
+            } else if (element.mozRequestFullScreen) {
+                element.mozRequestFullScreen();
+            } else if (element.msRequestFullscreen) {
+                element.msRequestFullscreen();
             } else {
+                window.alert('Este navegador não permite tela cheia. Adicione o site à tela inicial para abrir como aplicativo.');
                 return false;
             }
 
@@ -106,10 +115,12 @@ window.emoEmulator = {
                 await screen.orientation.lock('landscape').catch(() => {});
             }
 
+            window.scrollTo(0, 1);
             this.resize();
             return true;
         } catch (error) {
             console.warn('emoEmulator.enterFullscreen:', error);
+            window.alert('Não foi possível entrar em tela cheia neste navegador.');
             return false;
         }
     }

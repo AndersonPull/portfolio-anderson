@@ -65,6 +65,8 @@
     max-width: 960px;
     margin: 0 auto;
     width: 100%;
+    flex: 0 0 auto;
+    padding-bottom: 1.5rem;
 }
 
 .emo-card {
@@ -132,7 +134,13 @@
 
 @media (min-width: 768px) {
     .emo-grid {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        grid-template-columns: repeat(4, minmax(0, 1fr));
         gap: 1.25rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .emo-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
