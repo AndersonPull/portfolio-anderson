@@ -1,0 +1,65 @@
+@page "/emo"
+@layout EmoLayout
+@using Portfolio.Modules.Emo.Models
+
+@inject IGameCatalogService GameCatalogService
+@inject NavigationManager NavigationManager
+
+<div class="emo-catalog">
+    <header class="emo-catalog-header">
+        <button type="button" class="emo-home-link" @onclick="NavigateHome">← Portfolio</button>
+        <h1>Retro Games</h1>
+        <p>Escolha um jogo para jogar no navegador</p>
+    </header>
+
+    @if (Games is null)
+    {
+        <p class="emo-status">Carregando...</p>
+    }
+    else if (Games.Count == 0)
+    {
+        <div class="emo-empty">
+            <h2>Nenhum jogo configurado</h2>
+            <p>Adicione ROMs em <code>wwwroot/emo/roms/</code> e atualize <code>emo/games.json</code>.</p>
+        </div>
+    }
+    else
+    {
+        <div class="emo-grid">
+            @foreach (var game in Games)
+            {
+                <button type="button" class="emo-card" @onclick="@(() => PlayGame(game.Id))">
+                    <div class="emo-card-cover">
+                        @if (!string.IsNullOrWhiteSpace(game.Cover))
+                        {
+                            <img src="@game.Cover" alt="@game.Title" />
+                        }
+                        else
+                        {
+                            <div class="emo-card-placeholder">
+                                <i class="bi bi-controller"></i>
+                            </div>
+                        }
+                    </div>
+                    <div class="emo-card-body">
+                        <span class="emo-badge">@game.System.ToUpperInvariant()</span>
+                        <h2>@game.Title</h2>
+                    </div>
+                </button>
+            }
+        </div>
+    }
+</div>
+
+@code {
+    private List<GameEntry>? Games;
+
+    protected override async Task OnInitializedAsync()
+        => Games = await GameCatalogService.GetGamesAsync();
+
+    private void PlayGame(string gameId)
+        => NavigationManager.NavigateTo($"/emo/play/{gameId}");
+
+    private void NavigateHome()
+        => NavigationManager.NavigateTo("/");
+}

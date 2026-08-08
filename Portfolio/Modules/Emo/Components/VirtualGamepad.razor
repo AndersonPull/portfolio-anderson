@@ -1,0 +1,126 @@
+@inject IJSRuntime JSRuntime
+
+<div class="virtual-gamepad" @oncontextmenu:preventDefault="true">
+    <div class="gamepad-dpad">
+        <button type="button"
+                class="gamepad-btn dpad-up @(IsPressed("up") ? "pressed" : "")"
+                @onpointerdown="@(() => PressKey("up"))"
+                @onpointerup="@(() => ReleaseKey("up"))"
+                @onpointerleave="@(() => ReleaseKey("up"))"
+                @onpointercancel="@(() => ReleaseKey("up"))">
+            ↑
+        </button>
+        <div class="dpad-middle">
+            <button type="button"
+                    class="gamepad-btn dpad-left @(IsPressed("left") ? "pressed" : "")"
+                    @onpointerdown="@(() => PressKey("left"))"
+                    @onpointerup="@(() => ReleaseKey("left"))"
+                    @onpointerleave="@(() => ReleaseKey("left"))"
+                    @onpointercancel="@(() => ReleaseKey("left"))">
+                ←
+            </button>
+            <button type="button"
+                    class="gamepad-btn dpad-right @(IsPressed("right") ? "pressed" : "")"
+                    @onpointerdown="@(() => PressKey("right"))"
+                    @onpointerup="@(() => ReleaseKey("right"))"
+                    @onpointerleave="@(() => ReleaseKey("right"))"
+                    @onpointercancel="@(() => ReleaseKey("right"))">
+                →
+            </button>
+        </div>
+        <button type="button"
+                class="gamepad-btn dpad-down @(IsPressed("down") ? "pressed" : "")"
+                @onpointerdown="@(() => PressKey("down"))"
+                @onpointerup="@(() => ReleaseKey("down"))"
+                @onpointerleave="@(() => ReleaseKey("down"))"
+                @onpointercancel="@(() => ReleaseKey("down"))">
+            ↓
+        </button>
+    </div>
+
+    <div class="gamepad-actions">
+        <div class="action-row">
+            <button type="button"
+                    class="gamepad-btn action-btn @(IsPressed("y") ? "pressed" : "")"
+                    @onpointerdown="@(() => PressKey("y"))"
+                    @onpointerup="@(() => ReleaseKey("y"))"
+                    @onpointerleave="@(() => ReleaseKey("y"))"
+                    @onpointercancel="@(() => ReleaseKey("y"))">Y</button>
+            <button type="button"
+                    class="gamepad-btn action-btn @(IsPressed("x") ? "pressed" : "")"
+                    @onpointerdown="@(() => PressKey("x"))"
+                    @onpointerup="@(() => ReleaseKey("x"))"
+                    @onpointerleave="@(() => ReleaseKey("x"))"
+                    @onpointercancel="@(() => ReleaseKey("x"))">X</button>
+            <button type="button"
+                    class="gamepad-btn action-btn @(IsPressed("r") ? "pressed" : "")"
+                    @onpointerdown="@(() => PressKey("r"))"
+                    @onpointerup="@(() => ReleaseKey("r"))"
+                    @onpointerleave="@(() => ReleaseKey("r"))"
+                    @onpointercancel="@(() => ReleaseKey("r"))">Z</button>
+        </div>
+        <div class="action-row">
+            <button type="button"
+                    class="gamepad-btn action-btn @(IsPressed("a") ? "pressed" : "")"
+                    @onpointerdown="@(() => PressKey("a"))"
+                    @onpointerup="@(() => ReleaseKey("a"))"
+                    @onpointerleave="@(() => ReleaseKey("a"))"
+                    @onpointercancel="@(() => ReleaseKey("a"))">A</button>
+            <button type="button"
+                    class="gamepad-btn action-btn @(IsPressed("b") ? "pressed" : "")"
+                    @onpointerdown="@(() => PressKey("b"))"
+                    @onpointerup="@(() => ReleaseKey("b"))"
+                    @onpointerleave="@(() => ReleaseKey("b"))"
+                    @onpointercancel="@(() => ReleaseKey("b"))">B</button>
+            <button type="button"
+                    class="gamepad-btn action-btn @(IsPressed("l") ? "pressed" : "")"
+                    @onpointerdown="@(() => PressKey("l"))"
+                    @onpointerup="@(() => ReleaseKey("l"))"
+                    @onpointerleave="@(() => ReleaseKey("l"))"
+                    @onpointercancel="@(() => ReleaseKey("l"))">C</button>
+        </div>
+    </div>
+
+    <div class="system-buttons">
+        <button type="button"
+                class="gamepad-btn system-btn select-btn @(IsPressed("select") ? "pressed" : "")"
+                @onpointerdown="@(() => PressKey("select"))"
+                @onpointerup="@(() => ReleaseKey("select"))"
+                @onpointerleave="@(() => ReleaseKey("select"))"
+                @onpointercancel="@(() => ReleaseKey("select"))">
+            SELECT
+        </button>
+        <button type="button"
+                class="gamepad-btn system-btn start-btn @(IsPressed("start") ? "pressed" : "")"
+                @onpointerdown="@(() => PressKey("start"))"
+                @onpointerup="@(() => ReleaseKey("start"))"
+                @onpointerleave="@(() => ReleaseKey("start"))"
+                @onpointercancel="@(() => ReleaseKey("start"))">
+            START
+        </button>
+    </div>
+</div>
+
+@code {
+    private readonly HashSet<string> _pressedKeys = [];
+
+    private bool IsPressed(string code) => _pressedKeys.Contains(code);
+
+    private async Task PressKey(string code)
+    {
+        if (_pressedKeys.Add(code))
+        {
+            await JSRuntime.InvokeVoidAsync("emoEmulator.simulateKey", code, true);
+            StateHasChanged();
+        }
+    }
+
+    private async Task ReleaseKey(string code)
+    {
+        if (_pressedKeys.Remove(code))
+        {
+            await JSRuntime.InvokeVoidAsync("emoEmulator.simulateKey", code, false);
+            StateHasChanged();
+        }
+    }
+}

@@ -1,0 +1,90 @@
+@page "/emo/play/{GameId}"
+@layout EmoLayout
+@using Portfolio.Modules.Emo.Models
+@using Portfolio.Modules.Emo.Components
+@implements IDisposable
+
+@inject IGameCatalogService GameCatalogService
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
+
+<div class="emo-play">
+    <button type="button" class="emo-back-btn" @onclick="NavigateBack">← Voltar</button>
+
+    @if (IsLoadingGame)
+    {
+        <div class="emo-play-status">
+            <p>Carregando...</p>
+        </div>
+    }
+    else if (!string.IsNullOrEmpty(ErrorMessage))
+    {
+        <div class="emo-play-status">
+            <p>@ErrorMessage</p>
+            <button type="button" class="emo-back-btn emo-back-btn-inline" @onclick="NavigateBack">Voltar ao catálogo</button>
+        </div>
+    }
+    else
+    {
+        <div class="emo-screen">
+            <div class="emo-stage">
+                <canvas id="emo-canvas" class="emo-canvas"></canvas>
+                <div class="emo-controls">
+                    <VirtualGamepad />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public string GameId { get; set; } = string.Empty;
+
+    private GameEntry? Game { get; set; }
+    private bool IsLoadingGame = true;
+    private bool _emulatorInitialized;
+    private string? ErrorMessage;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (_emulatorInitialized)
+            await JSRuntime.InvokeVoidAsync("emoEmulator.stop");
+
+        IsLoadingGame = true;
+        ErrorMessage = null;
+        _emulatorInitialized = false;
+
+        Game = await GameCatalogService.GetGameByIdAsync(GameId);
+        if (Game is null)
+            ErrorMessage = "Jogo não encontrado.";
+
+        IsLoadingGame = false;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (_emulatorInitialized || Game is null || !string.IsNullOrEmpty(ErrorMessage))
+            return;
+
+        try
+        {
+            var romUrl = new Uri(new Uri(NavigationManager.BaseUri), Game.Rom).ToString();
+            await JSRuntime.InvokeAsync<bool>("emoEmulator.init", "emo-canvas", romUrl, Game.Core);
+            _emulatorInitialized = true;
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = $"Erro ao iniciar o emulador: {ex.Message}";
+            StateHasChanged();
+        }
+    }
+
+    private void NavigateBack()
+        => NavigationManager.NavigateTo("/emo");
+
+    public void Dispose()
+    {
+        _ = JSRuntime.InvokeVoidAsync("emoEmulator.stop");
+    }
+}
