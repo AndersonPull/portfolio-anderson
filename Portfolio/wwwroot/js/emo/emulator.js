@@ -85,5 +85,32 @@ window.emoEmulator = {
 
     resize() {
         window.dispatchEvent(new Event('resize'));
+    },
+
+    async enterFullscreen(elementId) {
+        const element = document.getElementById(elementId);
+        if (!element) {
+            return false;
+        }
+
+        try {
+            if (element.requestFullscreen) {
+                await element.requestFullscreen({ navigationUI: 'hide' });
+            } else if (element.webkitRequestFullscreen) {
+                element.webkitRequestFullscreen();
+            } else {
+                return false;
+            }
+
+            if (screen.orientation?.lock) {
+                await screen.orientation.lock('landscape').catch(() => {});
+            }
+
+            this.resize();
+            return true;
+        } catch (error) {
+            console.warn('emoEmulator.enterFullscreen:', error);
+            return false;
+        }
     }
 };

@@ -1,6 +1,9 @@
 @inject IJSRuntime JSRuntime
 
-<div class="virtual-gamepad" @oncontextmenu:preventDefault="true">
+<div class="virtual-gamepad"
+     @oncontextmenu:preventDefault="true"
+     @onpointerdown:preventDefault="true"
+     @onpointerup:preventDefault="true">
     <div class="gamepad-dpad">
         <button type="button"
                 class="gamepad-btn dpad-up @(IsPressed("up") ? "pressed" : "")"

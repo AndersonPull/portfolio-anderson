@@ -8,8 +8,15 @@
 @inject NavigationManager NavigationManager
 @inject IJSRuntime JSRuntime
 
-<div class="emo-play">
+<div id="emo-play-root" class="emo-play">
     <button type="button" class="emo-back-btn" @onclick="NavigateBack">← Voltar</button>
+    <button type="button"
+            class="emo-fullscreen-btn"
+            onclick="emoEmulator.enterFullscreen('emo-play-root')"
+            aria-label="Jogar em tela cheia">
+        <i class="bi bi-arrows-fullscreen"></i>
+        <span>Tela cheia</span>
+    </button>
 
     @if (IsLoadingGame)
     {
