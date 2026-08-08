@@ -6,6 +6,11 @@
     height: 100dvh;
     overflow: hidden;
     position: relative;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    overscroll-behavior: none;
 }
 
 .emo-back-btn {
@@ -25,6 +30,35 @@
 .emo-back-btn:hover {
     border-color: #F1BC03;
     color: #F1BC03;
+}
+
+.emo-fullscreen-btn {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(13, 17, 23, 0.75);
+    border: 1px solid rgba(241, 188, 3, 0.35);
+    color: #f8f9fa;
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    touch-action: manipulation;
+}
+
+.emo-fullscreen-btn:hover,
+.emo-fullscreen-btn:active {
+    border-color: #F1BC03;
+    color: #F1BC03;
+}
+
+.emo-play:fullscreen .emo-fullscreen-btn,
+.emo-play:-webkit-full-screen .emo-fullscreen-btn {
+    display: none;
 }
 
 .emo-back-btn-inline {
@@ -72,6 +106,10 @@
     width: 100%;
     height: 100%;
     image-rendering: pixelated;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
 }
 
 .emo-controls {
@@ -85,5 +123,16 @@
     .emo-back-btn {
         top: 0.4rem;
         left: 0.4rem;
+    }
+
+    .emo-fullscreen-btn {
+        top: 0.4rem;
+        right: 0.4rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .emo-fullscreen-btn span {
+        display: none;
     }
 }
