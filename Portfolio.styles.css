@@ -133,13 +133,17 @@
 @media (orientation: portrait) {
     .virtual-gamepad[b-ljdswbfxri] {
         --control-size: clamp(1.9rem, 9.5vw, 2.8rem);
-        padding-right: 1rem;
-        padding-bottom: 1.25rem;
-        padding-left: 1rem;
+        padding-right: 30px;
+        padding-bottom: 30px;
+        padding-left: 30px;
     }
 
     .gamepad-btn[b-ljdswbfxri] {
         font-size: 0.9rem;
+    }
+
+    .system-buttons[b-ljdswbfxri] {
+        bottom: 30px;
     }
 }
 
@@ -355,6 +359,7 @@
 }
 
 .emo-screen[b-6vdfjd5pvu] {
+    position: relative;
     flex: 1;
     width: 100%;
     height: 100%;
