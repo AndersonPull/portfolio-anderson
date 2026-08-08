@@ -1,0 +1,26 @@
+[
+  {
+    "id": "super-mario-world",
+    "title": "Super Mario World",
+    "system": "snes",
+    "core": "snes9x",
+    "rom": "emo/roms/Super Mario World (USA).sfc",
+    "cover": null
+  },
+  {
+    "id": "sonic-1-in-sonic-3-sce",
+    "title": "Sonic 1 in Sonic 3 SCE",
+    "system": "genesis",
+    "core": "genesis_plus_gx",
+    "rom": "emo/roms/Sonic 1 in Sonic 3 SCE.gen",
+    "cover": null
+  },
+  {
+    "id": "golden-axe-arcade-colors",
+    "title": "Golden Axe - Arcade Colors",
+    "system": "genesis",
+    "core": "genesis_plus_gx",
+    "rom": "emo/roms/Golden Axe - Arcade Colors (V1.4).md",
+    "cover": null
+  }
+]

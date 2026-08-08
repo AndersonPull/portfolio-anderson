@@ -1,0 +1,159 @@
+.virtual-gamepad {
+    --control-size: clamp(2.15rem, 7vw, 3.25rem);
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    padding: 1rem clamp(1.5rem, 5vw, 4rem) clamp(1.5rem, 4vh, 3rem);
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    pointer-events: none;
+    background: linear-gradient(
+        180deg,
+        rgba(13, 17, 23, 0) 35%,
+        rgba(13, 17, 23, 0.15) 58%,
+        rgba(13, 17, 23, 0.55) 100%
+    );
+}
+
+.gamepad-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(255, 255, 255, 0.45);
+    border-radius: 50%;
+    background: rgba(20, 24, 29, 0.68);
+    color: #f8f9fa;
+    font-weight: 700;
+    cursor: pointer;
+    touch-action: none;
+    pointer-events: auto;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
+    text-shadow: 0 1px 2px #000;
+    transition: background 0.1s, border-color 0.1s, transform 0.1s;
+}
+
+.gamepad-btn:active,
+.gamepad-btn.pressed {
+    background: rgba(241, 188, 3, 0.35);
+    border-color: #F1BC03;
+    transform: scale(0.95);
+}
+
+.gamepad-dpad {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.dpad-up {
+    width: var(--control-size);
+    height: var(--control-size);
+    font-size: 1.25rem;
+    border-radius: 50%;
+}
+
+.dpad-middle {
+    display: grid;
+    grid-template-columns: repeat(3, var(--control-size));
+    grid-template-rows: var(--control-size);
+    gap: 0.35rem;
+}
+
+.dpad-left,
+.dpad-down,
+.dpad-right {
+    width: var(--control-size);
+    height: var(--control-size);
+    font-size: 1.25rem;
+    border-radius: 50%;
+}
+
+.dpad-left {
+    grid-column: 1;
+}
+
+.dpad-right {
+    grid-column: 3;
+}
+
+.gamepad-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.action-row {
+    display: flex;
+    gap: 0.35rem;
+}
+
+.action-btn {
+    width: var(--control-size);
+    height: var(--control-size);
+    font-size: 0.95rem;
+    border-color: rgba(241, 188, 3, 0.65);
+}
+
+.system-buttons {
+    position: absolute;
+    left: 50%;
+    bottom: clamp(1.5rem, 4vh, 3rem);
+    transform: translateX(-50%);
+    display: flex;
+    gap: clamp(0.65rem, 2vw, 1.25rem);
+    pointer-events: none;
+}
+
+.system-btn {
+    width: auto;
+    min-width: clamp(3.25rem, 9vw, 4.5rem);
+    height: clamp(1.6rem, 4vw, 2rem);
+    border-radius: 999px;
+    padding: 0 0.75rem;
+    font-size: clamp(0.55rem, 1.4vw, 0.7rem);
+    letter-spacing: 0.04em;
+}
+
+.select-btn {
+    color: #f1dc3a;
+}
+
+.start-btn {
+    color: #5dde75;
+}
+
+@media (orientation: portrait) {
+    .virtual-gamepad {
+        --control-size: clamp(1.9rem, 9.5vw, 2.8rem);
+        padding-right: 1rem;
+        padding-bottom: 1.25rem;
+        padding-left: 1rem;
+    }
+
+    .gamepad-btn {
+        font-size: 0.9rem;
+    }
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+    .virtual-gamepad {
+        --control-size: clamp(1.8rem, 11vh, 2.8rem);
+        padding-bottom: 1rem;
+    }
+
+    .system-buttons {
+        bottom: 1rem;
+    }
+
+    .gamepad-actions,
+    .gamepad-dpad {
+        gap: 0.1rem;
+    }
+}

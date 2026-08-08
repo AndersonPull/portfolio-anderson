@@ -1,0 +1,88 @@
+.emo-play {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    height: 100dvh;
+    overflow: hidden;
+    position: relative;
+}
+
+.emo-back-btn {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    z-index: 10;
+    background: rgba(13, 17, 23, 0.75);
+    border: 1px solid rgba(241, 188, 3, 0.35);
+    color: #f8f9fa;
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.emo-back-btn:hover {
+    border-color: #F1BC03;
+    color: #F1BC03;
+}
+
+.emo-back-btn-inline {
+    position: static;
+    margin-top: 1rem;
+}
+
+.emo-play-status {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #f8f9fa;
+    padding: 2rem;
+    text-align: center;
+}
+
+.emo-screen {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+    overflow: hidden;
+}
+
+.emo-stage {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: min(100vw, calc(100dvh * 4 / 3));
+    height: min(100dvh, calc(100vw * 3 / 4));
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: #000;
+}
+
+.emo-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    image-rendering: pixelated;
+}
+
+.emo-controls {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+    .emo-back-btn {
+        top: 0.4rem;
+        left: 0.4rem;
+    }
+}
