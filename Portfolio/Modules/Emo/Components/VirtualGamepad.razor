@@ -41,71 +41,81 @@
         </button>
     </div>
 
-    <div class="gamepad-actions">
-        <div class="action-row">
-            <button type="button"
-                    class="gamepad-btn action-btn @(IsPressed("y") ? "pressed" : "")"
-                    @onpointerdown="@(() => PressKey("y"))"
-                    @onpointerup="@(() => ReleaseKey("y"))"
-                    @onpointerleave="@(() => ReleaseKey("y"))"
-                    @onpointercancel="@(() => ReleaseKey("y"))">Y</button>
-            <button type="button"
-                    class="gamepad-btn action-btn @(IsPressed("x") ? "pressed" : "")"
-                    @onpointerdown="@(() => PressKey("x"))"
-                    @onpointerup="@(() => ReleaseKey("x"))"
-                    @onpointerleave="@(() => ReleaseKey("x"))"
-                    @onpointercancel="@(() => ReleaseKey("x"))">X</button>
-            <button type="button"
-                    class="gamepad-btn action-btn @(IsPressed("r") ? "pressed" : "")"
-                    @onpointerdown="@(() => PressKey("r"))"
-                    @onpointerup="@(() => ReleaseKey("r"))"
-                    @onpointerleave="@(() => ReleaseKey("r"))"
-                    @onpointercancel="@(() => ReleaseKey("r"))">Z</button>
+    @if (TopRow.Count > 0 || BottomRow.Count > 0)
+    {
+        <div class="gamepad-actions">
+            @if (TopRow.Count > 0)
+            {
+                <div class="action-row">
+                    @foreach (var button in TopRow)
+                    {
+                        <button type="button"
+                                class="gamepad-btn action-btn action-@button.Label.ToLowerInvariant() @(IsPressed(button.Code) ? "pressed" : "")"
+                                @onpointerdown="@(() => PressKey(button.Code))"
+                                @onpointerup="@(() => ReleaseKey(button.Code))"
+                                @onpointerleave="@(() => ReleaseKey(button.Code))"
+                                @onpointercancel="@(() => ReleaseKey(button.Code))">@button.Label</button>
+                    }
+                </div>
+            }
+            @if (BottomRow.Count > 0)
+            {
+                <div class="action-row">
+                    @foreach (var button in BottomRow)
+                    {
+                        <button type="button"
+                                class="gamepad-btn action-btn action-@button.Label.ToLowerInvariant() @(IsPressed(button.Code) ? "pressed" : "")"
+                                @onpointerdown="@(() => PressKey(button.Code))"
+                                @onpointerup="@(() => ReleaseKey(button.Code))"
+                                @onpointerleave="@(() => ReleaseKey(button.Code))"
+                                @onpointercancel="@(() => ReleaseKey(button.Code))">@button.Label</button>
+                    }
+                </div>
+            }
         </div>
-        <div class="action-row">
-            <button type="button"
-                    class="gamepad-btn action-btn @(IsPressed("a") ? "pressed" : "")"
-                    @onpointerdown="@(() => PressKey("a"))"
-                    @onpointerup="@(() => ReleaseKey("a"))"
-                    @onpointerleave="@(() => ReleaseKey("a"))"
-                    @onpointercancel="@(() => ReleaseKey("a"))">A</button>
-            <button type="button"
-                    class="gamepad-btn action-btn @(IsPressed("b") ? "pressed" : "")"
-                    @onpointerdown="@(() => PressKey("b"))"
-                    @onpointerup="@(() => ReleaseKey("b"))"
-                    @onpointerleave="@(() => ReleaseKey("b"))"
-                    @onpointercancel="@(() => ReleaseKey("b"))">B</button>
-            <button type="button"
-                    class="gamepad-btn action-btn @(IsPressed("l") ? "pressed" : "")"
-                    @onpointerdown="@(() => PressKey("l"))"
-                    @onpointerup="@(() => ReleaseKey("l"))"
-                    @onpointerleave="@(() => ReleaseKey("l"))"
-                    @onpointercancel="@(() => ReleaseKey("l"))">C</button>
-        </div>
-    </div>
+    }
 
-    <div class="system-buttons">
-        <button type="button"
-                class="gamepad-btn system-btn select-btn @(IsPressed("select") ? "pressed" : "")"
-                @onpointerdown="@(() => PressKey("select"))"
-                @onpointerup="@(() => ReleaseKey("select"))"
-                @onpointerleave="@(() => ReleaseKey("select"))"
-                @onpointercancel="@(() => ReleaseKey("select"))">
-            SELECT
-        </button>
-        <button type="button"
-                class="gamepad-btn system-btn start-btn @(IsPressed("start") ? "pressed" : "")"
-                @onpointerdown="@(() => PressKey("start"))"
-                @onpointerup="@(() => ReleaseKey("start"))"
-                @onpointerleave="@(() => ReleaseKey("start"))"
-                @onpointercancel="@(() => ReleaseKey("start"))">
-            START
-        </button>
-    </div>
+    @if (ShowSelect || ShowStart)
+    {
+        <div class="system-buttons">
+            @if (ShowSelect)
+            {
+                <button type="button"
+                        class="gamepad-btn system-btn select-btn @(IsPressed("select") ? "pressed" : "")"
+                        @onpointerdown="@(() => PressKey("select"))"
+                        @onpointerup="@(() => ReleaseKey("select"))"
+                        @onpointerleave="@(() => ReleaseKey("select"))"
+                        @onpointercancel="@(() => ReleaseKey("select"))">
+                    SELECT
+                </button>
+            }
+            @if (ShowStart)
+            {
+                <button type="button"
+                        class="gamepad-btn system-btn start-btn @(IsPressed("start") ? "pressed" : "")"
+                        @onpointerdown="@(() => PressKey("start"))"
+                        @onpointerup="@(() => ReleaseKey("start"))"
+                        @onpointerleave="@(() => ReleaseKey("start"))"
+                        @onpointercancel="@(() => ReleaseKey("start"))">
+                    START
+                </button>
+            }
+        </div>
+    }
 </div>
 
 @code {
+    [Parameter]
+    public string System { get; set; } = "snes";
+
     private readonly HashSet<string> _pressedKeys = [];
+
+    private IReadOnlyList<FaceButton> TopRow => Layout.Top;
+    private IReadOnlyList<FaceButton> BottomRow => Layout.Bottom;
+    private bool ShowSelect => Layout.Select;
+    private bool ShowStart => Layout.Start;
+
+    private GamepadLayout Layout => ResolveLayout(System);
 
     private bool IsPressed(string code) => _pressedKeys.Contains(code);
 
@@ -126,4 +136,52 @@
             StateHasChanged();
         }
     }
+
+    private static GamepadLayout ResolveLayout(string system)
+        => system?.Trim().ToLowerInvariant() switch
+        {
+            "nes" or "famicom" => NesLayout,
+            "genesis" or "megadrive" or "sega" => GenesisLayout,
+            "gba" => GbaLayout,
+            "gb" or "gbc" => GameBoyLayout,
+            _ => SnesLayout
+        };
+
+    private static readonly GamepadLayout SnesLayout = new(
+        Top: [new("y", "Y"), new("x", "X"), new("r", "R")],
+        Bottom: [new("a", "A"), new("b", "B"), new("l", "L")],
+        Select: true,
+        Start: true);
+
+    private static readonly GamepadLayout GenesisLayout = new(
+        Top: [new("y", "Y"), new("x", "X"), new("r", "Z")],
+        Bottom: [new("a", "A"), new("b", "B"), new("l", "C")],
+        Select: false,
+        Start: true);
+
+    private static readonly GamepadLayout NesLayout = new(
+        Top: [],
+        Bottom: [new("b", "B"), new("a", "A")],
+        Select: true,
+        Start: true);
+
+    private static readonly GamepadLayout GbaLayout = new(
+        Top: [new("l", "L"), new("r", "R")],
+        Bottom: [new("b", "B"), new("a", "A")],
+        Select: true,
+        Start: true);
+
+    private static readonly GamepadLayout GameBoyLayout = new(
+        Top: [],
+        Bottom: [new("b", "B"), new("a", "A")],
+        Select: true,
+        Start: true);
+
+    private sealed record FaceButton(string Code, string Label);
+
+    private sealed record GamepadLayout(
+        IReadOnlyList<FaceButton> Top,
+        IReadOnlyList<FaceButton> Bottom,
+        bool Select,
+        bool Start);
 }
