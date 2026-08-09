@@ -24,7 +24,7 @@
     "core": "genesis_plus_gx",
     "rom": "emo/roms/Golden Axe - Arcade Colors (V1.4).md",
     "cover": null,
-    "buttons": ["a", "b", "c", "start"]
+    "buttons": ["a", "b", "Y", "start"]
   },
   {
     "id": "ultimate-mortal-kombat-3",

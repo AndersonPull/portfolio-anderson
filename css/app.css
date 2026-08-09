@@ -4,6 +4,23 @@ html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;    
 }
 
+html.emo-zoom-lock,
+html.emo-zoom-lock body {
+    touch-action: none;
+    overscroll-behavior: none;
+    -webkit-text-size-adjust: 100%;
+    overflow: hidden;
+}
+
+html.emo-zoom-lock #app,
+html.emo-zoom-lock .emo-layout,
+html.emo-zoom-lock .emo-play,
+html.emo-zoom-lock .emo-controls,
+html.emo-zoom-lock .virtual-gamepad,
+html.emo-zoom-lock .gamepad-btn {
+    touch-action: none;
+}
+
 a, .btn-link {
     color: #dee2e6;
 }
