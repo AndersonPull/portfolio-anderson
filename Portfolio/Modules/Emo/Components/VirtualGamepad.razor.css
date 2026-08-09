@@ -1,7 +1,7 @@
 .virtual-gamepad {
-    --control-size: clamp(2.15rem, 7vw, 3.25rem);
-    --control-gap: 0.35rem;
-    --system-btn-h: clamp(1.15rem, 3.4vmin, 2rem);
+    --control-size: clamp(2.85rem, 9.5vw, 4.25rem);
+    --control-gap: 0.45rem;
+    --system-btn-h: clamp(1.45rem, 4.2vmin, 2.4rem);
     position: relative;
     display: flex;
     align-items: flex-end;
@@ -9,9 +9,11 @@
     width: 100%;
     height: 100%;
     padding: 1rem clamp(1.5rem, 5vw, 4rem) calc(var(--system-btn-h) + 2.5rem);
-    touch-action: none;
+    touch-action: manipulation;
     user-select: none;
     -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
     pointer-events: none;
     background: linear-gradient(
         180deg,
@@ -25,26 +27,26 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid rgba(255, 255, 255, 0.45);
+    border: 2.5px solid rgba(255, 255, 255, 0.45);
     border-radius: 50%;
     background: rgba(20, 24, 29, 0.68);
     color: #f8f9fa;
     font-weight: 700;
     cursor: pointer;
-    touch-action: none;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
     pointer-events: auto;
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
     text-shadow: 0 1px 2px #000;
-    transition: background 0.1s, border-color 0.1s, transform 0.1s;
+    transition: background 0.08s, border-color 0.08s;
 }
 
 .gamepad-btn:active,
 .gamepad-btn.pressed {
     background: rgba(148, 163, 184, 0.4);
     border-color: rgba(226, 232, 240, 0.75);
-    transform: scale(0.95);
 }
 
 .gamepad-dpad {
@@ -57,7 +59,7 @@
 .dpad-up {
     width: var(--control-size);
     height: var(--control-size);
-    font-size: 1.25rem;
+    font-size: clamp(1.35rem, 4vw, 1.75rem);
     border-radius: 50%;
 }
 
@@ -73,7 +75,7 @@
 .dpad-right {
     width: var(--control-size);
     height: var(--control-size);
-    font-size: 1.25rem;
+    font-size: clamp(1.35rem, 4vw, 1.75rem);
     border-radius: 50%;
 }
 
@@ -102,7 +104,7 @@
 .action-btn {
     width: var(--control-size);
     height: var(--control-size);
-    font-size: 0.95rem;
+    font-size: clamp(1.05rem, 3.2vw, 1.35rem);
 }
 
 .action-a { color: #ff6b7a; }
@@ -133,11 +135,11 @@
 
 .system-btn {
     width: auto;
-    min-width: clamp(2.1rem, 7vmin, 4.5rem);
+    min-width: clamp(2.8rem, 9vmin, 5.25rem);
     height: var(--system-btn-h);
     border-radius: 999px;
-    padding: 0 clamp(0.35rem, 1.6vmin, 0.75rem);
-    font-size: clamp(0.42rem, 1.45vmin, 0.7rem);
+    padding: 0 clamp(0.55rem, 2vmin, 1rem);
+    font-size: clamp(0.55rem, 1.8vmin, 0.85rem);
     letter-spacing: 0.04em;
 }
 
@@ -151,14 +153,14 @@
 
 @media (orientation: portrait) {
     .virtual-gamepad {
-        --control-size: clamp(1.9rem, 9.5vw, 2.8rem);
-        --system-btn-h: clamp(1.1rem, 4.2vw, 1.75rem);
+        --control-size: clamp(2.6rem, 13vw, 3.75rem);
+        --system-btn-h: clamp(1.35rem, 5vw, 2.1rem);
         --stage-height: calc(100vw * 3 / 4);
         align-items: center;
         padding-top: var(--stage-height);
-        padding-right: 30px;
+        padding-right: 24px;
         padding-bottom: calc(var(--system-btn-h) + 2.75rem);
-        padding-left: 30px;
+        padding-left: 24px;
         background: linear-gradient(
             180deg,
             rgba(13, 17, 23, 0) 0,
@@ -169,7 +171,7 @@
     }
 
     .gamepad-btn {
-        font-size: 0.9rem;
+        font-size: 1.05rem;
     }
 
     .gamepad-actions {
@@ -181,28 +183,28 @@
     }
 
     .system-btn {
-        min-width: clamp(2rem, 12vw, 3.6rem);
-        font-size: clamp(0.4rem, 2.2vw, 0.62rem);
-        padding: 0 clamp(0.3rem, 2vw, 0.6rem);
+        min-width: clamp(2.6rem, 14vw, 4.5rem);
+        font-size: clamp(0.52rem, 2.6vw, 0.78rem);
+        padding: 0 clamp(0.45rem, 2.4vw, 0.85rem);
     }
 }
 
 @media (orientation: landscape) and (max-height: 500px) {
     .virtual-gamepad {
-        --control-size: clamp(1.8rem, 11vh, 2.8rem);
-        --control-gap: 0.1rem;
-        --system-btn-h: clamp(1rem, 4.2vh, 1.55rem);
+        --control-size: clamp(2.35rem, 14vh, 3.5rem);
+        --control-gap: 0.2rem;
+        --system-btn-h: clamp(1.2rem, 5vh, 1.9rem);
         padding-bottom: calc(var(--system-btn-h) + 1.75rem);
     }
 
     .system-buttons {
         bottom: 1.1rem;
-        gap: clamp(0.3rem, 1.5vh, 0.75rem);
+        gap: clamp(0.4rem, 2vh, 0.9rem);
     }
 
     .system-btn {
-        min-width: clamp(1.9rem, 9vh, 3.2rem);
-        font-size: clamp(0.38rem, 2.1vh, 0.58rem);
-        padding: 0 clamp(0.28rem, 1.4vh, 0.55rem);
+        min-width: clamp(2.4rem, 11vh, 4rem);
+        font-size: clamp(0.48rem, 2.5vh, 0.72rem);
+        padding: 0 clamp(0.4rem, 1.8vh, 0.75rem);
     }
 }

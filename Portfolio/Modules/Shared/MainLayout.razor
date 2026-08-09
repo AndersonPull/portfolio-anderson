@@ -76,8 +76,7 @@
     List<Menu> menu = new List<Menu>()
     {
         new Menu(){ Id=1, Text="Home", Icon="bi-house-fill", Page="/"},
-        new Menu(){ Id=2, Text="Newsletter", Icon="bi-newspaper", Page="/newsletter"},
-        new Menu(){ Id=3, Text="Emo", Icon="bi-controller", Page="/emo"}
+        new Menu(){ Id=2, Text="Newsletter", Icon="bi-newspaper", Page="/newsletter"}
     };
 
     protected override void OnInitialized()
@@ -105,10 +104,7 @@
                 navigation = "/";
                 break;
             case 2:
-                navigation = "newsletter";
-                break;
-            case 3:
-                navigation = "emo";
+                navigation = "/newsletter";
                 break;
         }
 
