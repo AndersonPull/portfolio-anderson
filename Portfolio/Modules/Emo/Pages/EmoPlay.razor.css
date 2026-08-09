@@ -7,7 +7,7 @@
     overflow: hidden;
     position: relative;
     background: #000;
-    touch-action: manipulation;
+    touch-action: none;
     user-select: none;
     -webkit-user-select: none;
     -webkit-touch-callout: none;

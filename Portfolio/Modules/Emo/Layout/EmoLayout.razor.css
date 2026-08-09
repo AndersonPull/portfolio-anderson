@@ -7,4 +7,10 @@
     overflow: hidden;
     background: #0d1117;
     z-index: 100;
+    touch-action: none;
+    overscroll-behavior: none;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
 }
