@@ -20,4 +20,4 @@ self.addEventListener('fetch', event => {
         event.respondWith(fetch(event.request, { cache: 'no-store' }));
     }
 });
-/* Manifest version: s9gTGnCQ */
+/* Manifest version: fI88+cXr */

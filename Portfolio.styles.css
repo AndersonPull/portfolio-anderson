@@ -1,13 +1,150 @@
+/* /Modules/Emo/Components/EmoSettingsMenu.razor.rz.scp.css */
+.emo-settings[b-1zn3a6koub] {
+    position: relative;
+    z-index: 10;
+}
+
+.emo-settings-btn[b-1zn3a6koub] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.15rem;
+    height: 2.15rem;
+    background: rgba(13, 17, 23, 0.75);
+    border: 1px solid rgba(241, 188, 3, 0.35);
+    color: #f8f9fa;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    touch-action: manipulation;
+    padding: 0;
+}
+
+.emo-settings-btn:hover[b-1zn3a6koub],
+.emo-settings-btn:active[b-1zn3a6koub],
+.emo-settings-btn[aria-expanded="true"][b-1zn3a6koub] {
+    border-color: #F1BC03;
+    color: #F1BC03;
+}
+
+.emo-settings-backdrop[b-1zn3a6koub] {
+    position: fixed;
+    inset: 0;
+    z-index: 11;
+    background: transparent;
+}
+
+.emo-settings-panel[b-1zn3a6koub] {
+    position: absolute;
+    top: calc(100% + 0.4rem);
+    right: 0;
+    z-index: 12;
+    min-width: 12.5rem;
+    padding: 0.4rem;
+    background: rgba(13, 17, 23, 0.94);
+    border: 1px solid rgba(241, 188, 3, 0.35);
+    border-radius: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+
+.emo-settings-volume[b-1zn3a6koub] {
+    display: flex;
+    flex-direction: column;
+    padding: 0.55rem 0.65rem 0.7rem;
+}
+
+.emo-settings-volume-row[b-1zn3a6koub] {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    color: #f8f9fa;
+}
+
+.emo-settings-volume-row i[b-1zn3a6koub] {
+    font-size: 0.95rem;
+    width: 1rem;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.emo-settings-volume-slider[b-1zn3a6koub] {
+    flex: 1;
+    min-width: 0;
+    accent-color: #F1BC03;
+    cursor: pointer;
+    touch-action: manipulation;
+}
+
+.emo-settings-item[b-1zn3a6koub] {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: #f8f9fa;
+    padding: 0.55rem 0.65rem;
+    border-radius: 0.5rem;
+    font-size: 0.82rem;
+    text-align: left;
+    cursor: pointer;
+    touch-action: manipulation;
+}
+
+.emo-settings-item:hover:not(:disabled)[b-1zn3a6koub],
+.emo-settings-item:active:not(:disabled)[b-1zn3a6koub] {
+    background: rgba(241, 188, 3, 0.12);
+    color: #F1BC03;
+}
+
+.emo-settings-item:disabled[b-1zn3a6koub] {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.emo-settings-item i[b-1zn3a6koub] {
+    font-size: 0.95rem;
+    width: 1rem;
+    text-align: center;
+}
+
+.emo-settings-message[b-1zn3a6koub] {
+    margin: 0.15rem 0.4rem 0.25rem;
+    font-size: 0.72rem;
+    line-height: 1.3;
+}
+
+.emo-settings-message.is-ok[b-1zn3a6koub] {
+    color: #8fd19e;
+}
+
+.emo-settings-message.is-error[b-1zn3a6koub] {
+    color: #f1a0a0;
+}
+
+.emo-settings-file-wrap[b-1zn3a6koub] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+}
 /* /Modules/Emo/Components/VirtualGamepad.razor.rz.scp.css */
 .virtual-gamepad[b-ljdswbfxri] {
     --control-size: clamp(2.15rem, 7vw, 3.25rem);
+    --control-gap: 0.35rem;
+    --system-btn-h: clamp(1.15rem, 3.4vmin, 2rem);
     position: relative;
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
     width: 100%;
     height: 100%;
-    padding: 1rem clamp(1.5rem, 5vw, 4rem) clamp(1.5rem, 4vh, 3rem);
+    padding: 1rem clamp(1.5rem, 5vw, 4rem) calc(var(--system-btn-h) + 2.5rem);
     touch-action: none;
     user-select: none;
     -webkit-user-select: none;
@@ -41,8 +178,8 @@
 
 .gamepad-btn:active[b-ljdswbfxri],
 .gamepad-btn.pressed[b-ljdswbfxri] {
-    background: rgba(241, 188, 3, 0.35);
-    border-color: #F1BC03;
+    background: rgba(148, 163, 184, 0.4);
+    border-color: rgba(226, 232, 240, 0.75);
     transform: scale(0.95);
 }
 
@@ -50,7 +187,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.35rem;
+    gap: var(--control-gap);
 }
 
 .dpad-up[b-ljdswbfxri] {
@@ -64,7 +201,7 @@
     display: grid;
     grid-template-columns: repeat(3, var(--control-size));
     grid-template-rows: var(--control-size);
-    gap: 0.35rem;
+    gap: var(--control-gap);
 }
 
 .dpad-left[b-ljdswbfxri],
@@ -87,38 +224,56 @@
 .gamepad-actions[b-ljdswbfxri] {
     display: flex;
     flex-direction: column;
-    gap: 0.35rem;
+    justify-content: center;
+    align-self: flex-end;
+    height: calc(var(--control-size) * 3 + var(--control-gap) * 2);
+    gap: var(--control-gap);
 }
 
 .action-row[b-ljdswbfxri] {
     display: flex;
-    gap: 0.35rem;
+    gap: var(--control-gap);
 }
 
 .action-btn[b-ljdswbfxri] {
     width: var(--control-size);
     height: var(--control-size);
     font-size: 0.95rem;
-    border-color: rgba(241, 188, 3, 0.65);
+}
+
+.action-a[b-ljdswbfxri] { color: #ff6b7a; }
+.action-b[b-ljdswbfxri] { color: #f1bc03; }
+.action-c[b-ljdswbfxri] { color: #ff9f43; }
+.action-x[b-ljdswbfxri] { color: #5dade2; }
+.action-y[b-ljdswbfxri] { color: #58d68d; }
+.action-z[b-ljdswbfxri] { color: #48c9b0; }
+.action-l[b-ljdswbfxri] { color: #b8a9e8; }
+.action-r[b-ljdswbfxri] { color: #f0a06a; }
+
+.gamepad-dpad .gamepad-btn[b-ljdswbfxri] {
+    color: #9ec9e8;
 }
 
 .system-buttons[b-ljdswbfxri] {
     position: absolute;
     left: 50%;
-    bottom: clamp(1.5rem, 4vh, 3rem);
-    transform: translateX(-50%);
+    bottom: 1.75rem;
+    z-index: 4;
     display: flex;
-    gap: clamp(0.65rem, 2vw, 1.25rem);
+    align-items: center;
+    justify-content: center;
+    gap: clamp(0.35rem, 1.8vmin, 1.25rem);
+    transform: translateX(-50%);
     pointer-events: none;
 }
 
 .system-btn[b-ljdswbfxri] {
     width: auto;
-    min-width: clamp(3.25rem, 9vw, 4.5rem);
-    height: clamp(1.6rem, 4vw, 2rem);
+    min-width: clamp(2.1rem, 7vmin, 4.5rem);
+    height: var(--system-btn-h);
     border-radius: 999px;
-    padding: 0 0.75rem;
-    font-size: clamp(0.55rem, 1.4vw, 0.7rem);
+    padding: 0 clamp(0.35rem, 1.6vmin, 0.75rem);
+    font-size: clamp(0.42rem, 1.45vmin, 0.7rem);
     letter-spacing: 0.04em;
 }
 
@@ -133,33 +288,58 @@
 @media (orientation: portrait) {
     .virtual-gamepad[b-ljdswbfxri] {
         --control-size: clamp(1.9rem, 9.5vw, 2.8rem);
+        --system-btn-h: clamp(1.1rem, 4.2vw, 1.75rem);
+        --stage-height: calc(100vw * 3 / 4);
+        align-items: center;
+        padding-top: var(--stage-height);
         padding-right: 30px;
-        padding-bottom: 30px;
+        padding-bottom: calc(var(--system-btn-h) + 2.75rem);
         padding-left: 30px;
+        background: linear-gradient(
+            180deg,
+            rgba(13, 17, 23, 0) 0,
+            rgba(13, 17, 23, 0) var(--stage-height),
+            rgba(13, 17, 23, 0.2) calc(var(--stage-height) + 1rem),
+            rgba(13, 17, 23, 0.55) 100%
+        );
     }
 
     .gamepad-btn[b-ljdswbfxri] {
         font-size: 0.9rem;
     }
 
+    .gamepad-actions[b-ljdswbfxri] {
+        align-self: center;
+    }
+
     .system-buttons[b-ljdswbfxri] {
-        bottom: 30px;
+        bottom: 2rem;
+    }
+
+    .system-btn[b-ljdswbfxri] {
+        min-width: clamp(2rem, 12vw, 3.6rem);
+        font-size: clamp(0.4rem, 2.2vw, 0.62rem);
+        padding: 0 clamp(0.3rem, 2vw, 0.6rem);
     }
 }
 
 @media (orientation: landscape) and (max-height: 500px) {
     .virtual-gamepad[b-ljdswbfxri] {
         --control-size: clamp(1.8rem, 11vh, 2.8rem);
-        padding-bottom: 1rem;
+        --control-gap: 0.1rem;
+        --system-btn-h: clamp(1rem, 4.2vh, 1.55rem);
+        padding-bottom: calc(var(--system-btn-h) + 1.75rem);
     }
 
     .system-buttons[b-ljdswbfxri] {
-        bottom: 1rem;
+        bottom: 1.1rem;
+        gap: clamp(0.3rem, 1.5vh, 0.75rem);
     }
 
-    .gamepad-actions[b-ljdswbfxri],
-    .gamepad-dpad[b-ljdswbfxri] {
-        gap: 0.1rem;
+    .system-btn[b-ljdswbfxri] {
+        min-width: clamp(1.9rem, 9vh, 3.2rem);
+        font-size: clamp(0.38rem, 2.1vh, 0.58rem);
+        padding: 0 clamp(0.28rem, 1.4vh, 0.55rem);
     }
 }
 /* /Modules/Emo/Layout/EmoLayout.razor.rz.scp.css */
@@ -329,6 +509,7 @@
     height: 100dvh;
     overflow: hidden;
     position: relative;
+    background: #000;
     touch-action: none;
     user-select: none;
     -webkit-user-select: none;
@@ -355,20 +536,29 @@
     color: #F1BC03;
 }
 
-.emo-fullscreen-btn[b-6vdfjd5pvu] {
+.emo-top-right[b-6vdfjd5pvu] {
     position: absolute;
     top: 0.75rem;
     right: 0.75rem;
     z-index: 10;
     display: flex;
     align-items: center;
-    gap: 0.4rem;
+    gap: 0.45rem;
+}
+
+.emo-fullscreen-btn[b-6vdfjd5pvu] {
+    position: static;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.15rem;
+    height: 2.15rem;
     background: rgba(13, 17, 23, 0.75);
     border: 1px solid rgba(241, 188, 3, 0.35);
     color: #f8f9fa;
-    padding: 0.35rem 0.75rem;
+    padding: 0;
     border-radius: 999px;
-    font-size: 0.8rem;
+    font-size: 0.95rem;
     cursor: pointer;
     touch-action: manipulation;
 }
@@ -442,23 +632,53 @@
     pointer-events: none;
 }
 
+.emo-gamepad-badge[b-6vdfjd5pvu] {
+    position: absolute;
+    left: 50%;
+    bottom: 1.25rem;
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transform: translateX(-50%);
+    background: rgba(13, 17, 23, 0.75);
+    border: 1px solid rgba(241, 188, 3, 0.35);
+    color: #f8f9fa;
+    padding: 0.4rem 0.85rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    pointer-events: none;
+}
+
+.emo-gamepad-badge i[b-6vdfjd5pvu] {
+    color: #F1BC03;
+}
+
+@media (orientation: portrait) {
+    .emo-screen[b-6vdfjd5pvu] {
+        align-items: flex-start;
+        justify-content: center;
+    }
+
+    .emo-stage[b-6vdfjd5pvu] {
+        width: 100vw;
+        height: calc(100vw * 3 / 4);
+        max-height: none;
+    }
+}
+
 @media (orientation: landscape) and (max-height: 500px) {
     .emo-back-btn[b-6vdfjd5pvu] {
         top: 0.4rem;
         left: 0.4rem;
     }
 
-    .emo-fullscreen-btn[b-6vdfjd5pvu] {
+    .emo-top-right[b-6vdfjd5pvu] {
         top: 0.4rem;
         right: 0.4rem;
     }
 }
 
-@media (max-width: 480px) {
-    .emo-fullscreen-btn span[b-6vdfjd5pvu] {
-        display: none;
-    }
-}
 /* /Modules/Home/Components/About.razor.rz.scp.css */
 .container-about[b-ezf9ty0u79] {
     margin-right: 100px;
