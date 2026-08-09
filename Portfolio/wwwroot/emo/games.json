@@ -5,7 +5,8 @@
     "system": "snes",
     "core": "snes9x",
     "rom": "emo/roms/Super Mario World (USA).sfc",
-    "cover": null
+    "cover": null,
+    "buttons": ["y", "b", "a", "x", "l", "r", "select", "start"]
   },
   {
     "id": "sonic-1-in-sonic-3-sce",
@@ -13,7 +14,8 @@
     "system": "genesis",
     "core": "genesis_plus_gx",
     "rom": "emo/roms/Sonic 1 in Sonic 3 SCE.gen",
-    "cover": null
+    "cover": null,
+    "buttons": ["a", "b", "start"]
   },
   {
     "id": "golden-axe-arcade-colors",
@@ -21,7 +23,8 @@
     "system": "genesis",
     "core": "genesis_plus_gx",
     "rom": "emo/roms/Golden Axe - Arcade Colors (V1.4).md",
-    "cover": null
+    "cover": null,
+    "buttons": ["a", "b", "c", "start"]
   },
   {
     "id": "ultimate-mortal-kombat-3",
@@ -29,6 +32,7 @@
     "system": "genesis",
     "core": "genesis_plus_gx",
     "rom": "emo/roms/Ultimate Mortal Kombat 3 (USA).md",
-    "cover": null
+    "cover": null,
+    "buttons": ["a", "b", "c", "x", "y", "z", "start"]
   }
 ]

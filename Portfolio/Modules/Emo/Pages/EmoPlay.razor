@@ -9,7 +9,6 @@
 @inject IJSRuntime JSRuntime
 
 <div id="emo-play-root" class="emo-play">
-    <button type="button" class="emo-back-btn" @onclick="NavigateBack">← Voltar</button>
     <div class="emo-top-right">
         @if (_emulatorInitialized && Game is not null)
         {
@@ -34,7 +33,6 @@
     {
         <div class="emo-play-status">
             <p>@ErrorMessage</p>
-            <button type="button" class="emo-back-btn emo-back-btn-inline" @onclick="NavigateBack">Voltar ao catálogo</button>
         </div>
     }
     else if (Game is not null)
@@ -45,15 +43,14 @@
             </div>
             @if (_gamepadConnected)
             {
-                <div class="emo-gamepad-badge" aria-live="polite">
+                <div class="emo-gamepad-badge" aria-live="polite" title="Controle conectado" aria-label="Controle conectado">
                     <i class="bi bi-controller"></i>
-                    <span>Controle conectado</span>
                 </div>
             }
             else
             {
                 <div class="emo-controls">
-                    <VirtualGamepad System="@Game.System" />
+                    <VirtualGamepad System="@Game.System" Buttons="@Game.Buttons" />
                 </div>
             }
         </div>
@@ -125,9 +122,6 @@
         _gamepadConnected = connected;
         InvokeAsync(StateHasChanged);
     }
-
-    private void NavigateBack()
-        => NavigationManager.NavigateTo("/emo");
 
     private async Task StopGamepadWatchAsync()
     {

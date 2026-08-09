@@ -108,14 +108,21 @@
     [Parameter]
     public string System { get; set; } = "snes";
 
+    [Parameter]
+    public IEnumerable<string> Buttons { get; set; }
+
     private readonly HashSet<string> _pressedKeys = [];
+    private GamepadLayout _layout = SnesLayout;
 
-    private IReadOnlyList<FaceButton> TopRow => Layout.Top;
-    private IReadOnlyList<FaceButton> BottomRow => Layout.Bottom;
-    private bool ShowSelect => Layout.Select;
-    private bool ShowStart => Layout.Start;
+    private IReadOnlyList<FaceButton> TopRow => _layout.Top;
+    private IReadOnlyList<FaceButton> BottomRow => _layout.Bottom;
+    private bool ShowSelect => _layout.Select;
+    private bool ShowStart => _layout.Start;
 
-    private GamepadLayout Layout => ResolveLayout(System);
+    protected override void OnParametersSet()
+    {
+        _layout = BuildLayout(System, Buttons);
+    }
 
     private bool IsPressed(string code) => _pressedKeys.Contains(code);
 
@@ -137,7 +144,26 @@
         }
     }
 
-    private static GamepadLayout ResolveLayout(string system)
+    private static GamepadLayout BuildLayout(string system, IEnumerable<string> buttons)
+    {
+        var baseLayout = ResolveSystemLayout(system);
+        var allowed = buttons?
+            .Where(b => !string.IsNullOrWhiteSpace(b))
+            .Select(b => b.Trim().ToLowerInvariant())
+            .ToHashSet();
+
+        if (allowed is null || allowed.Count == 0)
+            return baseLayout;
+
+        var top = baseLayout.Top.Where(b => allowed.Contains(b.Label.ToLowerInvariant())).ToList();
+        var bottom = baseLayout.Bottom.Where(b => allowed.Contains(b.Label.ToLowerInvariant())).ToList();
+        var select = baseLayout.Select && allowed.Contains("select");
+        var start = baseLayout.Start && allowed.Contains("start");
+
+        return new GamepadLayout(top, bottom, select, start);
+    }
+
+    private static GamepadLayout ResolveSystemLayout(string system)
         => system?.Trim().ToLowerInvariant() switch
         {
             "nes" or "famicom" => NesLayout,

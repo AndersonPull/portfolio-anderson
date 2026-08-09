@@ -83,16 +83,40 @@ window.emoEmulator = {
         }
     },
 
+    async ensureNostalgist() {
+        if (typeof Nostalgist !== 'undefined') {
+            return;
+        }
+
+        await new Promise((resolve, reject) => {
+            const existing = document.querySelector('script[data-emo-nostalgist]');
+            if (existing) {
+                existing.addEventListener('load', () => resolve(), { once: true });
+                existing.addEventListener('error', () => reject(new Error('Falha ao carregar Nostalgist')), { once: true });
+                return;
+            }
+
+            const script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/npm/nostalgist/dist/nostalgist.umd.js';
+            script.async = true;
+            script.dataset.emoNostalgist = 'true';
+            script.onload = () => resolve();
+            script.onerror = () => reject(new Error('Falha ao carregar Nostalgist'));
+            document.head.appendChild(script);
+        });
+
+        if (typeof Nostalgist === 'undefined') {
+            throw new Error('Nostalgist library not loaded');
+        }
+    },
+
     async init(elementId, romUrl, core) {
         await this.stop();
+        await this.ensureNostalgist();
 
         const canvas = document.getElementById(elementId);
         if (!(canvas instanceof HTMLCanvasElement)) {
             throw new Error(`Canvas #${elementId} not found`);
-        }
-
-        if (typeof Nostalgist === 'undefined') {
-            throw new Error('Nostalgist library not loaded');
         }
 
         this.targetElement = canvas;
