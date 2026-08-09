@@ -45,7 +45,7 @@
       "url": "emo\/covers\/.gitkeep"
     },
     {
-      "hash": "sha256-s2WX6Oezr15ec1uswIsIX1FXaYXX62NyILGpv21VMXg=",
+      "hash": "sha256-h6LebTpWmJOtRmWG08TVirN5YxvS26oE+bsZ3TLGh2Q=",
       "url": "emo\/games.json"
     },
     {
@@ -89,11 +89,11 @@
       "url": "Images\/whats.png"
     },
     {
-      "hash": "sha256-ySqV00KCGwiDtDFprEyNRlgsu4aAlFvyTs9OlNBiA18=",
+      "hash": "sha256-b9xA5XVkR7kv\/F+iq2iNpqp7Z0NwL0GNJyHZ7lNMfsY=",
       "url": "index.html"
     },
     {
-      "hash": "sha256-+7iQ11NyL7coPlzZ1Es\/8pCJ1eWvKX6A3yizs7wPP8A=",
+      "hash": "sha256-oGBE7BqwEabBoGWFzWoYsOnOR952t9iZb\/G0rL2aIwo=",
       "url": "js\/emo\/emulator.js"
     },
     {
@@ -141,7 +141,7 @@
       "url": "_framework\/icudt_no_CJK.dat"
     },
     {
-      "hash": "sha256-2TAE3i8ZJf0QE605dpLu+7qJ4vtW4f4l72\/tSRv+gkw=",
+      "hash": "sha256-eGY2dKA8\/\/oUPtmI5gKEtoW8FdfC2TM2gNNu\/\/uRj8w=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -217,7 +217,7 @@
       "url": "_framework\/Newtonsoft.Json.wasm"
     },
     {
-      "hash": "sha256-BqJmIxtcXvTTlOu9B2FCEfxiB4c+NWEE\/eaQsu4elb8=",
+      "hash": "sha256-9NCWVCIAeYwGgpafo\/2fBMTTe4rPGLO31cTrfsqKngk=",
       "url": "_framework\/Portfolio.wasm"
     },
     {
@@ -277,7 +277,7 @@
       "url": "_framework\/System.Linq.Expressions.wasm"
     },
     {
-      "hash": "sha256-1JjR0dZ\/mS51tLRdX\/qE45ntAQ5oqhP5nYIEoGAb+Xg=",
+      "hash": "sha256-2L+p2WFEmszwxt+NAWET9MAdj6S4oYhtqtXHFjTfvnQ=",
       "url": "_framework\/System.Linq.wasm"
     },
     {
@@ -389,7 +389,7 @@
       "url": "_framework\/System.Xml.XDocument.wasm"
     },
     {
-      "hash": "sha256-8GHTp4PpHUTjD2xl2+Usdj+Tf\/0SCaN4qrT85u0803I=",
+      "hash": "sha256-sQ4MO\/UWN2TDV\/KuOVsOg\/yqfdlB\/YTYBTz2GdkkfEM=",
       "url": "Portfolio.styles.css"
     },
     {
@@ -401,5 +401,5 @@
       "url": "_content\/Blazored.Modal\/blazored.modal.js"
     }
   ],
-  "version": "fI88+cXr"
+  "version": "eUQplUk8"
 };
