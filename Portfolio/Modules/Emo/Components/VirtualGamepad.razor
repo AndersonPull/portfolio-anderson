@@ -1,44 +1,18 @@
 @inject IJSRuntime JSRuntime
+@implements IAsyncDisposable
 
 <div class="virtual-gamepad"
      @oncontextmenu:preventDefault="true"
      @onpointerdown:preventDefault="true"
      @onpointerup:preventDefault="true">
-    <div class="gamepad-dpad">
-        <button type="button"
-                class="gamepad-btn dpad-up @(IsPressed("up") ? "pressed" : "")"
-                @onpointerdown="@(() => PressKey("up"))"
-                @onpointerup="@(() => ReleaseKey("up"))"
-                @onpointerleave="@(() => ReleaseKey("up"))"
-                @onpointercancel="@(() => ReleaseKey("up"))">
-            ↑
-        </button>
-        <div class="dpad-middle">
-            <button type="button"
-                    class="gamepad-btn dpad-left @(IsPressed("left") ? "pressed" : "")"
-                    @onpointerdown="@(() => PressKey("left"))"
-                    @onpointerup="@(() => ReleaseKey("left"))"
-                    @onpointerleave="@(() => ReleaseKey("left"))"
-                    @onpointercancel="@(() => ReleaseKey("left"))">
-                ←
-            </button>
-            <button type="button"
-                    class="gamepad-btn dpad-right @(IsPressed("right") ? "pressed" : "")"
-                    @onpointerdown="@(() => PressKey("right"))"
-                    @onpointerup="@(() => ReleaseKey("right"))"
-                    @onpointerleave="@(() => ReleaseKey("right"))"
-                    @onpointercancel="@(() => ReleaseKey("right"))">
-                →
-            </button>
-        </div>
-        <button type="button"
-                class="gamepad-btn dpad-down @(IsPressed("down") ? "pressed" : "")"
-                @onpointerdown="@(() => PressKey("down"))"
-                @onpointerup="@(() => ReleaseKey("down"))"
-                @onpointerleave="@(() => ReleaseKey("down"))"
-                @onpointercancel="@(() => ReleaseKey("down"))">
-            ↓
-        </button>
+    <div class="gamepad-stick @(IsStickActive ? "active" : "")"
+         @ref="_stickBase"
+         @onpointerdown="OnStickDown"
+         @onpointermove="OnStickMove"
+         @onpointerup="OnStickUp"
+         @onpointercancel="OnStickUp">
+        <div class="stick-ring"></div>
+        <div class="stick-knob" style="@KnobStyle"></div>
     </div>
 
     @if (TopRow.Count > 0 || BottomRow.Count > 0)
@@ -112,12 +86,25 @@
     public IEnumerable<string> Buttons { get; set; }
 
     private readonly HashSet<string> _pressedKeys = [];
+    private readonly HashSet<string> _stickDirs = [];
     private GamepadLayout _layout = SnesLayout;
+    private ElementReference _stickBase;
+    private double _knobX;
+    private double _knobY;
+    private double _stickCenterX;
+    private double _stickCenterY;
+    private double _stickMaxRadius;
+    private long? _activePointerId;
+    private bool _disposed;
 
     private IReadOnlyList<FaceButton> TopRow => _layout.Top;
     private IReadOnlyList<FaceButton> BottomRow => _layout.Bottom;
     private bool ShowSelect => _layout.Select;
     private bool ShowStart => _layout.Start;
+    private bool IsStickActive => _activePointerId.HasValue || _stickDirs.Count > 0;
+
+    private string KnobStyle =>
+        FormattableString.Invariant($"transform: translate(calc(-50% + {_knobX:0.##}px), calc(-50% + {_knobY:0.##}px));");
 
     protected override void OnParametersSet()
     {
@@ -141,6 +128,131 @@
         {
             await JSRuntime.InvokeVoidAsync("emoEmulator.simulateKey", code, false);
             StateHasChanged();
+        }
+    }
+
+    private async Task OnStickDown(PointerEventArgs e)
+    {
+        if (_activePointerId.HasValue)
+            return;
+
+        var rect = await JSRuntime.InvokeAsync<DomRect>("emoEmulator.getRect", _stickBase);
+        if (rect.Width <= 0 || rect.Height <= 0)
+            return;
+
+        _stickCenterX = rect.Left + rect.Width / 2;
+        _stickCenterY = rect.Top + rect.Height / 2;
+        _stickMaxRadius = Math.Min(rect.Width, rect.Height) * 0.34;
+        _activePointerId = e.PointerId;
+
+        await JSRuntime.InvokeVoidAsync("emoEmulator.capturePointer", _stickBase, e.PointerId);
+        await UpdateStick(e.ClientX, e.ClientY);
+    }
+
+    private async Task OnStickMove(PointerEventArgs e)
+    {
+        if (_activePointerId != e.PointerId)
+            return;
+
+        await UpdateStick(e.ClientX, e.ClientY);
+    }
+
+    private async Task OnStickUp(PointerEventArgs e)
+    {
+        if (_activePointerId != e.PointerId)
+            return;
+
+        await JSRuntime.InvokeVoidAsync("emoEmulator.releasePointer", _stickBase, e.PointerId);
+        _activePointerId = null;
+        _knobX = 0;
+        _knobY = 0;
+        await SyncStickDirs([]);
+        StateHasChanged();
+    }
+
+    private async Task UpdateStick(double clientX, double clientY)
+    {
+        if (_stickMaxRadius <= 0)
+            return;
+
+        var maxRadius = _stickMaxRadius;
+        var dx = clientX - _stickCenterX;
+        var dy = clientY - _stickCenterY;
+        var magnitude = Math.Sqrt(dx * dx + dy * dy);
+
+        if (magnitude > maxRadius && magnitude > 0)
+        {
+            dx = dx / magnitude * maxRadius;
+            dy = dy / magnitude * maxRadius;
+            magnitude = maxRadius;
+        }
+
+        _knobX = dx;
+        _knobY = dy;
+
+        var wanted = new HashSet<string>(StringComparer.Ordinal);
+        var deadzone = maxRadius * 0.22;
+        var axisThreshold = maxRadius * 0.32;
+
+        if (magnitude >= deadzone)
+        {
+            if (dx >= axisThreshold) wanted.Add("right");
+            if (dx <= -axisThreshold) wanted.Add("left");
+            if (dy >= axisThreshold) wanted.Add("down");
+            if (dy <= -axisThreshold) wanted.Add("up");
+
+            if (wanted.Count == 0)
+            {
+                if (Math.Abs(dx) >= Math.Abs(dy))
+                    wanted.Add(dx > 0 ? "right" : "left");
+                else
+                    wanted.Add(dy > 0 ? "down" : "up");
+            }
+        }
+
+        await SyncStickDirs(wanted);
+        StateHasChanged();
+    }
+
+    private async Task SyncStickDirs(HashSet<string> wanted)
+    {
+        foreach (var dir in _stickDirs.ToArray())
+        {
+            if (!wanted.Contains(dir))
+            {
+                _stickDirs.Remove(dir);
+                await JSRuntime.InvokeVoidAsync("emoEmulator.simulateKey", dir, false);
+            }
+        }
+
+        foreach (var dir in wanted)
+        {
+            if (_stickDirs.Add(dir))
+                await JSRuntime.InvokeVoidAsync("emoEmulator.simulateKey", dir, true);
+        }
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (_disposed)
+            return;
+
+        _disposed = true;
+        _activePointerId = null;
+        _knobX = 0;
+        _knobY = 0;
+
+        foreach (var dir in _stickDirs.ToArray())
+        {
+            _stickDirs.Remove(dir);
+            try
+            {
+                await JSRuntime.InvokeVoidAsync("emoEmulator.simulateKey", dir, false);
+            }
+            catch (JSDisconnectedException)
+            {
+                // page unloading
+            }
         }
     }
 
@@ -210,4 +322,12 @@
         IReadOnlyList<FaceButton> Bottom,
         bool Select,
         bool Start);
+
+    private sealed class DomRect
+    {
+        public double Left { get; set; }
+        public double Top { get; set; }
+        public double Width { get; set; }
+        public double Height { get; set; }
+    }
 }

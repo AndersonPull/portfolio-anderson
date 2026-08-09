@@ -97,6 +97,7 @@
         try
         {
             var romUrl = new Uri(new Uri(NavigationManager.BaseUri), Game.Rom).ToString();
+            await JSRuntime.InvokeVoidAsync("emoEmulator.lockZoom");
             await JSRuntime.InvokeAsync<bool>("emoEmulator.init", "emo-canvas", romUrl, Game.Core);
             _emulatorInitialized = true;
 
@@ -146,6 +147,7 @@
 
         try
         {
+            await JSRuntime.InvokeVoidAsync("emoEmulator.unlockZoom");
             await JSRuntime.InvokeVoidAsync("emoEmulator.stop");
         }
         catch

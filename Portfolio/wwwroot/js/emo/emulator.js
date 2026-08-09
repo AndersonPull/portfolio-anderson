@@ -11,6 +11,12 @@ window.emoEmulator = {
     _gamepadConnected: false,
     _onGamepadConnected: null,
     _onGamepadDisconnected: null,
+    _zoomLocked: false,
+    _lastTouchEnd: 0,
+    _onZoomTouchStart: null,
+    _onZoomTouchMove: null,
+    _onZoomTouchEnd: null,
+    _onZoomGesture: null,
 
     readStoredVolume() {
         const raw = localStorage.getItem('emo.volume');
@@ -160,6 +166,7 @@ window.emoEmulator = {
         this.captureExistingAudioContexts();
         this.applyVolume();
         this.startVolumeWatch();
+        this.lockZoom();
         return true;
     },
 
@@ -172,6 +179,46 @@ window.emoEmulator = {
             this.instance.pressDown(button);
         } else {
             this.instance.pressUp(button);
+        }
+    },
+
+    getRect(element) {
+        if (!element) {
+            return { left: 0, top: 0, width: 0, height: 0 };
+        }
+
+        const rect = element.getBoundingClientRect();
+        return {
+            left: rect.left,
+            top: rect.top,
+            width: rect.width,
+            height: rect.height
+        };
+    },
+
+    capturePointer(element, pointerId) {
+        if (!element || typeof element.setPointerCapture !== 'function') {
+            return;
+        }
+
+        try {
+            element.setPointerCapture(pointerId);
+        } catch {
+            // ignore
+        }
+    },
+
+    releasePointer(element, pointerId) {
+        if (!element || typeof element.releasePointerCapture !== 'function') {
+            return;
+        }
+
+        try {
+            if (element.hasPointerCapture?.(pointerId)) {
+                element.releasePointerCapture(pointerId);
+            }
+        } catch {
+            // ignore
         }
     },
 
@@ -535,9 +582,88 @@ window.emoEmulator = {
         this._gamepadConnected = false;
     },
 
+    lockZoom() {
+        if (this._zoomLocked) {
+            this.refreshViewportLock();
+            return;
+        }
+
+        this._zoomLocked = true;
+        document.documentElement.classList.add('emo-zoom-lock');
+        document.body.classList.add('emo-zoom-lock');
+        this.refreshViewportLock();
+
+        this._onZoomGesture = (event) => event.preventDefault();
+        this._onZoomTouchStart = (event) => {
+            // Only block pinch/zoom gestures, never single-finger taps.
+            if (event.touches.length > 1) {
+                event.preventDefault();
+            }
+        };
+        this._onZoomTouchMove = (event) => {
+            if (event.touches.length > 1) {
+                event.preventDefault();
+            }
+        };
+
+        const opts = { passive: false, capture: true };
+        document.addEventListener('gesturestart', this._onZoomGesture, opts);
+        document.addEventListener('gesturechange', this._onZoomGesture, opts);
+        document.addEventListener('gestureend', this._onZoomGesture, opts);
+        document.addEventListener('touchstart', this._onZoomTouchStart, opts);
+        document.addEventListener('touchmove', this._onZoomTouchMove, opts);
+    },
+
+    unlockZoom() {
+        if (!this._zoomLocked) {
+            return;
+        }
+
+        this._zoomLocked = false;
+        document.documentElement.classList.remove('emo-zoom-lock');
+        document.body.classList.remove('emo-zoom-lock');
+
+        const opts = { capture: true };
+        if (this._onZoomGesture) {
+            document.removeEventListener('gesturestart', this._onZoomGesture, opts);
+            document.removeEventListener('gesturechange', this._onZoomGesture, opts);
+            document.removeEventListener('gestureend', this._onZoomGesture, opts);
+            this._onZoomGesture = null;
+        }
+
+        if (this._onZoomTouchStart) {
+            document.removeEventListener('touchstart', this._onZoomTouchStart, opts);
+            this._onZoomTouchStart = null;
+        }
+
+        if (this._onZoomTouchMove) {
+            document.removeEventListener('touchmove', this._onZoomTouchMove, opts);
+            this._onZoomTouchMove = null;
+        }
+
+        this._onZoomTouchEnd = null;
+    },
+
+    refreshViewportLock() {
+        let meta = document.querySelector('meta[name="viewport"]');
+        if (!meta) {
+            meta = document.createElement('meta');
+            meta.name = 'viewport';
+            document.head.appendChild(meta);
+        }
+
+        const content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover';
+        meta.setAttribute('content', content);
+
+        // Some iOS versions only re-apply the lock if the content string changes.
+        meta.setAttribute('content', `${content}, emo-lock=${Date.now()}`);
+        meta.setAttribute('content', content);
+    },
+
     async stop() {
         this.stopVolumeWatch();
         this.stopGamepadWatch();
+        this.unlockZoom();
 
         if (this.instance) {
             try {
