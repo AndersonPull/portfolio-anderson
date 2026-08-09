@@ -1,0 +1,134 @@
+.emo-settings {
+    position: relative;
+    z-index: 10;
+}
+
+.emo-settings-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.15rem;
+    height: 2.15rem;
+    background: rgba(13, 17, 23, 0.75);
+    border: 1px solid rgba(241, 188, 3, 0.35);
+    color: #f8f9fa;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    touch-action: manipulation;
+    padding: 0;
+}
+
+.emo-settings-btn:hover,
+.emo-settings-btn:active,
+.emo-settings-btn[aria-expanded="true"] {
+    border-color: #F1BC03;
+    color: #F1BC03;
+}
+
+.emo-settings-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 11;
+    background: transparent;
+}
+
+.emo-settings-panel {
+    position: absolute;
+    top: calc(100% + 0.4rem);
+    right: 0;
+    z-index: 12;
+    min-width: 12.5rem;
+    padding: 0.4rem;
+    background: rgba(13, 17, 23, 0.94);
+    border: 1px solid rgba(241, 188, 3, 0.35);
+    border-radius: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+
+.emo-settings-volume {
+    display: flex;
+    flex-direction: column;
+    padding: 0.55rem 0.65rem 0.7rem;
+}
+
+.emo-settings-volume-row {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    color: #f8f9fa;
+}
+
+.emo-settings-volume-row i {
+    font-size: 0.95rem;
+    width: 1rem;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.emo-settings-volume-slider {
+    flex: 1;
+    min-width: 0;
+    accent-color: #F1BC03;
+    cursor: pointer;
+    touch-action: manipulation;
+}
+
+.emo-settings-item {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: #f8f9fa;
+    padding: 0.55rem 0.65rem;
+    border-radius: 0.5rem;
+    font-size: 0.82rem;
+    text-align: left;
+    cursor: pointer;
+    touch-action: manipulation;
+}
+
+.emo-settings-item:hover:not(:disabled),
+.emo-settings-item:active:not(:disabled) {
+    background: rgba(241, 188, 3, 0.12);
+    color: #F1BC03;
+}
+
+.emo-settings-item:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.emo-settings-item i {
+    font-size: 0.95rem;
+    width: 1rem;
+    text-align: center;
+}
+
+.emo-settings-message {
+    margin: 0.15rem 0.4rem 0.25rem;
+    font-size: 0.72rem;
+    line-height: 1.3;
+}
+
+.emo-settings-message.is-ok {
+    color: #8fd19e;
+}
+
+.emo-settings-message.is-error {
+    color: #f1a0a0;
+}
+
+.emo-settings-file-wrap {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+}

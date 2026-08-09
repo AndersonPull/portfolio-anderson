@@ -2,7 +2,7 @@
 @layout EmoLayout
 @using Portfolio.Modules.Emo.Models
 @using Portfolio.Modules.Emo.Components
-@implements IDisposable
+@implements IAsyncDisposable
 
 @inject IGameCatalogService GameCatalogService
 @inject NavigationManager NavigationManager
@@ -10,13 +10,19 @@
 
 <div id="emo-play-root" class="emo-play">
     <button type="button" class="emo-back-btn" @onclick="NavigateBack">← Voltar</button>
-    <button type="button"
-            class="emo-fullscreen-btn"
-            onclick="emoEmulator.enterFullscreen('emo-play-root')"
-            aria-label="Jogar em tela cheia">
-        <i class="bi bi-arrows-fullscreen"></i>
-        <span>Tela cheia</span>
-    </button>
+    <div class="emo-top-right">
+        @if (_emulatorInitialized && Game is not null)
+        {
+            <EmoSettingsMenu GameId="@Game.Id" Core="@Game.Core" />
+        }
+        <button type="button"
+                class="emo-fullscreen-btn"
+                onclick="emoEmulator.enterFullscreen('emo-play-root')"
+                aria-label="Jogar em tela cheia"
+                title="Tela cheia">
+            <i class="bi bi-arrows-fullscreen"></i>
+        </button>
+    </div>
 
     @if (IsLoadingGame)
     {
@@ -31,15 +37,25 @@
             <button type="button" class="emo-back-btn emo-back-btn-inline" @onclick="NavigateBack">Voltar ao catálogo</button>
         </div>
     }
-    else
+    else if (Game is not null)
     {
         <div class="emo-screen">
             <div class="emo-stage">
                 <canvas id="emo-canvas" class="emo-canvas"></canvas>
             </div>
-            <div class="emo-controls">
-                <VirtualGamepad />
-            </div>
+            @if (_gamepadConnected)
+            {
+                <div class="emo-gamepad-badge" aria-live="polite">
+                    <i class="bi bi-controller"></i>
+                    <span>Controle conectado</span>
+                </div>
+            }
+            else
+            {
+                <div class="emo-controls">
+                    <VirtualGamepad System="@Game.System" />
+                </div>
+            }
         </div>
     }
 </div>
@@ -51,16 +67,23 @@
     private GameEntry? Game { get; set; }
     private bool IsLoadingGame = true;
     private bool _emulatorInitialized;
+    private bool _gamepadConnected;
+    private bool _gamepadWatchStarted;
     private string? ErrorMessage;
+    private DotNetObjectReference<EmoPlay>? _dotNetRef;
 
     protected override async Task OnParametersSetAsync()
     {
         if (_emulatorInitialized)
             await JSRuntime.InvokeVoidAsync("emoEmulator.stop");
 
+        await StopGamepadWatchAsync();
+
         IsLoadingGame = true;
         ErrorMessage = null;
         _emulatorInitialized = false;
+        _gamepadConnected = false;
+        _gamepadWatchStarted = false;
 
         Game = await GameCatalogService.GetGameByIdAsync(GameId);
         if (Game is null)
@@ -79,6 +102,12 @@
             var romUrl = new Uri(new Uri(NavigationManager.BaseUri), Game.Rom).ToString();
             await JSRuntime.InvokeAsync<bool>("emoEmulator.init", "emo-canvas", romUrl, Game.Core);
             _emulatorInitialized = true;
+
+            _dotNetRef ??= DotNetObjectReference.Create(this);
+            await JSRuntime.InvokeVoidAsync("emoEmulator.startGamepadWatch", _dotNetRef);
+            _gamepadWatchStarted = true;
+
+            StateHasChanged();
         }
         catch (Exception ex)
         {
@@ -87,11 +116,50 @@
         }
     }
 
+    [JSInvokable]
+    public void OnGamepadChanged(bool connected)
+    {
+        if (_gamepadConnected == connected)
+            return;
+
+        _gamepadConnected = connected;
+        InvokeAsync(StateHasChanged);
+    }
+
     private void NavigateBack()
         => NavigationManager.NavigateTo("/emo");
 
-    public void Dispose()
+    private async Task StopGamepadWatchAsync()
     {
-        _ = JSRuntime.InvokeVoidAsync("emoEmulator.stop");
+        if (!_gamepadWatchStarted)
+            return;
+
+        try
+        {
+            await JSRuntime.InvokeVoidAsync("emoEmulator.stopGamepadWatch");
+        }
+        catch
+        {
+            // Ignore when tearing down.
+        }
+
+        _gamepadWatchStarted = false;
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        await StopGamepadWatchAsync();
+
+        try
+        {
+            await JSRuntime.InvokeVoidAsync("emoEmulator.stop");
+        }
+        catch
+        {
+            // Ignore dispose races.
+        }
+
+        _dotNetRef?.Dispose();
+        _dotNetRef = null;
     }
 }

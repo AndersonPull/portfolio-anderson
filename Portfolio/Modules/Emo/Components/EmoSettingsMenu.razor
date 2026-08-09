@@ -1,0 +1,231 @@
+@inject IJSRuntime JSRuntime
+@using System.IO
+@using Microsoft.AspNetCore.Components.Forms
+
+<div class="emo-settings">
+    <button type="button"
+            class="emo-settings-btn"
+            @onclick="ToggleMenu"
+            aria-label="Configurações"
+            aria-expanded="@_isOpen">
+        <i class="bi bi-gear-fill"></i>
+    </button>
+
+    @if (_isOpen)
+    {
+        <div class="emo-settings-backdrop" @onclick="CloseMenu"></div>
+        <div class="emo-settings-panel" role="menu">
+            <div class="emo-settings-volume" role="menuitem">
+                <div class="emo-settings-volume-row">
+                    <i class="bi @(_volume <= 0 ? "bi-volume-mute-fill" : _volume <= 4 ? "bi-volume-down-fill" : "bi-volume-up-fill")"
+                       aria-hidden="true"></i>
+                    <input type="range"
+                           class="emo-settings-volume-slider"
+                           min="0"
+                           max="10"
+                           step="1"
+                           value="@_volume"
+                           @oninput="OnVolumeInput"
+                           aria-label="Volume @_volume" />
+                </div>
+            </div>
+
+            <button type="button"
+                    class="emo-settings-item"
+                    @onclick="SaveState"
+                    disabled="@_busy"
+                    role="menuitem">
+                <i class="bi bi-download"></i>
+                <span>Salvar estado</span>
+            </button>
+
+            <button type="button"
+                    class="emo-settings-item"
+                    @onclick="TriggerImport"
+                    disabled="@_busy"
+                    role="menuitem">
+                <i class="bi bi-upload"></i>
+                <span>Importar estado</span>
+            </button>
+
+            @if (!string.IsNullOrEmpty(_message))
+            {
+                <p class="emo-settings-message @(_isError ? "is-error" : "is-ok")">@_message</p>
+            }
+        </div>
+    }
+
+    <div class="emo-settings-file-wrap" aria-hidden="true">
+        <InputFile id="@_fileInputId"
+                   OnChange="OnFileSelected"
+                   accept=".json,.emo-state.json,application/json" />
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string GameId { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Core { get; set; } = string.Empty;
+
+    private bool _isOpen;
+    private int _volume = 10;
+    private bool _busy;
+    private bool _isError;
+    private string _message = string.Empty;
+    private readonly string _fileInputId = $"emo-import-{Guid.NewGuid():N}";
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender)
+            return;
+
+        try
+        {
+            _volume = await JSRuntime.InvokeAsync<int>("emoEmulator.getVolume");
+            StateHasChanged();
+        }
+        catch
+        {
+            // Emulator may not be ready yet on first paint.
+        }
+    }
+
+    private async Task ToggleMenu()
+    {
+        if (_isOpen)
+        {
+            await CloseMenu();
+            return;
+        }
+
+        _isOpen = true;
+        _message = string.Empty;
+        try
+        {
+            _volume = await JSRuntime.InvokeAsync<int>("emoEmulator.getVolume");
+        }
+        catch (Exception ex)
+        {
+            ShowMessage($"Erro: {ex.Message}", isError: true);
+        }
+    }
+
+    private Task CloseMenu()
+    {
+        _isOpen = false;
+        _message = string.Empty;
+        return Task.CompletedTask;
+    }
+
+    private async Task OnVolumeInput(ChangeEventArgs e)
+    {
+        if (!int.TryParse(e.Value?.ToString(), out var level))
+            return;
+
+        try
+        {
+            _volume = await JSRuntime.InvokeAsync<int>("emoEmulator.setVolume", level);
+        }
+        catch (Exception ex)
+        {
+            ShowMessage($"Erro: {ex.Message}", isError: true);
+        }
+    }
+
+    private async Task SaveState()
+    {
+        if (_busy)
+            return;
+
+        _busy = true;
+        try
+        {
+            await JSRuntime.InvokeVoidAsync("emoEmulator.pause");
+            await JSRuntime.InvokeAsync<object>("emoEmulator.exportState", new { gameId = GameId, core = Core });
+            ShowMessage("Estado salvo", isError: false);
+        }
+        catch (Exception ex)
+        {
+            ShowMessage(FriendlyError(ex.Message), isError: true);
+        }
+        finally
+        {
+            try { await JSRuntime.InvokeVoidAsync("emoEmulator.resume"); } catch { }
+            _busy = false;
+        }
+    }
+
+    private async Task TriggerImport()
+    {
+        try
+        {
+            await JSRuntime.InvokeVoidAsync("emoEmulator.clickElement", _fileInputId);
+        }
+        catch (Exception ex)
+        {
+            ShowMessage($"Erro: {ex.Message}", isError: true);
+        }
+    }
+
+    private async Task OnFileSelected(InputFileChangeEventArgs e)
+    {
+        if (_busy)
+            return;
+
+        var file = e.File;
+        if (file is null)
+            return;
+
+        _busy = true;
+        try
+        {
+            await JSRuntime.InvokeVoidAsync("emoEmulator.pause");
+            await using var stream = file.OpenReadStream(maxAllowedSize: 32 * 1024 * 1024);
+            using var ms = new MemoryStream();
+            await stream.CopyToAsync(ms);
+            var bytes = ms.ToArray();
+
+            var result = await JSRuntime.InvokeAsync<ImportResult>(
+                "emoEmulator.importStateFromBytes",
+                bytes,
+                new { gameId = GameId, core = Core });
+
+            if (result?.Ok == true)
+                ShowMessage("Estado importado", isError: false);
+            else
+                ShowMessage(result?.Error ?? "Falha ao importar", isError: true);
+        }
+        catch (Exception ex)
+        {
+            ShowMessage(FriendlyError(ex.Message), isError: true);
+        }
+        finally
+        {
+            try { await JSRuntime.InvokeVoidAsync("emoEmulator.resume"); } catch { }
+            _busy = false;
+        }
+    }
+
+    private void ShowMessage(string message, bool isError)
+    {
+        _message = message;
+        _isError = isError;
+    }
+
+    private static string FriendlyError(string message)
+    {
+        if (message.Contains("Jogo incompatível", StringComparison.OrdinalIgnoreCase))
+            return "Jogo incompatível";
+        if (message.Contains("inválido", StringComparison.OrdinalIgnoreCase))
+            return "Arquivo de estado inválido";
+        return message;
+    }
+
+    private sealed class ImportResult
+    {
+        public bool Ok { get; set; }
+        public string Error { get; set; } = string.Empty;
+    }
+}
