@@ -235,7 +235,7 @@
 }
 
 .gamepad-actions[b-ljdswbfxri] {
-    --action-size: calc(var(--control-size) * 1.5);
+    --action-size: var(--control-size);
     --action-gap: clamp(0.85rem, 2.8vw, 1.35rem);
     display: flex;
     flex-direction: column;
@@ -254,7 +254,7 @@
     width: var(--action-size);
     height: var(--action-size);
     border-width: 3.5px;
-    font-size: clamp(1.55rem, 4.8vw, 2rem);
+    font-size: clamp(1.05rem, 3.2vw, 1.35rem);
 }
 
 .action-a[b-ljdswbfxri] { color: #ff6b7a; }
@@ -325,7 +325,7 @@
     }
 
     .action-btn[b-ljdswbfxri] {
-        font-size: clamp(1.45rem, 6.5vw, 1.9rem);
+        font-size: clamp(1.05rem, 4.5vw, 1.35rem);
     }
 
     .system-buttons[b-ljdswbfxri] {
