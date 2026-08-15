@@ -795,19 +795,41 @@
     transform: translateX(100%);
 }
 
-.terminal_text[b-fx4s4655nz] {
-    font-size: 14px;
-    font-weight: bold;
-    margin: 15px;
+.terminal-log[b-fx4s4655nz] {
+    position: absolute;
+    top: 12px;
+    left: 15px;
+    right: 15px;
+    bottom: 70px;
     overflow: hidden;
-    white-space: nowrap;
-    width: 100%;
-    animation: typeWriter-b-fx4s4655nz 9s steps(40) 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 0.35rem;
+    pointer-events: none;
 }
 
-@keyframes typeWriter-b-fx4s4655nz {
-    from { width: 0; }
-    to { width: 100%; }
+.terminal-line[b-fx4s4655nz] {
+    margin: 0;
+    font-size: 14px;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.35;
+}
+
+.terminal-caret[b-fx4s4655nz] {
+    display: inline-block;
+    margin-left: 1px;
+    font-weight: 400;
+    animation: caret-blink-b-fx4s4655nz 0.9s step-end infinite;
+}
+
+@keyframes caret-blink-b-fx4s4655nz {
+    50% {
+        opacity: 0;
+    }
 }
 
 .terminal_button[b-fx4s4655nz] {
@@ -865,7 +887,7 @@
         padding: 0;
         height: 100dvh;
         min-height: 100dvh;
-        background: #f3f3f3;
+        background: #e2e2e2;
     }
 
     .home-desktop[b-fx4s4655nz] {
@@ -926,8 +948,9 @@
         flex-direction: column;
         align-items: stretch;
         gap: 0.85rem;
-        background: rgba(243, 243, 243, 0.98);
+        background: rgba(226, 226, 226, 0.98);
         border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 16px;
         box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
         opacity: 0;
         visibility: hidden;
@@ -1041,14 +1064,11 @@
         transform: translateX(110%);
     }
 
-    .home-mobile-panel-text[b-fx4s4655nz] {
-        font-size: 14px;
-        font-weight: bold;
-        margin: 15px;
-        overflow: hidden;
-        white-space: nowrap;
-        width: calc(100% - 30px);
-        animation: typeWriter-b-fx4s4655nz 9s steps(40) 1;
+    .home-mobile-panel .terminal-log[b-fx4s4655nz] {
+        top: 12px;
+        left: 15px;
+        right: 15px;
+        bottom: 70px;
     }
 
     .home-mobile-cta[b-fx4s4655nz] {
@@ -1080,10 +1100,10 @@
     .text1[b-fx4s4655nz],
     .text2[b-fx4s4655nz],
     .terminal[b-fx4s4655nz],
-    .terminal_text[b-fx4s4655nz],
     .home-nav[b-fx4s4655nz],
     .home-burger span[b-fx4s4655nz],
-    .home-mobile-panel[b-fx4s4655nz] {
+    .home-mobile-panel[b-fx4s4655nz],
+    .terminal-caret[b-fx4s4655nz] {
         animation: none;
         transition: none;
     }

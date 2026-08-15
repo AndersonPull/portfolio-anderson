@@ -1,7 +1,7 @@
 ﻿self.assetsManifest = {
   "assets": [
     {
-      "hash": "sha256-47rJx+NV5ecXcSR4fbixf+EB5qy2MdBUVwyGkEX1H2g=",
+      "hash": "sha256-RBp21V87tUKf3cj65P\/Ho2yqhEgpSqtD3eFF\/dwCaig=",
       "url": "css\/app.css"
     },
     {
@@ -69,6 +69,10 @@
       "url": "emo\/roms\/Ultimate Mortal Kombat 3 (USA).md"
     },
     {
+      "hash": "sha256-e64LV5uz8kVqiqPMBuMZuxdJz7NpMqKp+3eTy9QO3zc=",
+      "url": "home\/terminal.json"
+    },
+    {
       "hash": "sha256-kmTYvI8YLaqzVSB6230UD9jTrodPoAr7skDFkj8vEFk=",
       "url": "Images\/arrow_green_right.png"
     },
@@ -101,7 +105,7 @@
       "url": "Images\/whats.png"
     },
     {
-      "hash": "sha256-KHV1f33dbS\/C0vzlMupJFC\/23gROob7DukMrgDWZpjo=",
+      "hash": "sha256-ajbyPjcQg1M7ws1GfpQlDbYhiI7bOtncXn82UNUlHmg=",
       "url": "index.html"
     },
     {
@@ -109,7 +113,7 @@
       "url": "js\/emo\/emulator.js"
     },
     {
-      "hash": "sha256-07r5IaXQT6dUoFCOdd0tQ20DoCHOWitT\/mA12pxtjeM=",
+      "hash": "sha256-MhKxPtCALM0gIndWjnUo2CIe+fthd1HjRyPnFwGEPkY=",
       "url": "manifest.json"
     },
     {
@@ -153,7 +157,7 @@
       "url": "_framework\/icudt_no_CJK.dat"
     },
     {
-      "hash": "sha256-NU\/0LbB92EBtzE0eQNN12XpiCqazfvWYqV7mMezA\/Ak=",
+      "hash": "sha256-b9zEr83mUi4wmrgTVPG368RvXX7Fmi4dXbftIrtjk4s=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -229,7 +233,7 @@
       "url": "_framework\/Newtonsoft.Json.wasm"
     },
     {
-      "hash": "sha256-0NQhHxpONQSPZu3kz9WVVXqYf6tyodIhiBo6aha5q4Y=",
+      "hash": "sha256-pfNtw51uOwHsm2wOG9WOifq6ciuHR3ctPGBjbZrmdvM=",
       "url": "_framework\/Portfolio.wasm"
     },
     {
@@ -297,7 +301,11 @@
       "url": "_framework\/System.Memory.wasm"
     },
     {
-      "hash": "sha256-6GyuS8AjWWh8rubyL4rcO93tZVU\/icFkpfs8ZLL71Ho=",
+      "hash": "sha256-vBpQezaTjsI8P8UAwFHz\/LonB8dLUmSvfMtQoPwsQO8=",
+      "url": "_framework\/System.Net.Http.Json.wasm"
+    },
+    {
+      "hash": "sha256-WarkmXkgF6oYlzxluwYhB6B\/OPKvMUe6UwNyY0xYuak=",
       "url": "_framework\/System.Net.Http.wasm"
     },
     {
@@ -309,7 +317,7 @@
       "url": "_framework\/System.ObjectModel.wasm"
     },
     {
-      "hash": "sha256-PcUWR+I3tnII+S0QkdSxRYLYZDbYDeTBDzqFv3RbnxY=",
+      "hash": "sha256-M+xiOc8tm1wPSXx7w6\/SnyRIAXVa9RdDvfFve\/AHaT4=",
       "url": "_framework\/System.Private.CoreLib.wasm"
     },
     {
@@ -357,7 +365,7 @@
       "url": "_framework\/System.Runtime.Serialization.Primitives.wasm"
     },
     {
-      "hash": "sha256-F84Q6gh8iaafMuE\/5h2zN28LlSBhjGt9sLrD+qCeP2E=",
+      "hash": "sha256-uchefIKIYcdcIr8UsuTbvpDOFOYH3B0OLSwLWAGgOZQ=",
       "url": "_framework\/System.Runtime.wasm"
     },
     {
@@ -373,7 +381,7 @@
       "url": "_framework\/System.Text.Encodings.Web.wasm"
     },
     {
-      "hash": "sha256-3ezxLuiweKUG3Z9aVa7JnUu7NSL58d0LQhRTx6yJfIs=",
+      "hash": "sha256-CZke4LJ8hNKS6kZneuURFnvlopR28ZLDswfnVn4ljTA=",
       "url": "_framework\/System.Text.Json.wasm"
     },
     {
@@ -401,7 +409,7 @@
       "url": "_framework\/System.Xml.XDocument.wasm"
     },
     {
-      "hash": "sha256-Pgcvk71EJ91LRdXkahXF7lJEpVd5EHorROQHOCHEnnQ=",
+      "hash": "sha256-mpA+x3w\/yFrwXX1PAjf+rNbfRevz\/tE42a6Iq76EDCk=",
       "url": "Portfolio.styles.css"
     },
     {
@@ -413,5 +421,5 @@
       "url": "_content\/Blazored.Modal\/blazored.modal.js"
     }
   ],
-  "version": "9JnQLrql"
+  "version": "r312Mq8S"
 };
