@@ -1,0 +1,72 @@
+@inject NavigationManager Navigation
+@implements IDisposable
+
+<div class="site-nav-root @(menuOpen ? "menu-open" : null)">
+    <header class="site-topbar">
+        <button type="button"
+                class="site-burger"
+                aria-label="@(menuOpen ? "Fechar menu" : "Abrir menu")"
+                aria-expanded="@menuOpen"
+                @onclick="ToggleMenu">
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <nav class="site-nav" aria-label="Principal">
+        <a class="site-nav-link" href="/" @onclick="GoHome" @onclick:preventDefault>Home</a>
+        <a class="site-nav-link"
+           href="https://marketplace.visualstudio.com/items?itemName=AndersonOliveira.zoiodelula"
+           target="_blank"
+           rel="noopener noreferrer"
+           @onclick="CloseMenu">Produtos</a>
+        <a class="site-nav-link" href="newsletter" @onclick="GoNewsletter" @onclick:preventDefault>Newsletter</a>
+        <a class="site-nav-loja"
+           href="https://marketplace.visualstudio.com/items?itemName=AndersonOliveira.zoiodelula"
+           target="_blank"
+           rel="noopener noreferrer"
+           @onclick="CloseMenu">
+            Loja
+            <img src="Images/arrow_green_right.png" class="site-nav-loja-arrow" alt="" />
+        </a>
+    </nav>
+</div>
+
+@code {
+    private bool menuOpen;
+
+    protected override void OnInitialized()
+    {
+        Navigation.LocationChanged += OnLocationChanged;
+    }
+
+    private void OnLocationChanged(object sender, LocationChangedEventArgs e)
+    {
+        if (!menuOpen)
+            return;
+
+        menuOpen = false;
+        InvokeAsync(StateHasChanged);
+    }
+
+    private void ToggleMenu() => menuOpen = !menuOpen;
+
+    private void CloseMenu() => menuOpen = false;
+
+    private void GoHome()
+    {
+        CloseMenu();
+        Navigation.NavigateTo("/");
+    }
+
+    private void GoNewsletter()
+    {
+        CloseMenu();
+        Navigation.NavigateTo("newsletter");
+    }
+
+    public void Dispose()
+    {
+        Navigation.LocationChanged -= OnLocationChanged;
+    }
+}

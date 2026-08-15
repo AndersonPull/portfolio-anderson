@@ -3,34 +3,8 @@
 @inject HttpClient Http
 @implements IAsyncDisposable
 
-<div class="home-root @(menuOpen ? "menu-open" : null)">
-    <header class="home-topbar">
-        <button type="button"
-                class="home-burger"
-                aria-label="@(menuOpen ? "Fechar menu" : "Abrir menu")"
-                aria-expanded="@menuOpen"
-                @onclick="ToggleMenu">
-            <span></span>
-            <span></span>
-        </button>
-    </header>
-
-    <nav class="home-nav" aria-label="Principal">
-        <a class="home-nav-link"
-           href="https://marketplace.visualstudio.com/items?itemName=AndersonOliveira.zoiodelula"
-           target="_blank"
-           rel="noopener noreferrer"
-           @onclick="CloseMenu">Produtos</a>
-        <a class="home-nav-link" href="newsletter" @onclick="GoNewsletter" @onclick:preventDefault>Newsletter</a>
-        <a class="home-nav-loja"
-           href="https://marketplace.visualstudio.com/items?itemName=AndersonOliveira.zoiodelula"
-           target="_blank"
-           rel="noopener noreferrer"
-           @onclick="CloseMenu">
-            Loja
-            <img src="Images/arrow_green_right.png" class="home-nav-loja-arrow" alt="" />
-        </a>
-    </nav>
+<div class="home-root">
+    @* SiteNav vem do MainLayout *@
 
     @* Desktop (Drrobo layout) *@
     <div class="home-desktop">
@@ -100,7 +74,6 @@
 
 @code {
     private bool moverTerminal;
-    private bool menuOpen;
     private readonly List<string> _sourceLines = [];
     private readonly List<string> _completedLines = [];
     private string _currentTyped = string.Empty;
@@ -182,16 +155,6 @@
         {
             // disposed
         }
-    }
-
-    private void ToggleMenu() => menuOpen = !menuOpen;
-
-    private void CloseMenu() => menuOpen = false;
-
-    private void GoNewsletter()
-    {
-        CloseMenu();
-        Navigation.NavigateTo("newsletter");
     }
 
     private async Task OnTerminalClick()
