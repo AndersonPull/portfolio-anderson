@@ -1,20 +1,55 @@
 ﻿@inherits LayoutComponentBase
 @implements IDisposable
+@using System.Threading
+@using Microsoft.AspNetCore.Components.Routing
 
 @inject NavigationManager NavigationManager
 
 <div class="page @(IsHome ? "layout-home" : "layout-sitenav")">
-    <SiteNav />
+    @if (IsHome)
+    {
+        <SiteNav />
+    }
 
     <div class="main">
+        @if (!IsHome)
+        {
+            <SiteNav />
+        }
+
         <div class="content @(IsHome ? "content-home" : "px-4")">
-            @Body
+            <CascadingValue Name="PageLeavingHome" Value="@(_isExiting && _leavingHome)" IsFixed="false">
+                <div class="page-stage @PageStageClass">
+                    @Body
+                </div>
+            </CascadingValue>
         </div>
     </div>
 </div>
 
 @code {
     private bool IsHome { get; set; }
+    private bool _isExiting;
+    private bool _isEntering;
+    private bool _leavingHome;
+    private string _exitDir = "left";
+    private string _enterDir = "right";
+    private IDisposable _locationChangingRegistration;
+    private CancellationTokenSource _enterCts;
+
+    private string PageStageClass
+    {
+        get
+        {
+            if (_isExiting && _leavingHome)
+                return "is-exiting leaving-home";
+            if (_isExiting)
+                return $"is-exiting exit-{_exitDir}";
+            if (_isEntering)
+                return $"is-entering enter-{_enterDir}";
+            return null;
+        }
+    }
 
     protected override void OnInitialized()
     {
@@ -22,20 +57,78 @@
         SyncRouteState();
     }
 
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (!firstRender)
+            return;
+
+        _locationChangingRegistration = NavigationManager.RegisterLocationChangingHandler(OnLocationChanging);
+    }
+
+    private async ValueTask OnLocationChanging(LocationChangingContext context)
+    {
+        var current = NormalizePath(new Uri(NavigationManager.Uri).AbsolutePath);
+        var target = NormalizePath(NavigationManager.ToAbsoluteUri(context.TargetLocation).AbsolutePath);
+
+        if (string.Equals(current, target, StringComparison.OrdinalIgnoreCase))
+            return;
+
+        var toHome = string.IsNullOrEmpty(target);
+        _leavingHome = string.IsNullOrEmpty(current);
+        _exitDir = toHome ? "right" : "left";
+        _enterDir = toHome ? "left" : "right";
+
+        _isExiting = true;
+        _isEntering = false;
+        await InvokeAsync(StateHasChanged);
+        await Task.Delay(_leavingHome ? 700 : 420);
+    }
+
     private void OnLocationChanged(object sender, LocationChangedEventArgs e)
     {
+        _isExiting = false;
+        _leavingHome = false;
+        _isEntering = true;
         SyncRouteState();
         InvokeAsync(StateHasChanged);
+        _ = FinishEnterAsync();
+    }
+
+    private async Task FinishEnterAsync()
+    {
+        _enterCts?.Cancel();
+        _enterCts?.Dispose();
+        _enterCts = new CancellationTokenSource();
+        var token = _enterCts.Token;
+
+        try
+        {
+            await Task.Delay(520, token);
+            if (token.IsCancellationRequested)
+                return;
+
+            _isEntering = false;
+            await InvokeAsync(StateHasChanged);
+        }
+        catch (TaskCanceledException)
+        {
+            // next navigation
+        }
     }
 
     private void SyncRouteState()
     {
-        var path = new Uri(NavigationManager.Uri).AbsolutePath.TrimEnd('/');
-        IsHome = string.IsNullOrEmpty(path);
+        IsHome = string.IsNullOrEmpty(NormalizePath(new Uri(NavigationManager.Uri).AbsolutePath));
     }
+
+    private static string NormalizePath(string path)
+        => (path ?? string.Empty).TrimEnd('/');
 
     public void Dispose()
     {
         NavigationManager.LocationChanged -= OnLocationChanged;
+        _locationChangingRegistration?.Dispose();
+        _enterCts?.Cancel();
+        _enterCts?.Dispose();
     }
 }

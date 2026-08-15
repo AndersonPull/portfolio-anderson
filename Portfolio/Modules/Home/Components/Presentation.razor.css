@@ -216,6 +216,77 @@
     to { opacity: 1; transform: translateX(0) rotate(180deg); }
 }
 
+/* Saída: cada peça volta pelo lado que entrou */
+.home-root.is-leaving .home-title {
+    animation: home-out-left 0.55s cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+.home-root.is-leaving .tag-number {
+    animation: home-out-left-rotated 0.55s cubic-bezier(0.4, 0, 1, 1) 0.05s forwards;
+}
+
+.home-root.is-leaving .text1 {
+    animation: home-out-top 0.5s cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+.home-root.is-leaving .text2 {
+    animation: home-out-right-rotated 0.55s cubic-bezier(0.4, 0, 1, 1) 0.04s forwards;
+}
+
+.home-root.is-leaving .footer-image {
+    animation: home-out-right 0.6s cubic-bezier(0.4, 0, 1, 1) 0.06s forwards;
+}
+
+.home-root.is-leaving .terminal {
+    animation: home-out-right 0.6s cubic-bezier(0.4, 0, 1, 1) 0.1s forwards;
+}
+
+.home-root.is-leaving .home-mobile-title {
+    animation: home-out-left 0.5s cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+.home-root.is-leaving .home-mobile-rail {
+    animation: home-out-left-flip 0.5s cubic-bezier(0.4, 0, 1, 1) 0.04s forwards;
+}
+
+.home-root.is-leaving .home-mobile-photo {
+    animation: home-out-right 0.55s cubic-bezier(0.4, 0, 1, 1) 0.06s forwards;
+}
+
+.home-root.is-leaving .home-mobile-panel {
+    animation: home-out-right 0.55s cubic-bezier(0.4, 0, 1, 1) 0.1s forwards;
+}
+
+@keyframes home-out-left {
+    from { opacity: 1; transform: translateX(0); }
+    to { opacity: 0; transform: translateX(-4.5rem); }
+}
+
+@keyframes home-out-right {
+    from { opacity: 1; transform: translateX(0); }
+    to { opacity: 0; transform: translateX(4.5rem); }
+}
+
+@keyframes home-out-top {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-3rem); }
+}
+
+@keyframes home-out-left-rotated {
+    from { opacity: 1; transform: translateX(0) rotate(90deg); }
+    to { opacity: 0; transform: translateX(-4.5rem) rotate(90deg); }
+}
+
+@keyframes home-out-right-rotated {
+    from { opacity: 1; transform: translateX(0) rotate(90deg); }
+    to { opacity: 0; transform: translateX(4.5rem) rotate(90deg); }
+}
+
+@keyframes home-out-left-flip {
+    from { opacity: 1; transform: translateX(0) rotate(180deg); }
+    to { opacity: 0; transform: translateX(-3rem) rotate(180deg); }
+}
+
 /* —— Compacto: mobile, iPad e telas baixas (landscape) —— */
 @media (max-width: 1024px), (max-height: 560px) and (max-width: 1200px) {
     .home-root {
@@ -408,7 +479,17 @@
     .home-mobile-photo,
     .home-mobile-rail,
     .home-mobile-panel,
-    .terminal-caret {
+    .terminal-caret,
+    .home-root.is-leaving .home-title,
+    .home-root.is-leaving .tag-number,
+    .home-root.is-leaving .text1,
+    .home-root.is-leaving .text2,
+    .home-root.is-leaving .terminal,
+    .home-root.is-leaving .footer-image,
+    .home-root.is-leaving .home-mobile-title,
+    .home-root.is-leaving .home-mobile-photo,
+    .home-root.is-leaving .home-mobile-rail,
+    .home-root.is-leaving .home-mobile-panel {
         animation: none;
         transition: none;
     }

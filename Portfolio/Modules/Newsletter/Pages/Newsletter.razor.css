@@ -1,6 +1,6 @@
 .newsletter-page {
-    min-height: 100dvh;
-    padding-top: 1.5rem;
+    min-height: auto;
+    padding-top: 0.5rem;
 }
 
 .newsletter-body {
@@ -18,10 +18,52 @@
     border-radius: 10px;
     margin-bottom: 15px;
     cursor: pointer;
+    animation-duration: 0.65s;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-fill-mode: both;
+    animation-delay: var(--card-delay, 0ms);
+}
+
+.newsletter-card.from-left {
+    animation-name: newsletter-in-left;
+}
+
+.newsletter-card.from-right {
+    animation-name: newsletter-in-right;
 }
 
 .newsletter-cover {
     max-width: 100%;
     height: auto;
     object-fit: cover;
+}
+
+@keyframes newsletter-in-left {
+    from {
+        opacity: 0;
+        transform: translateX(-2.5rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes newsletter-in-right {
+    from {
+        opacity: 0;
+        transform: translateX(2.5rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .newsletter-card {
+        opacity: 1;
+        animation: none;
+        transform: none;
+    }
 }

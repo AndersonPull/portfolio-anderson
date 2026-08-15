@@ -38,10 +38,12 @@ public class NewsletterService : INewsletterService
 
     public async Task<List<ArticleModel>> GetArticlesMockAsync()
     {
-        var resposta = await _httpClient.GetAsync("Mock/newsletter.json");
-        if (resposta.IsSuccessStatusCode)
-            return JsonConvert.DeserializeObject<List<ArticleModel>>(await resposta.Content.ReadAsStringAsync());
+        var cacheBust = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+        var resposta = await _httpClient.GetAsync($"Mock/newsletter.json?v={cacheBust}");
+        if (!resposta.IsSuccessStatusCode)
+            return [];
 
-        return [];
+        var json = await resposta.Content.ReadAsStringAsync();
+        return JsonConvert.DeserializeObject<List<ArticleModel>>(json) ?? [];
     }
 }

@@ -3,7 +3,7 @@
 @inject HttpClient Http
 @implements IAsyncDisposable
 
-<div class="home-root">
+<div class="home-root @(PageLeavingHome ? "is-leaving" : null)">
     @* SiteNav vem do MainLayout *@
 
     @* Desktop (Drrobo layout) *@
@@ -73,6 +73,9 @@
 </div>
 
 @code {
+    [CascadingParameter(Name = "PageLeavingHome")]
+    private bool PageLeavingHome { get; set; }
+
     private bool moverTerminal;
     private readonly List<string> _sourceLines = [];
     private readonly List<string> _completedLines = [];

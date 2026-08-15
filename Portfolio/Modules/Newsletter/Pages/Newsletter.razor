@@ -17,9 +17,14 @@
             }
             else
             {
-                @foreach (var item in Newsletters)
+                @for (var i = 0; i < Newsletters.Count; i++)
                 {
-                    <div class="bg-body-secondary newsletter-card" @onclick="@(() => NavigateDetailPage(item.Url))">
+                    var item = Newsletters[i];
+                    var fromLeft = i % 2 == 0;
+                    <div @key="i"
+                         class="bg-body-secondary newsletter-card @(fromLeft ? "from-left" : "from-right")"
+                         style="--card-delay: @(i * 90)ms"
+                         @onclick="@(() => NavigateDetailPage(item.Url))">
                         <img src="@item.CoverImage" class="newsletter-cover" alt="" />
                         <div style="padding: 15px;">
                             <div class="position-horizontal" style="margin-bottom: 10px;">
