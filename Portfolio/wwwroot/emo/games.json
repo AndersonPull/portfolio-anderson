@@ -1,6 +1,6 @@
 [
   {
-    "id": "super-mario-world",
+    "id": "eb935ea293054b4f",
     "title": "Super Mario World",
     "system": "snes",
     "core": "snes9x",
@@ -9,7 +9,7 @@
     "buttons": ["y", "b", "a", "x", "l", "r", "select", "start"]
   },
   {
-    "id": "sonic-1-in-sonic-3-sce",
+    "id": "fa9f8b4491744f74",
     "title": "Sonic 1 in Sonic 3 SCE",
     "system": "genesis",
     "core": "genesis_plus_gx",
@@ -18,7 +18,7 @@
     "buttons": ["a", "b", "start"]
   },
   {
-    "id": "golden-axe-arcade-colors",
+    "id": "df9077f3d2f5493b",
     "title": "Golden Axe - Arcade Colors",
     "system": "genesis",
     "core": "genesis_plus_gx",
@@ -27,7 +27,7 @@
     "buttons": ["a", "b", "Y", "start"]
   },
   {
-    "id": "ultimate-mortal-kombat-3",
+    "id": "83fe90aaea9b4140",
     "title": "Ultimate Mortal Kombat 3",
     "system": "genesis",
     "core": "genesis_plus_gx",
