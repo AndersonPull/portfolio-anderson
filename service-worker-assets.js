@@ -157,7 +157,7 @@
       "url": "_framework\/icudt_no_CJK.dat"
     },
     {
-      "hash": "sha256-9HD6InRjrBKZjtAH9EvlDcwSUiYlnWAdS2rWyw6qGKk=",
+      "hash": "sha256-xTO1DCEiIYyXqQ9MpMVzhUvUE5WNQylShVMCyplfDV0=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -233,7 +233,7 @@
       "url": "_framework\/Newtonsoft.Json.wasm"
     },
     {
-      "hash": "sha256-l30Y+l0M9vfvzzSQ9TQIdl+YX0pN4xSj50BIUD0lFeE=",
+      "hash": "sha256-2XaeCJqiIgOMupwc8Zl\/OwHgivjrFgsZAspNgyRh5l0=",
       "url": "_framework\/Portfolio.wasm"
     },
     {
@@ -409,7 +409,7 @@
       "url": "_framework\/System.Xml.XDocument.wasm"
     },
     {
-      "hash": "sha256-G3jTlkDds3kjsbjT227lCAU6c3VGuLn+Hq8G13Ifg3s=",
+      "hash": "sha256-zYMcCLmyJjXeYpoI6tJaqy59jfk6RAAIaLf8RpZHvkQ=",
       "url": "Portfolio.styles.css"
     },
     {
@@ -421,5 +421,5 @@
       "url": "_content\/Blazored.Modal\/blazored.modal.js"
     }
   ],
-  "version": "98cCc\/Ot"
+  "version": "mYXWTjLf"
 };
