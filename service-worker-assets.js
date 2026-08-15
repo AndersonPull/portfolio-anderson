@@ -41,11 +41,15 @@
       "url": "css\/open-iconic\/README.md"
     },
     {
+      "hash": "sha256-+ihfiGU+LkJOMxJD2sGjHUMCYaY2NQsIrobotpHLudI=",
+      "url": "css\/site-nav.css"
+    },
+    {
       "hash": "sha256-47DEQpj8HBSa+\/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=",
       "url": "emo\/covers\/.gitkeep"
     },
     {
-      "hash": "sha256-mFq0h5NBiT6pd1xIsRFdG2MILVdYXJmyxpUEjMFnENo=",
+      "hash": "sha256-BxTveG9Pqly6bFj0ZORgSrLHKlHJ6h66HYI49dpvmXs=",
       "url": "emo\/games.json"
     },
     {
@@ -105,7 +109,7 @@
       "url": "Images\/whats.png"
     },
     {
-      "hash": "sha256-ajbyPjcQg1M7ws1GfpQlDbYhiI7bOtncXn82UNUlHmg=",
+      "hash": "sha256-Gj7PO7US9gRtHM04Bsa6xC1MBdpjso7cOfmo5RoVQAE=",
       "url": "index.html"
     },
     {
@@ -157,7 +161,7 @@
       "url": "_framework\/icudt_no_CJK.dat"
     },
     {
-      "hash": "sha256-xTO1DCEiIYyXqQ9MpMVzhUvUE5WNQylShVMCyplfDV0=",
+      "hash": "sha256-oCOlwoFwD1whmMDvAz60iK6771gGSvfRi7E93ZldLAw=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -233,7 +237,7 @@
       "url": "_framework\/Newtonsoft.Json.wasm"
     },
     {
-      "hash": "sha256-2XaeCJqiIgOMupwc8Zl\/OwHgivjrFgsZAspNgyRh5l0=",
+      "hash": "sha256-OHp0gATZ9MKzJ\/65CFb0BjfIJBbdMv6Yr6LKtJWxqUM=",
       "url": "_framework\/Portfolio.wasm"
     },
     {
@@ -409,7 +413,7 @@
       "url": "_framework\/System.Xml.XDocument.wasm"
     },
     {
-      "hash": "sha256-zYMcCLmyJjXeYpoI6tJaqy59jfk6RAAIaLf8RpZHvkQ=",
+      "hash": "sha256-kyhBbmzuvmQOa\/ZoMyYRObJPGIip2N5fiTsgyLuM22w=",
       "url": "Portfolio.styles.css"
     },
     {
@@ -421,5 +425,5 @@
       "url": "_content\/Blazored.Modal\/blazored.modal.js"
     }
   ],
-  "version": "mYXWTjLf"
+  "version": "AjpiS9l+"
 };
