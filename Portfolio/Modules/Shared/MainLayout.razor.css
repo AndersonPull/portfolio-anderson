@@ -209,13 +209,83 @@ span.item-menu {
     padding: 0 !important;
 }
 
-/* Páginas com SiteNav fixo (qualquer rota via MainLayout) */
+/* Páginas com SiteNav fixo no topo; só o conteúdo rola */
+.layout-sitenav {
+    overflow: hidden;
+}
+
 .layout-sitenav .main {
+    display: flex;
+    flex-direction: column;
+    position: relative;
     margin-left: 0;
     margin-right: 0;
-    padding-bottom: 1.5rem;
+    padding-bottom: 0;
+    min-height: 0;
+    overflow: hidden;
 }
 
 .layout-sitenav .content {
-    padding-top: 5.5rem;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-top: 0.75rem;
+    padding-bottom: 1.5rem;
+}
+
+/* Transição entre páginas: sai uma, depois entra a outra */
+.page-stage {
+    width: 100%;
+    min-height: 100%;
+}
+
+.page-stage.is-exiting.exit-left {
+    animation: page-exit-left 0.42s cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+.page-stage.is-exiting.exit-right {
+    animation: page-exit-right 0.42s cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+/* Home: não desliza a página inteira — as peças saem sozinhas */
+.page-stage.is-exiting.leaving-home {
+    animation: none !important;
+}
+
+.page-stage.is-entering.enter-left {
+    animation: page-enter-left 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.page-stage.is-entering.enter-right {
+    animation: page-enter-right 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes page-exit-left {
+    from { opacity: 1; transform: translateX(0); }
+    to { opacity: 0; transform: translateX(-3rem); }
+}
+
+@keyframes page-exit-right {
+    from { opacity: 1; transform: translateX(0); }
+    to { opacity: 0; transform: translateX(3rem); }
+}
+
+@keyframes page-enter-left {
+    from { opacity: 0; transform: translateX(-3rem); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes page-enter-right {
+    from { opacity: 0; transform: translateX(3rem); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .page-stage.is-exiting,
+    .page-stage.is-entering {
+        animation: none !important;
+        opacity: 1;
+        transform: none;
+    }
 }
