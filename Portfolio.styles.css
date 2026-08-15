@@ -651,6 +651,7 @@
     display: flex;
     align-items: center;
     gap: clamp(1.25rem, 3vw, 2.25rem);
+    animation: home-in-top-b-fx4s4655nz 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .home-nav-link[b-fx4s4655nz] {
@@ -725,11 +726,13 @@
     left: auto;
     right: 0;
     margin-left: 0;
-    max-width: min(100%, 560px);
+    width: clamp(26rem, 38vw, 40rem);
+    max-width: 100%;
     height: auto;
     z-index: 1;
     pointer-events: none;
     user-select: none;
+    animation: home-in-right-b-fx4s4655nz 0.95s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
 }
 
 .footer[b-fx4s4655nz] {
@@ -743,6 +746,7 @@
     transform: rotate(90deg);
     font-weight: bold;
     margin-bottom: 90px;
+    animation: home-in-left-rotated-b-fx4s4655nz 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.18s both;
 }
 
 .home-title[b-fx4s4655nz] {
@@ -750,14 +754,14 @@
     font-weight: bold;
     margin-bottom: 80px;
     line-height: 0.9;
-    animation: home-title-in-b-fx4s4655nz 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation: home-in-left-b-fx4s4655nz 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
 }
 
 .text1[b-fx4s4655nz] {
     margin-top: 155px;
     line-height: 1.5;
     font-size: 14px;
-    animation: home-fade-b-fx4s4655nz 0.7s ease 0.15s both;
+    animation: home-in-top-b-fx4s4655nz 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.12s both;
 }
 
 .text2[b-fx4s4655nz] {
@@ -769,7 +773,7 @@
     transform: rotate(90deg);
     border-bottom: 4px solid #000;
     padding-bottom: 0.85rem;
-    animation: home-text2-in-b-fx4s4655nz 0.8s ease 0.3s both;
+    animation: home-in-right-rotated-b-fx4s4655nz 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.25s both;
 }
 
 .text2 p[b-fx4s4655nz] {
@@ -778,17 +782,18 @@
 }
 
 .terminal[b-fx4s4655nz] {
-    width: 100%;
-    height: 380px;
+    width: 960px;
+    max-width: 960px;
+    height: clamp(16rem, 34vh, 23.75rem);
     background: linear-gradient(to bottom, #2fc12ca6, #006f1fa6);
     z-index: 10;
     position: absolute;
     right: 0;
-    left: 0;
+    left: auto;
     bottom: 25px;
     margin-right: 0;
     transition: transform 0.7s ease-in-out;
-    animation: home-strip-in-b-fx4s4655nz 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both;
+    animation: home-in-right-b-fx4s4655nz 0.95s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both;
 }
 
 .terminal.move-right[b-fx4s4655nz] {
@@ -861,24 +866,34 @@
     display: block;
 }
 
-@keyframes home-title-in-b-fx4s4655nz {
-    from { opacity: 0; transform: translateY(1rem); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes home-fade-b-fx4s4655nz {
-    from { opacity: 0; transform: translateY(0.6rem); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes home-text2-in-b-fx4s4655nz {
-    from { opacity: 0; transform: rotate(90deg) translateY(0.6rem); }
-    to { opacity: 1; transform: rotate(90deg) translateY(0); }
-}
-
-@keyframes home-strip-in-b-fx4s4655nz {
-    from { opacity: 0; transform: translateX(2rem); }
+@keyframes home-in-left-b-fx4s4655nz {
+    from { opacity: 0; transform: translateX(-4.5rem); }
     to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes home-in-right-b-fx4s4655nz {
+    from { opacity: 0; transform: translateX(4.5rem); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes home-in-top-b-fx4s4655nz {
+    from { opacity: 0; transform: translateY(-3rem); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes home-in-left-rotated-b-fx4s4655nz {
+    from { opacity: 0; transform: translateX(-4.5rem) rotate(90deg); }
+    to { opacity: 1; transform: translateX(0) rotate(90deg); }
+}
+
+@keyframes home-in-right-rotated-b-fx4s4655nz {
+    from { opacity: 0; transform: translateX(4.5rem) rotate(90deg); }
+    to { opacity: 1; transform: translateX(0) rotate(90deg); }
+}
+
+@keyframes home-in-left-flip-b-fx4s4655nz {
+    from { opacity: 0; transform: translateX(-3rem) rotate(180deg); }
+    to { opacity: 1; transform: translateX(0) rotate(180deg); }
 }
 
 /* —— Mobile: composição do mockup —— */
@@ -904,6 +919,7 @@
         right: 0;
         z-index: 110;
         padding: 1.05rem 1.2rem;
+        animation: home-in-top-b-fx4s4655nz 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
 
     .home-burger[b-fx4s4655nz] {
@@ -957,6 +973,7 @@
         pointer-events: none;
         transform: translateY(-0.4rem);
         transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+        animation: none;
     }
 
     .home-root.menu-open .home-nav[b-fx4s4655nz] {
@@ -999,6 +1016,7 @@
         line-height: 0.82;
         letter-spacing: -0.05em;
         color: var(--home-ink);
+        animation: home-in-left-b-fx4s4655nz 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
     }
 
     .home-mobile-stage[b-fx4s4655nz] {
@@ -1023,6 +1041,7 @@
         object-position: center top;
         pointer-events: none;
         user-select: none;
+        animation: home-in-right-b-fx4s4655nz 0.95s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
     }
 
     .home-mobile-rail[b-fx4s4655nz] {
@@ -1041,6 +1060,7 @@
         transform: rotate(180deg);
         white-space: nowrap;
         pointer-events: none;
+        animation: home-in-left-flip-b-fx4s4655nz 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
     }
 
     .home-mobile-panel[b-fx4s4655nz] {
@@ -1058,6 +1078,7 @@
         transition: transform 0.7s ease-in-out;
         transform: none;
         pointer-events: auto;
+        animation: home-in-right-b-fx4s4655nz 0.95s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
     }
 
     .home-mobile-panel.move-right[b-fx4s4655nz] {
@@ -1097,11 +1118,17 @@
 
 @media (prefers-reduced-motion: reduce) {
     .home-title[b-fx4s4655nz],
+    .tag-number[b-fx4s4655nz],
     .text1[b-fx4s4655nz],
     .text2[b-fx4s4655nz],
     .terminal[b-fx4s4655nz],
+    .footer-image[b-fx4s4655nz],
     .home-nav[b-fx4s4655nz],
+    .home-topbar[b-fx4s4655nz],
     .home-burger span[b-fx4s4655nz],
+    .home-mobile-title[b-fx4s4655nz],
+    .home-mobile-photo[b-fx4s4655nz],
+    .home-mobile-rail[b-fx4s4655nz],
     .home-mobile-panel[b-fx4s4655nz],
     .terminal-caret[b-fx4s4655nz] {
         animation: none;
