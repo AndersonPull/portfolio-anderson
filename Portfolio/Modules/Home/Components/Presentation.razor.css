@@ -27,6 +27,7 @@
     display: flex;
     align-items: center;
     gap: clamp(1.25rem, 3vw, 2.25rem);
+    animation: home-in-top 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .home-nav-link {
@@ -101,11 +102,13 @@
     left: auto;
     right: 0;
     margin-left: 0;
-    max-width: min(100%, 560px);
+    width: clamp(26rem, 38vw, 40rem);
+    max-width: 100%;
     height: auto;
     z-index: 1;
     pointer-events: none;
     user-select: none;
+    animation: home-in-right 0.95s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
 }
 
 .footer {
@@ -119,6 +122,7 @@
     transform: rotate(90deg);
     font-weight: bold;
     margin-bottom: 90px;
+    animation: home-in-left-rotated 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.18s both;
 }
 
 .home-title {
@@ -126,14 +130,14 @@
     font-weight: bold;
     margin-bottom: 80px;
     line-height: 0.9;
-    animation: home-title-in 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation: home-in-left 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
 }
 
 .text1 {
     margin-top: 155px;
     line-height: 1.5;
     font-size: 14px;
-    animation: home-fade 0.7s ease 0.15s both;
+    animation: home-in-top 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.12s both;
 }
 
 .text2 {
@@ -145,7 +149,7 @@
     transform: rotate(90deg);
     border-bottom: 4px solid #000;
     padding-bottom: 0.85rem;
-    animation: home-text2-in 0.8s ease 0.3s both;
+    animation: home-in-right-rotated 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.25s both;
 }
 
 .text2 p {
@@ -154,17 +158,18 @@
 }
 
 .terminal {
-    width: 100%;
-    height: 380px;
+    width: 960px;
+    max-width: 960px;
+    height: clamp(16rem, 34vh, 23.75rem);
     background: linear-gradient(to bottom, #2fc12ca6, #006f1fa6);
     z-index: 10;
     position: absolute;
     right: 0;
-    left: 0;
+    left: auto;
     bottom: 25px;
     margin-right: 0;
     transition: transform 0.7s ease-in-out;
-    animation: home-strip-in 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both;
+    animation: home-in-right 0.95s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both;
 }
 
 .terminal.move-right {
@@ -237,24 +242,34 @@
     display: block;
 }
 
-@keyframes home-title-in {
-    from { opacity: 0; transform: translateY(1rem); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes home-fade {
-    from { opacity: 0; transform: translateY(0.6rem); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes home-text2-in {
-    from { opacity: 0; transform: rotate(90deg) translateY(0.6rem); }
-    to { opacity: 1; transform: rotate(90deg) translateY(0); }
-}
-
-@keyframes home-strip-in {
-    from { opacity: 0; transform: translateX(2rem); }
+@keyframes home-in-left {
+    from { opacity: 0; transform: translateX(-4.5rem); }
     to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes home-in-right {
+    from { opacity: 0; transform: translateX(4.5rem); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes home-in-top {
+    from { opacity: 0; transform: translateY(-3rem); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes home-in-left-rotated {
+    from { opacity: 0; transform: translateX(-4.5rem) rotate(90deg); }
+    to { opacity: 1; transform: translateX(0) rotate(90deg); }
+}
+
+@keyframes home-in-right-rotated {
+    from { opacity: 0; transform: translateX(4.5rem) rotate(90deg); }
+    to { opacity: 1; transform: translateX(0) rotate(90deg); }
+}
+
+@keyframes home-in-left-flip {
+    from { opacity: 0; transform: translateX(-3rem) rotate(180deg); }
+    to { opacity: 1; transform: translateX(0) rotate(180deg); }
 }
 
 /* —— Mobile: composição do mockup —— */
@@ -280,6 +295,7 @@
         right: 0;
         z-index: 110;
         padding: 1.05rem 1.2rem;
+        animation: home-in-top 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
 
     .home-burger {
@@ -333,6 +349,7 @@
         pointer-events: none;
         transform: translateY(-0.4rem);
         transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+        animation: none;
     }
 
     .home-root.menu-open .home-nav {
@@ -375,6 +392,7 @@
         line-height: 0.82;
         letter-spacing: -0.05em;
         color: var(--home-ink);
+        animation: home-in-left 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
     }
 
     .home-mobile-stage {
@@ -399,6 +417,7 @@
         object-position: center top;
         pointer-events: none;
         user-select: none;
+        animation: home-in-right 0.95s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
     }
 
     .home-mobile-rail {
@@ -417,6 +436,7 @@
         transform: rotate(180deg);
         white-space: nowrap;
         pointer-events: none;
+        animation: home-in-left-flip 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
     }
 
     .home-mobile-panel {
@@ -434,6 +454,7 @@
         transition: transform 0.7s ease-in-out;
         transform: none;
         pointer-events: auto;
+        animation: home-in-right 0.95s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
     }
 
     .home-mobile-panel.move-right {
@@ -473,11 +494,17 @@
 
 @media (prefers-reduced-motion: reduce) {
     .home-title,
+    .tag-number,
     .text1,
     .text2,
     .terminal,
+    .footer-image,
     .home-nav,
+    .home-topbar,
     .home-burger span,
+    .home-mobile-title,
+    .home-mobile-photo,
+    .home-mobile-rail,
     .home-mobile-panel,
     .terminal-caret {
         animation: none;
