@@ -102,7 +102,7 @@
     left: auto;
     right: 0;
     margin-left: 0;
-    width: clamp(26rem, 38vw, 40rem);
+    width: min(38vw, 40rem, 100%);
     max-width: 100%;
     height: auto;
     z-index: 1;
@@ -118,33 +118,33 @@
 }
 
 .tag-number {
-    font-size: 100px;
+    font-size: clamp(3.25rem, 7vw, 6.25rem);
     transform: rotate(90deg);
     font-weight: bold;
-    margin-bottom: 90px;
+    margin-bottom: clamp(2rem, 8vh, 5.625rem);
     animation: home-in-left-rotated 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.18s both;
 }
 
 .home-title {
-    font-size: 100px;
+    font-size: clamp(3.5rem, 8vw, 6.25rem);
     font-weight: bold;
-    margin-bottom: 80px;
+    margin-bottom: clamp(2rem, 8vh, 5rem);
     line-height: 0.9;
     animation: home-in-left 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
 }
 
 .text1 {
-    margin-top: 155px;
+    margin-top: clamp(2rem, 14vh, 9.7rem);
     line-height: 1.5;
-    font-size: 14px;
+    font-size: clamp(0.8rem, 1.1vw, 0.875rem);
     animation: home-in-top 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.12s both;
 }
 
 .text2 {
-    margin-top: 150px;
+    margin-top: clamp(2rem, 14vh, 9.4rem);
     float: right;
     line-height: 1.15;
-    font-size: 20px;
+    font-size: clamp(0.95rem, 1.4vw, 1.25rem);
     font-weight: bold;
     transform: rotate(90deg);
     border-bottom: 4px solid #000;
@@ -158,9 +158,9 @@
 }
 
 .terminal {
-    width: 960px;
-    max-width: 960px;
-    height: clamp(16rem, 34vh, 23.75rem);
+    width: min(60rem, 100%);
+    max-width: 100%;
+    height: clamp(12rem, 34vh, 23.75rem);
     background: linear-gradient(to bottom, #2fc12ca6, #006f1fa6);
     z-index: 10;
     position: absolute;
@@ -272,8 +272,8 @@
     to { opacity: 1; transform: translateX(0) rotate(180deg); }
 }
 
-/* —— Mobile: composição do mockup —— */
-@media (max-width: 770px) {
+/* —— Compacto: mobile, iPad e telas baixas (landscape) —— */
+@media (max-width: 1024px), (max-height: 560px) and (max-width: 1200px) {
     .home-root {
         padding: 0;
         height: 100dvh;
@@ -489,6 +489,63 @@
         width: 15px;
         height: auto;
         display: block;
+    }
+}
+
+/* Landscape curto: iPad/celular deitado */
+@media (max-width: 1024px) and (orientation: landscape),
+       (max-height: 560px) and (max-width: 1200px) {
+    .home-topbar {
+        padding: 0.55rem 1rem;
+    }
+
+    .home-nav {
+        top: 2.75rem;
+    }
+
+    .home-mobile-title {
+        top: 0.55rem;
+        left: 1rem;
+        font-size: clamp(2rem, 7vw, 3.1rem);
+    }
+
+    .home-mobile-stage {
+        top: 12%;
+    }
+
+    .home-mobile-rail {
+        top: 18%;
+        font-size: 0.55rem;
+    }
+
+    .home-mobile-photo {
+        left: 22%;
+        right: -4%;
+        object-position: center 15%;
+    }
+
+    .home-mobile-panel {
+        width: min(52vw, 26rem);
+        height: min(46vh, 11.5rem);
+        max-height: 46vh;
+        bottom: 6%;
+        right: 0;
+    }
+
+    .home-mobile-panel .terminal-log {
+        top: 8px;
+        left: 12px;
+        right: 12px;
+        bottom: 52px;
+    }
+
+    .home-mobile-cta {
+        width: 72px;
+        height: 48px;
+    }
+
+    .terminal-line {
+        font-size: 12px;
     }
 }
 
