@@ -1,5 +1,6 @@
 ﻿@inherits LayoutComponentBase
 @using Microsoft.JSInterop
+@implements IDisposable
 
 @inject IJSRuntime JS
 @inject NavigationManager NavigationManager
@@ -10,68 +11,80 @@
         var theme = body.dataset.bsTheme === 'light' ? 'dark' : 'light';
         body.dataset.bsTheme = theme;
 
-        var backgroundColor = theme === 'light' ? '#FFFFFF' : '#212529';
-        document.getElementById("minhaDiv").style.backgroundColor = backgroundColor;
+        var nav = document.getElementById("minhaDiv");
+        if (nav) {
+            var backgroundColor = theme === 'light' ? '#FFFFFF' : '#212529';
+            nav.style.backgroundColor = backgroundColor;
+        }
 
         var newThemeIcon = theme === 'light' ? 'bi bi-moon-fill' : 'bi bi-brightness-high-fill';
-        document.getElementById("themeIconBottom").className = newThemeIcon;
-        document.getElementById("themeIcon").className = newThemeIcon;
+        var bottom = document.getElementById("themeIconBottom");
+        var top = document.getElementById("themeIcon");
+        if (bottom) bottom.className = newThemeIcon;
+        if (top) top.className = newThemeIcon;
     }
 </script>
-<div class="page">
+<div class="page @(IsHome ? "layout-home" : null)">
     <div class="main">
-        <div id="minhaDiv" class="navigation-bar">
-            <div class="navigation-itens">
-                @foreach (var item in menu)
-                {
-                    if(item.IsSelected)
+        @if (!IsHome)
+        {
+            <div id="minhaDiv" class="navigation-bar">
+                <div class="navigation-itens">
+                    @foreach (var item in menu)
                     {
-                        <p class="item-menu primary-color">@item.Text</p>
+                        if(item.IsSelected)
+                        {
+                            <p class="item-menu primary-color">@item.Text</p>
+                        }
+                        else
+                        {
+                            <p class="item-menu" @onclick="@(() => ToggleNavMenu(item))">@item.Text</p>
+                        }
                     }
-                    else
-                    {
-                        <p class="item-menu" @onclick="@(() => ToggleNavMenu(item))">@item.Text</p>
-                    }
-                }
-                <i id="themeIcon" class="bi bi-brightness-high-fill" style="color: #F1BC03;" width="30" alt="Selecione o tema" onclick="toggleTheme()"/>
+                    <i id="themeIcon" class="bi bi-brightness-high-fill" style="color: #F1BC03;" width="30" alt="Selecione o tema" onclick="toggleTheme()"/>
+                </div>
             </div>
-        </div>
-        <div class="content px-4">
+        }
+        <div class="content @(IsHome ? "content-home" : "px-4")">
             @Body
         </div>
     </div>
-    <div class="nav-bar-bottom bg-body-secondary">
-    <div class="icon-container">
-        @foreach (var item in menu)
-        {
-            if (item.IsSelected)
-            {
-                <div class="menu-item">
-                    <i class="bi @item.Icon primary-color" width="90" alt="@item.Text"></i>
-                    <p class="primary-color" style="font-size: 10px;">@item.Text</p>
+    @if (!IsHome)
+    {
+        <div class="nav-bar-bottom bg-body-secondary">
+            <div class="icon-container">
+                @foreach (var item in menu)
+                {
+                    if (item.IsSelected)
+                    {
+                        <div class="menu-item">
+                            <i class="bi @item.Icon primary-color" width="90" alt="@item.Text"></i>
+                            <p class="primary-color" style="font-size: 10px;">@item.Text</p>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="menu-item" @onclick="@(() => ToggleNavMenu(item))">
+                            <i class="bi @item.Icon" width="90" alt="@item.Text"></i>
+                            <p style="font-size: 10px;">@item.Text</p>
+                        </div>
+                    }
+                }
+                <div class="menu-item" onclick="toggleTheme()">
+                    <i id="themeIconBottom" class="bi bi-brightness-high-fill" style="color: #F1BC03;" width="90" alt="Selecione o tema" />
+                    <p style="font-size: 10px; color: #F1BC03;" >Tema</p>
                 </div>
-            }
-            else
-            {
-                <div class="menu-item" @onclick="@(() => ToggleNavMenu(item))">
-                    <i class="bi @item.Icon" width="90" alt="@item.Text"></i>
-                    <p style="font-size: 10px;">@item.Text</p>
-                </div>
-            }
-        }
-        <div class="menu-item" onclick="toggleTheme()">
-            <i id="themeIconBottom" class="bi bi-brightness-high-fill" style="color: #F1BC03;" width="90" alt="Selecione o tema" />
-            <p style="font-size: 10px; color: #F1BC03;" >Tema</p>
+            </div>
         </div>
-    </div>
-</div>
+    }
 </div>
 
 @code{
 
     [Inject]
     private IJSRuntime JSRuntime { get; set; }
-    private string currentTheme = "light"; 
+    private string currentTheme = "light";
+    private bool IsHome { get; set; }
 
     List<Menu> menu = new List<Menu>()
     {
@@ -81,11 +94,29 @@
 
     protected override void OnInitialized()
     {
+        NavigationManager.LocationChanged += OnLocationChanged;
+        SyncRouteState();
+    }
+
+    private void OnLocationChanged(object sender, LocationChangedEventArgs e)
+    {
+        SyncRouteState();
+        InvokeAsync(StateHasChanged);
+    }
+
+    private void SyncRouteState()
+    {
+        var path = new Uri(NavigationManager.Uri).AbsolutePath.TrimEnd('/');
+        IsHome = string.IsNullOrEmpty(path);
+
         var relativeUri = new Uri(NavigationManager.Uri).PathAndQuery;
+        foreach (var item in menu)
+            item.IsSelected = false;
 
         var selectedMenu = menu
-            .FirstOrDefault(menu => menu.Page.Equals(relativeUri, StringComparison.OrdinalIgnoreCase));
-        
+            .FirstOrDefault(m => m.Page.Equals(relativeUri, StringComparison.OrdinalIgnoreCase)
+                              || (m.Page == "/" && IsHome));
+
         if (selectedMenu != null)
             selectedMenu.IsSelected = true;
     }
@@ -98,7 +129,7 @@
         item.IsSelected = true;
 
         string navigation = string.Empty;
-        switch(item.Id) 
+        switch(item.Id)
         {
             case 1:
                 navigation = "/";
@@ -111,12 +142,8 @@
         NavigationManager.NavigateTo(navigation);
     }
 
-    @* private async Task ToggleTheme()
+    public void Dispose()
     {
-        // Inverte o tema atual
-        currentTheme = currentTheme == "light" ? "dark" : "light";
-
-        // Atualiza o tema diretamente no DOM usando IJSRuntime
-        await JSRuntime.InvokeVoidAsync("toggleTheme", currentTheme);
-    } *@
+        NavigationManager.LocationChanged -= OnLocationChanged;
+    }
 }
