@@ -41,7 +41,7 @@
       "url": "css\/open-iconic\/README.md"
     },
     {
-      "hash": "sha256-+ihfiGU+LkJOMxJD2sGjHUMCYaY2NQsIrobotpHLudI=",
+      "hash": "sha256-EG+os82SgUAi\/vqQiSIcAtNrovoeCdp0L2tvsK9QZMc=",
       "url": "css\/site-nav.css"
     },
     {
@@ -109,7 +109,7 @@
       "url": "Images\/whats.png"
     },
     {
-      "hash": "sha256-Gj7PO7US9gRtHM04Bsa6xC1MBdpjso7cOfmo5RoVQAE=",
+      "hash": "sha256-kA5zid8DFklWnJCMh9SCUdM1hlSiAcZgUUGibV2xroM=",
       "url": "index.html"
     },
     {
@@ -161,7 +161,7 @@
       "url": "_framework\/icudt_no_CJK.dat"
     },
     {
-      "hash": "sha256-oCOlwoFwD1whmMDvAz60iK6771gGSvfRi7E93ZldLAw=",
+      "hash": "sha256-8pFASVTdqh+CoXjdRu3S916Sc4l490UGHXgU9dxTmIQ=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -169,7 +169,7 @@
       "url": "_framework\/Blazored.Modal.wasm"
     },
     {
-      "hash": "sha256-z6UF+sp09uTrDUmYKZ+GxHOen9iRbcvU7\/dAsoI1p1E=",
+      "hash": "sha256-47uBF1quCPuffICn8UIGjYcA2y8EYq0Ba5b8ccb5Eww=",
       "url": "_framework\/Microsoft.AspNetCore.Components.wasm"
     },
     {
@@ -177,7 +177,7 @@
       "url": "_framework\/Microsoft.AspNetCore.Components.Web.wasm"
     },
     {
-      "hash": "sha256-B0rYYf5Qgszwdtdy0HssBVHiPqnJrNVm8WmlCPYs5RI=",
+      "hash": "sha256-\/s9daJb4f847w4c1Tz\/t7pXHjmSfGFra4mggdjp54CQ=",
       "url": "_framework\/Microsoft.AspNetCore.Components.WebAssembly.wasm"
     },
     {
@@ -237,7 +237,7 @@
       "url": "_framework\/Newtonsoft.Json.wasm"
     },
     {
-      "hash": "sha256-OHp0gATZ9MKzJ\/65CFb0BjfIJBbdMv6Yr6LKtJWxqUM=",
+      "hash": "sha256-0cEhjuw2xzPxSRbN\/N4vanxoVfo9L9rhtDGE9l2gP78=",
       "url": "_framework\/Portfolio.wasm"
     },
     {
@@ -369,7 +369,7 @@
       "url": "_framework\/System.Runtime.Serialization.Primitives.wasm"
     },
     {
-      "hash": "sha256-uchefIKIYcdcIr8UsuTbvpDOFOYH3B0OLSwLWAGgOZQ=",
+      "hash": "sha256-TgxycUVlBK4QJaObTl3fC3KtMjAljkTjbkWYQnqAmFk=",
       "url": "_framework\/System.Runtime.wasm"
     },
     {
@@ -413,7 +413,7 @@
       "url": "_framework\/System.Xml.XDocument.wasm"
     },
     {
-      "hash": "sha256-kyhBbmzuvmQOa\/ZoMyYRObJPGIip2N5fiTsgyLuM22w=",
+      "hash": "sha256-wZzMGpCD71yANEFGzHj75kFUcCtTqzXF+yvErav\/tio=",
       "url": "Portfolio.styles.css"
     },
     {
@@ -425,5 +425,5 @@
       "url": "_content\/Blazored.Modal\/blazored.modal.js"
     }
   ],
-  "version": "AjpiS9l+"
+  "version": "NHfk2DLA"
 };
