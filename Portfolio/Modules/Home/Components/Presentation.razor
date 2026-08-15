@@ -1,4 +1,7 @@
-﻿@inject NavigationManager Navigation
+﻿@using System.Threading
+@inject NavigationManager Navigation
+@inject HttpClient Http
+@implements IAsyncDisposable
 
 <div class="home-root @(menuOpen ? "menu-open" : null)">
     <header class="home-topbar">
@@ -57,7 +60,7 @@
                     </div>
                     <img src="Images/modelo.png" alt="Anderson" class="footer-image" />
                     <div class="terminal @(moverTerminal ? "move-right" : null)">
-                        <p class="terminal_text">&gt;_ Estamos em construção</p>
+                        @TerminalLog
                         <button type="button"
                                 class="terminal_button"
                                 @onclick="OnTerminalClick"
@@ -83,7 +86,7 @@
             <img class="home-mobile-photo" src="Images/modelo.png" alt="Anderson" />
 
             <div class="home-mobile-panel @(moverTerminal ? "move-right" : null)">
-                <p class="home-mobile-panel-text">&gt;_ Estamos em construção</p>
+                @TerminalLog
                 <button type="button"
                         class="home-mobile-cta"
                         @onclick="OnTerminalClick"
@@ -98,6 +101,88 @@
 @code {
     private bool moverTerminal;
     private bool menuOpen;
+    private readonly List<string> _sourceLines = [];
+    private readonly List<string> _completedLines = [];
+    private string _currentTyped = string.Empty;
+    private bool _showCaret = true;
+    private CancellationTokenSource? _typingCts;
+
+    private RenderFragment TerminalLog => __builder =>
+    {
+        <div class="terminal-log">
+            @foreach (var line in _completedLines)
+            {
+                <p class="terminal-line">@line</p>
+            }
+            @if (_showCaret || !string.IsNullOrEmpty(_currentTyped))
+            {
+                <p class="terminal-line terminal-line-active">@_currentTyped<span class="terminal-caret">|</span></p>
+            }
+        </div>
+    };
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadTerminalLinesAsync();
+        _typingCts = new CancellationTokenSource();
+        _ = RunTypewriterAsync(_typingCts.Token);
+    }
+
+    private async Task LoadTerminalLinesAsync()
+    {
+        try
+        {
+            var cacheBust = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+            var data = await Http.GetFromJsonAsync<TerminalFeed>($"home/terminal.json?v={cacheBust}");
+            if (data?.Lines is { Count: > 0 })
+            {
+                _sourceLines.AddRange(data.Lines.Where(l => !string.IsNullOrWhiteSpace(l)));
+                return;
+            }
+        }
+        catch
+        {
+            // fallback below
+        }
+
+        _sourceLines.Add(">_ Estamos em construção");
+    }
+
+    private async Task RunTypewriterAsync(CancellationToken ct)
+    {
+        try
+        {
+            foreach (var line in _sourceLines)
+            {
+                ct.ThrowIfCancellationRequested();
+                _currentTyped = string.Empty;
+                _showCaret = true;
+                await InvokeAsync(StateHasChanged);
+
+                foreach (var ch in line)
+                {
+                    ct.ThrowIfCancellationRequested();
+                    _currentTyped += ch;
+                    await InvokeAsync(StateHasChanged);
+                    await Task.Delay(38, ct);
+                }
+
+                _completedLines.Add(line);
+                _currentTyped = string.Empty;
+                await InvokeAsync(StateHasChanged);
+                await Task.Delay(420, ct);
+            }
+
+            // Keep caret blinking on a trailing empty prompt line.
+            _currentTyped = ">_ ";
+            _showCaret = true;
+            await InvokeAsync(StateHasChanged);
+        }
+        catch (OperationCanceledException)
+        {
+            // disposed
+        }
+    }
 
     private void ToggleMenu() => menuOpen = !menuOpen;
 
@@ -115,5 +200,20 @@
         StateHasChanged();
         await Task.Delay(700);
         Navigation.NavigateTo("newsletter");
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (_typingCts is null)
+            return;
+
+        await _typingCts.CancelAsync();
+        _typingCts.Dispose();
+        _typingCts = null;
+    }
+
+    private sealed class TerminalFeed
+    {
+        public List<string> Lines { get; set; } = [];
     }
 }

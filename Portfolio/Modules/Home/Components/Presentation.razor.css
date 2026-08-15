@@ -171,19 +171,41 @@
     transform: translateX(100%);
 }
 
-.terminal_text {
-    font-size: 14px;
-    font-weight: bold;
-    margin: 15px;
+.terminal-log {
+    position: absolute;
+    top: 12px;
+    left: 15px;
+    right: 15px;
+    bottom: 70px;
     overflow: hidden;
-    white-space: nowrap;
-    width: 100%;
-    animation: typeWriter 9s steps(40) 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 0.35rem;
+    pointer-events: none;
 }
 
-@keyframes typeWriter {
-    from { width: 0; }
-    to { width: 100%; }
+.terminal-line {
+    margin: 0;
+    font-size: 14px;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.35;
+}
+
+.terminal-caret {
+    display: inline-block;
+    margin-left: 1px;
+    font-weight: 400;
+    animation: caret-blink 0.9s step-end infinite;
+}
+
+@keyframes caret-blink {
+    50% {
+        opacity: 0;
+    }
 }
 
 .terminal_button {
@@ -241,7 +263,7 @@
         padding: 0;
         height: 100dvh;
         min-height: 100dvh;
-        background: #f3f3f3;
+        background: #e2e2e2;
     }
 
     .home-desktop {
@@ -302,8 +324,9 @@
         flex-direction: column;
         align-items: stretch;
         gap: 0.85rem;
-        background: rgba(243, 243, 243, 0.98);
+        background: rgba(226, 226, 226, 0.98);
         border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 16px;
         box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
         opacity: 0;
         visibility: hidden;
@@ -417,14 +440,11 @@
         transform: translateX(110%);
     }
 
-    .home-mobile-panel-text {
-        font-size: 14px;
-        font-weight: bold;
-        margin: 15px;
-        overflow: hidden;
-        white-space: nowrap;
-        width: calc(100% - 30px);
-        animation: typeWriter 9s steps(40) 1;
+    .home-mobile-panel .terminal-log {
+        top: 12px;
+        left: 15px;
+        right: 15px;
+        bottom: 70px;
     }
 
     .home-mobile-cta {
@@ -456,10 +476,10 @@
     .text1,
     .text2,
     .terminal,
-    .terminal_text,
     .home-nav,
     .home-burger span,
-    .home-mobile-panel {
+    .home-mobile-panel,
+    .terminal-caret {
         animation: none;
         transition: none;
     }
