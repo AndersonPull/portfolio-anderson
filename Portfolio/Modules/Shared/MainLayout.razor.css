@@ -208,3 +208,14 @@ span.item-menu {
 .layout-home .content-home {
     padding: 0 !important;
 }
+
+/* Páginas com SiteNav fixo (qualquer rota via MainLayout) */
+.layout-sitenav .main {
+    margin-left: 0;
+    margin-right: 0;
+    padding-bottom: 1.5rem;
+}
+
+.layout-sitenav .content {
+    padding-top: 5.5rem;
+}

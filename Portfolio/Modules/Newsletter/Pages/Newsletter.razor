@@ -4,62 +4,64 @@
 @inject Portfolio.INewsletterService _newsletterService
 @inject IJSRuntime JSRuntime
 
-<div class=" d-flex align-items-center justify-content-center gap-3">
-    <div style="margin-top: 80px;">
-        @if(Newsletters == null)
-        {
-            <p>Carregando...</p>
-        }
-        else if(Newsletters.Count == 0)
-        {
-            <h2>Nenhum item encontrado</h2>
-        }
-        else
-        {
-            @foreach (var item in Newsletters)
+<div class="newsletter-page">
+    <div class="newsletter-body d-flex align-items-center justify-content-center gap-3">
+        <div class="newsletter-list">
+            @if (Newsletters == null)
             {
-                <div class="bg-body-secondary" style=" max-width: 700px; border-radius: 10px; margin-bottom: 15px; cursor: pointer;" @onclick="@(() => NavigateDetailPage(item.Url))" >
-                    <img src="@item.CoverImage" style=" max-width: 100%; height: auto;  object-fit: cover; "/>
-                    <div style="padding: 15px;">
-                        <div class="position-horizontal" style="margin-bottom: 10px;">
-                            <div style="width: 50px; border-radius: 25px;">
-                                <img src="@item.User.ProfileImage" style="width: 50px; border-radius: 25px;"/>
-                            </div>
-                            <div style="margin-Left: 10px;">
-                                <p style="margin-bottom: 0px;">@item.User.Name</p>
-                                <p style="margin-bottom: 0px;">@item.PublishedAt.ToString("dd MMM")</p>
-                            </div>
-                        </div>
-                        <h2>@item.Title</h2>
-                        <p style="margin-bottom: 0px;">@item.Description</p>
-                        <div class="position-horizontal">
-                            @foreach (var tag in item.TagList)
-                            {
-                                <div class="position-horizontal" style="padding-right: 10px;">
-                                    <p class="primary-color">#</p>
-                                    <p>@tag</p>
+                <p>Carregando...</p>
+            }
+            else if (Newsletters.Count == 0)
+            {
+                <h2>Nenhum item encontrado</h2>
+            }
+            else
+            {
+                @foreach (var item in Newsletters)
+                {
+                    <div class="bg-body-secondary newsletter-card" @onclick="@(() => NavigateDetailPage(item.Url))">
+                        <img src="@item.CoverImage" class="newsletter-cover" alt="" />
+                        <div style="padding: 15px;">
+                            <div class="position-horizontal" style="margin-bottom: 10px;">
+                                <div style="width: 50px; border-radius: 25px;">
+                                    <img src="@item.User.ProfileImage" style="width: 50px; border-radius: 25px;" alt="" />
                                 </div>
-                            }
-                        </div>
-                        <div class="position-horizontal" style="justify-content: space-between;">
+                                <div style="margin-left: 10px;">
+                                    <p style="margin-bottom: 0px;">@item.User.Name</p>
+                                    <p style="margin-bottom: 0px;">@item.PublishedAt.ToString("dd MMM")</p>
+                                </div>
+                            </div>
+                            <h2>@item.Title</h2>
+                            <p style="margin-bottom: 0px;">@item.Description</p>
                             <div class="position-horizontal">
-                                <div class="position-horizontal" style="padding-right: 10px;">
-                                    <i class="bi bi-heart-fill primary-color" style="padding-right: 5px;"></i>
-                                    <p>@item.PublicReactionsCount</p>
-                                </div>
-                                <div class="position-horizontal">
-                                    <i class="bi bi-chat-fill primary-color" style="padding-right: 5px;"></i>
-                                    <p>@item.CommentsCount</p>
-                                </div>
+                                @foreach (var tag in item.TagList)
+                                {
+                                    <div class="position-horizontal" style="padding-right: 10px;">
+                                        <p class="primary-color">#</p>
+                                        <p>@tag</p>
+                                    </div>
+                                }
                             </div>
-                            <div class="position-horizontal" style="justify-content: flex-end; padding-right: 10px;">
-                                <p>@item.ReadingTimeMinutes min de leitura</p>
+                            <div class="position-horizontal" style="justify-content: space-between;">
+                                <div class="position-horizontal">
+                                    <div class="position-horizontal" style="padding-right: 10px;">
+                                        <i class="bi bi-heart-fill primary-color" style="padding-right: 5px;"></i>
+                                        <p>@item.PublicReactionsCount</p>
+                                    </div>
+                                    <div class="position-horizontal">
+                                        <i class="bi bi-chat-fill primary-color" style="padding-right: 5px;"></i>
+                                        <p>@item.CommentsCount</p>
+                                    </div>
+                                </div>
+                                <div class="position-horizontal" style="justify-content: flex-end; padding-right: 10px;">
+                                    <p>@item.ReadingTimeMinutes min de leitura</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                }
             }
-        }
+        </div>
     </div>
 </div>
 
@@ -74,7 +76,7 @@
         => Newsletters = await _newsletterService.GetArticlesMockAsync();
 
     private async Task NavigateDetailPage(string externalUrl)
-    { 
+    {
         await JSRuntime.InvokeVoidAsync("openInNewTab", externalUrl);
     }
 }

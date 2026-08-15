@@ -1,0 +1,176 @@
+/* SiteNav — global, reusable on any page (not Blazor-scoped) */
+.site-nav-root {
+    --site-ink: #0a0a0a;
+    --site-muted: #6b6b6b;
+    --site-loja: #1e1e1e;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 110;
+    pointer-events: none;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.site-nav-root .site-topbar,
+.site-nav-root .site-nav,
+.site-nav-root .site-burger {
+    pointer-events: auto;
+}
+
+.site-nav-root .site-topbar {
+    display: none;
+}
+
+.site-nav-root .site-nav {
+    position: absolute;
+    top: clamp(1rem, 2.5vh, 1.75rem);
+    right: clamp(5.5rem, 16vw, 11rem);
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    gap: clamp(1.25rem, 3vw, 2.25rem);
+}
+
+.site-nav-root .site-nav-link {
+    color: var(--site-muted);
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.15s ease;
+}
+
+.site-nav-root .site-nav-link:hover,
+.site-nav-root .site-nav-link:focus-visible {
+    color: var(--site-ink);
+    outline: none;
+}
+
+.site-nav-root .site-nav-loja {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 0.65rem 1.15rem 0.65rem 1.25rem;
+    border-radius: 12px;
+    background: var(--site-loja);
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.site-nav-root .site-nav-loja:hover,
+.site-nav-root .site-nav-loja:focus-visible {
+    background: #111;
+    transform: translateY(-1px);
+    outline: none;
+    color: #fff;
+}
+
+.site-nav-root .site-nav-loja-arrow {
+    width: 9px;
+    height: auto;
+    display: block;
+}
+
+@media (max-width: 1024px), (max-height: 560px) and (max-width: 1200px) {
+    .site-nav-root .site-topbar {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 110;
+        padding: 1.05rem 1.2rem;
+    }
+
+    .site-nav-root .site-burger {
+        width: 2rem;
+        height: 2rem;
+        padding: 0;
+        border: none;
+        background: transparent;
+        display: inline-flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        cursor: pointer;
+        color: var(--site-ink);
+    }
+
+    .site-nav-root .site-burger span {
+        display: block;
+        width: 1.25rem;
+        height: 1.5px;
+        background: currentColor;
+        align-self: flex-end;
+        transition: transform 0.2s ease;
+    }
+
+    .site-nav-root.menu-open .site-burger span:first-child {
+        transform: translateY(3.25px) rotate(45deg);
+    }
+
+    .site-nav-root.menu-open .site-burger span:last-child {
+        transform: translateY(-3.25px) rotate(-45deg);
+    }
+
+    .site-nav-root .site-nav {
+        position: fixed;
+        top: 3.4rem;
+        right: 0.85rem;
+        left: auto;
+        z-index: 120;
+        width: min(15.5rem, 78vw);
+        margin: 0;
+        padding: 1rem;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.85rem;
+        background: rgba(226, 226, 226, 0.98);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 16px;
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateY(-0.4rem);
+        transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+    }
+
+    .site-nav-root.menu-open .site-nav {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(0);
+    }
+
+    .site-nav-root .site-nav-link {
+        font-size: 1rem;
+        color: var(--site-ink);
+        padding: 0.35rem 0.15rem;
+    }
+
+    .site-nav-root .site-nav-loja {
+        justify-content: space-between;
+        width: 100%;
+        padding: 0.7rem 1rem;
+        border-radius: 10px;
+    }
+}
+
+@media (max-width: 1024px) and (orientation: landscape),
+       (max-height: 560px) and (max-width: 1200px) {
+    .site-nav-root .site-topbar {
+        padding: 0.55rem 1rem;
+    }
+
+    .site-nav-root .site-nav {
+        top: 2.75rem;
+    }
+}

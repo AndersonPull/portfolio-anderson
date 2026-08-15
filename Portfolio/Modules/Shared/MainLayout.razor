@@ -1,96 +1,20 @@
 ﻿@inherits LayoutComponentBase
-@using Microsoft.JSInterop
 @implements IDisposable
 
-@inject IJSRuntime JS
 @inject NavigationManager NavigationManager
 
-<script>
-    function toggleTheme(){
-        var body = document.body;
-        var theme = body.dataset.bsTheme === 'light' ? 'dark' : 'light';
-        body.dataset.bsTheme = theme;
+<div class="page @(IsHome ? "layout-home" : "layout-sitenav")">
+    <SiteNav />
 
-        var nav = document.getElementById("minhaDiv");
-        if (nav) {
-            var backgroundColor = theme === 'light' ? '#FFFFFF' : '#212529';
-            nav.style.backgroundColor = backgroundColor;
-        }
-
-        var newThemeIcon = theme === 'light' ? 'bi bi-moon-fill' : 'bi bi-brightness-high-fill';
-        var bottom = document.getElementById("themeIconBottom");
-        var top = document.getElementById("themeIcon");
-        if (bottom) bottom.className = newThemeIcon;
-        if (top) top.className = newThemeIcon;
-    }
-</script>
-<div class="page @(IsHome ? "layout-home" : null)">
     <div class="main">
-        @if (!IsHome)
-        {
-            <div id="minhaDiv" class="navigation-bar">
-                <div class="navigation-itens">
-                    @foreach (var item in menu)
-                    {
-                        if(item.IsSelected)
-                        {
-                            <p class="item-menu primary-color">@item.Text</p>
-                        }
-                        else
-                        {
-                            <p class="item-menu" @onclick="@(() => ToggleNavMenu(item))">@item.Text</p>
-                        }
-                    }
-                    <i id="themeIcon" class="bi bi-brightness-high-fill" style="color: #F1BC03;" width="30" alt="Selecione o tema" onclick="toggleTheme()"/>
-                </div>
-            </div>
-        }
         <div class="content @(IsHome ? "content-home" : "px-4")">
             @Body
         </div>
     </div>
-    @if (!IsHome)
-    {
-        <div class="nav-bar-bottom bg-body-secondary">
-            <div class="icon-container">
-                @foreach (var item in menu)
-                {
-                    if (item.IsSelected)
-                    {
-                        <div class="menu-item">
-                            <i class="bi @item.Icon primary-color" width="90" alt="@item.Text"></i>
-                            <p class="primary-color" style="font-size: 10px;">@item.Text</p>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="menu-item" @onclick="@(() => ToggleNavMenu(item))">
-                            <i class="bi @item.Icon" width="90" alt="@item.Text"></i>
-                            <p style="font-size: 10px;">@item.Text</p>
-                        </div>
-                    }
-                }
-                <div class="menu-item" onclick="toggleTheme()">
-                    <i id="themeIconBottom" class="bi bi-brightness-high-fill" style="color: #F1BC03;" width="90" alt="Selecione o tema" />
-                    <p style="font-size: 10px; color: #F1BC03;" >Tema</p>
-                </div>
-            </div>
-        </div>
-    }
 </div>
 
-@code{
-
-    [Inject]
-    private IJSRuntime JSRuntime { get; set; }
-    private string currentTheme = "light";
+@code {
     private bool IsHome { get; set; }
-
-    List<Menu> menu = new List<Menu>()
-    {
-        new Menu(){ Id=1, Text="Home", Icon="bi-house-fill", Page="/"},
-        new Menu(){ Id=2, Text="Newsletter", Icon="bi-newspaper", Page="/newsletter"}
-    };
 
     protected override void OnInitialized()
     {
@@ -108,38 +32,6 @@
     {
         var path = new Uri(NavigationManager.Uri).AbsolutePath.TrimEnd('/');
         IsHome = string.IsNullOrEmpty(path);
-
-        var relativeUri = new Uri(NavigationManager.Uri).PathAndQuery;
-        foreach (var item in menu)
-            item.IsSelected = false;
-
-        var selectedMenu = menu
-            .FirstOrDefault(m => m.Page.Equals(relativeUri, StringComparison.OrdinalIgnoreCase)
-                              || (m.Page == "/" && IsHome));
-
-        if (selectedMenu != null)
-            selectedMenu.IsSelected = true;
-    }
-
-    private void ToggleNavMenu(Menu item)
-    {
-        foreach(var items in menu)
-            items.IsSelected = false;
-
-        item.IsSelected = true;
-
-        string navigation = string.Empty;
-        switch(item.Id)
-        {
-            case 1:
-                navigation = "/";
-                break;
-            case 2:
-                navigation = "/newsletter";
-                break;
-        }
-
-        NavigationManager.NavigateTo(navigation);
     }
 
     public void Dispose()

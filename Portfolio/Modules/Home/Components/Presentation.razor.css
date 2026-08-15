@@ -14,64 +14,8 @@
     overflow: hidden;
 }
 
-.home-topbar,
 .home-mobile {
     display: none;
-}
-
-.home-nav {
-    position: absolute;
-    top: clamp(1rem, 2.5vh, 1.75rem);
-    right: clamp(5.5rem, 16vw, 11rem);
-    z-index: 20;
-    display: flex;
-    align-items: center;
-    gap: clamp(1.25rem, 3vw, 2.25rem);
-    animation: home-in-top 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-.home-nav-link {
-    color: var(--home-nav);
-    font-size: 0.95rem;
-    font-weight: 500;
-    text-decoration: none;
-    white-space: nowrap;
-    transition: color 0.15s ease;
-}
-
-.home-nav-link:hover,
-.home-nav-link:focus-visible {
-    color: var(--home-ink);
-    outline: none;
-}
-
-.home-nav-loja {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.9rem;
-    padding: 0.65rem 1.15rem 0.65rem 1.25rem;
-    border-radius: 12px;
-    background: var(--home-loja);
-    color: #fff;
-    font-size: 0.95rem;
-    font-weight: 700;
-    text-decoration: none;
-    white-space: nowrap;
-    transition: transform 0.15s ease, background 0.15s ease;
-}
-
-.home-nav-loja:hover,
-.home-nav-loja:focus-visible {
-    background: #111;
-    transform: translateY(-1px);
-    outline: none;
-    color: #fff;
-}
-
-.home-nav-loja-arrow {
-    width: 9px;
-    height: auto;
-    display: block;
 }
 
 .home-row {
@@ -285,94 +229,6 @@
         display: none;
     }
 
-    .home-topbar {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 110;
-        padding: 1.05rem 1.2rem;
-        animation: home-in-top 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
-    }
-
-    .home-burger {
-        width: 2rem;
-        height: 2rem;
-        padding: 0;
-        border: none;
-        background: transparent;
-        display: inline-flex;
-        flex-direction: column;
-        justify-content: center;
-        gap: 5px;
-        cursor: pointer;
-    }
-
-    .home-burger span {
-        display: block;
-        width: 1.25rem;
-        height: 1.5px;
-        background: var(--home-ink);
-        align-self: flex-end;
-        transition: transform 0.2s ease;
-    }
-
-    .home-root.menu-open .home-burger span:first-child {
-        transform: translateY(3.25px) rotate(45deg);
-    }
-
-    .home-root.menu-open .home-burger span:last-child {
-        transform: translateY(-3.25px) rotate(-45deg);
-    }
-
-    .home-nav {
-        position: fixed;
-        top: 3.4rem;
-        right: 0.85rem;
-        left: auto;
-        z-index: 100;
-        width: min(15.5rem, 78vw);
-        margin: 0;
-        padding: 1rem;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0.85rem;
-        background: rgba(226, 226, 226, 0.98);
-        border: 1px solid rgba(0, 0, 0, 0.08);
-        border-radius: 16px;
-        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
-        opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
-        transform: translateY(-0.4rem);
-        transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
-        animation: none;
-    }
-
-    .home-root.menu-open .home-nav {
-        opacity: 1;
-        visibility: visible;
-        pointer-events: auto;
-        transform: translateY(0);
-        z-index: 100;
-    }
-
-    .home-nav-link {
-        font-size: 1rem;
-        color: var(--home-ink);
-        padding: 0.35rem 0.15rem;
-    }
-
-    .home-nav-loja {
-        justify-content: space-between;
-        width: 100%;
-        padding: 0.7rem 1rem;
-        border-radius: 10px;
-    }
-
     .home-mobile {
         display: block;
         position: relative;
@@ -495,14 +351,6 @@
 /* Landscape curto: iPad/celular deitado */
 @media (max-width: 1024px) and (orientation: landscape),
        (max-height: 560px) and (max-width: 1200px) {
-    .home-topbar {
-        padding: 0.55rem 1rem;
-    }
-
-    .home-nav {
-        top: 2.75rem;
-    }
-
     .home-mobile-title {
         top: 0.55rem;
         left: 1rem;
@@ -556,9 +404,6 @@
     .text2,
     .terminal,
     .footer-image,
-    .home-nav,
-    .home-topbar,
-    .home-burger span,
     .home-mobile-title,
     .home-mobile-photo,
     .home-mobile-rail,
