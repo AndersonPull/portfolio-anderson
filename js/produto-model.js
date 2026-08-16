@@ -85,7 +85,7 @@ window.produtoModel = (function () {
             var fitH = modelSize.y;
             var fitW = modelSize.x / camera.aspect;
             var dist = (Math.max(fitH, fitW) * 0.5) / Math.tan(fov * 0.5);
-            var zoom = window.matchMedia('(max-width: 1024px)').matches ? 2.85 : 3.7;
+            var zoom = window.matchMedia('(max-width: 1024px)').matches ? 1.425 : 3.7;
             camera.position.set(0, 0, Math.max(dist * zoom, 0.01));
             camera.near = dist / 100;
             camera.far = Math.max(dist * 50, 10);
@@ -121,7 +121,7 @@ window.produtoModel = (function () {
             box.setFromObject(model);
 
         model.position.sub(box.getCenter(new THREE.Vector3()));
-        model.rotation.y = Math.PI;
+        model.rotation.y = 0;
         model.updateMatrixWorld(true);
         scene.add(model);
 

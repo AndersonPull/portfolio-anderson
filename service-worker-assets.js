@@ -1,8 +1,16 @@
 ﻿self.assetsManifest = {
   "assets": [
     {
-      "hash": "sha256-yRC6c4wq2okteXr05oemvDZbuFVCRciKJLgyaGMCEh4=",
-      "url": "3dModels\/CartuchoNitendo.glb"
+      "hash": "sha256-qvJustukgrK\/r1F3dum0qkmVPMR70IdB3GsJQwXaOAU=",
+      "url": "3dModels\/Cartucho.glb"
+    },
+    {
+      "hash": "sha256-mdcadjHHZXG0VvpZuo4aBY+tFxa7bQR8snNmS5w4BlQ=",
+      "url": "3dModels\/MobileController.glb"
+    },
+    {
+      "hash": "sha256-Hv9JMYrWEa7aqXrfqdWMbRuWN6BsIBxVLtJgKwqudLg=",
+      "url": "3dModels\/SmartPhone.glb"
     },
     {
       "hash": "sha256-ts5EUsMfGsDCNjmmiPA3SEAo8Wjih5kwqt\/ZaZnEfKc=",
@@ -113,7 +121,7 @@
       "url": "Images\/whats.png"
     },
     {
-      "hash": "sha256-X3ZcqSw7MphJfEUIG0M3oUCbHy7UIMrLi\/G90gLavwA=",
+      "hash": "sha256-m6XtD6zq\/1famAIfx0TI4DHzBydhxI3mcuaXlm3Y10Y=",
       "url": "index.html"
     },
     {
@@ -121,7 +129,7 @@
       "url": "js\/emo\/emulator.js"
     },
     {
-      "hash": "sha256-QlEjRC\/Vm9zz6U0acpMoBblf4MxcxRC2kAUZTilPOp0=",
+      "hash": "sha256-AribcIJ7i6DNB3gwfIKm4TXd7Ws7evVg9+Qd9LZuAok=",
       "url": "js\/produto-model.js"
     },
     {
@@ -169,7 +177,7 @@
       "url": "_framework\/icudt_no_CJK.dat"
     },
     {
-      "hash": "sha256-PF8+QPMByCe9\/yvL\/etfV0RMbfY8j7Sj2DVz0ciUI\/U=",
+      "hash": "sha256-w2S6Pz96hd3L3meSjBhxCJEK\/F2Lrp40aNiP8sLmQxU=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -245,7 +253,7 @@
       "url": "_framework\/Newtonsoft.Json.wasm"
     },
     {
-      "hash": "sha256-DfV1o09XI+lRp2ghWJU6g4g6otHOiHqFlyFX6ijKsYw=",
+      "hash": "sha256-J08c\/c7U5zuCqoZlqCLoMx\/QqOupyqDCp4u8kU8+zgQ=",
       "url": "_framework\/Portfolio.wasm"
     },
     {
@@ -433,5 +441,5 @@
       "url": "_content\/Blazored.Modal\/blazored.modal.js"
     }
   ],
-  "version": "xbfkoQZN"
+  "version": "s28V6rre"
 };
