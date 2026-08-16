@@ -162,6 +162,24 @@
     50% { opacity: 0; }
 }
 
+.produtos-wordmark,
+.produtos-rail,
+.produtos-modal,
+.produtos-scroll {
+    transition: opacity 0.4s ease;
+}
+
+.produtos-page.is-docking .produtos-modal {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.produtos-page.is-docked:not(.is-docking):not(.is-opened) .produtos-modal,
+.produtos-page.is-opened:not(.is-docking) .produtos-modal {
+    opacity: 1;
+    pointer-events: auto;
+}
+
 .produtos-scroll {
     position: absolute;
     right: clamp(1.1rem, 3vw, 2rem);
@@ -173,10 +191,16 @@
     align-items: flex-end;
     justify-content: center;
     padding-bottom: 0.7rem;
+    border: none;
     background: #1e1e1e;
     color: #fff;
     text-decoration: none;
     border-radius: 12px;
+    cursor: pointer;
+}
+
+.produtos-scroll:disabled {
+    cursor: default;
 }
 
 .produtos-scroll-arrow {
@@ -222,6 +246,17 @@
 
     .produtos-rail-block + .produtos-rail-block {
         margin-top: 0;
+    }
+
+    .produtos-page.is-docking:not(.is-opened) .produtos-rail,
+    .produtos-page.is-docked:not(.is-opened) .produtos-rail {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .produtos-page.is-opened .produtos-rail {
+        opacity: 1;
+        pointer-events: auto;
     }
 
     .produtos-modal {

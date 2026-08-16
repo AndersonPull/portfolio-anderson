@@ -3,7 +3,7 @@
 @implements IAsyncDisposable
 @inject IJSRuntime JS
 
-<div class="produtos-page">
+<div class="produtos-page @(_docking ? "is-docking" : null) @(_docked ? "is-docked" : null) @(_opened ? "is-opened" : null)">
     @if (!string.IsNullOrEmpty(_error))
     {
         <p class="produtos-error">@_error</p>
@@ -47,13 +47,13 @@
         </div>
     </div>
 
-    <a class="produtos-scroll"
-       href="https://marketplace.visualstudio.com/items?itemName=AndersonOliveira.zoiodelula"
-       target="_blank"
-       rel="noopener noreferrer"
-       aria-label="Abrir na loja">
+    <button type="button"
+            class="produtos-scroll"
+            disabled="@(!_ready || _dockBusy || _opened)"
+            @onclick="OnDockClick"
+            aria-label="@(_docked ? "Abrir produto" : "Aproximar cartucho do celular")">
         <img src="Images/arrow_green_right.png" class="produtos-scroll-arrow" alt="" />
-    </a>
+    </button>
 </div>
 
 @code {
@@ -65,19 +65,103 @@
         ">_ Cartucho digital",
         ">_ software for product"
     };
+    private static readonly string[] AfterDockLines =
+    {
+        ">_ Aproximando cartucho",
+        ">_ NFC detectado",
+        ">_ Lendo tag... ok",
+        ">_ Abrindo produto"
+    };
+    private static readonly string[] AfterOpenLines =
+    {
+        ">_ Encaixando controle",
+        ">_ MobileController ok",
+        ">_ Dual grip + analog",
+        ">_ Pronto para jogar"
+    };
 
     private ElementReference _canvas;
     private bool _ready;
     private string _error;
     private bool _mounted;
+    private bool _docking;
+    private bool _docked;
+    private bool _opened;
+    private bool _dockBusy;
     private readonly List<string> _completedLines = new();
     private string _activeLine = ">_ ";
     private CancellationTokenSource _lifeCts;
+    private CancellationTokenSource _typeCts;
 
     protected override void OnInitialized()
     {
         _lifeCts = new CancellationTokenSource();
-        _ = RunTerminalAsync(_lifeCts.Token);
+        ResetTypeCts();
+        _ = RunTerminalAsync(_typeCts.Token);
+    }
+
+    private void ResetTypeCts()
+    {
+        try { _typeCts?.Cancel(); } catch { }
+        _typeCts?.Dispose();
+        _typeCts = CancellationTokenSource.CreateLinkedTokenSource(_lifeCts.Token);
+    }
+
+    private async Task OnDockClick()
+    {
+        if (_dockBusy || _opened || !_ready)
+            return;
+
+        if (_docked)
+        {
+            ResetTypeCts();
+            _dockBusy = true;
+            _opened = true;
+            _docking = true;
+            await InvokeAsync(StateHasChanged);
+            await Task.Delay(280);
+
+            try
+            {
+                await JS.InvokeVoidAsync("produtoModel.playOpen");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
+            _completedLines.Clear();
+            _activeLine = ">_ ";
+            _docking = false;
+            _dockBusy = false;
+            await InvokeAsync(StateHasChanged);
+            await Task.Delay(420);
+            await RunOpenTerminalAsync(_typeCts.Token);
+            return;
+        }
+
+        ResetTypeCts();
+        _dockBusy = true;
+        _docking = true;
+        await InvokeAsync(StateHasChanged);
+        await Task.Delay(420);
+
+        try
+        {
+            await JS.InvokeVoidAsync("produtoModel.playDock");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
+
+        _completedLines.Clear();
+        _activeLine = ">_ ";
+        _docked = true;
+        _docking = false;
+        _dockBusy = false;
+        await InvokeAsync(StateHasChanged);
+        await RunDockTerminalAsync(_typeCts.Token);
     }
 
     private async Task RunTerminalAsync(CancellationToken ct)
@@ -88,11 +172,16 @@
             var i = 0;
             while (!ct.IsCancellationRequested && !_ready && string.IsNullOrEmpty(_error))
             {
+                if (_docking || _docked)
+                    return;
                 _activeLine = ">_ Carregando... " + SpinFrames[i];
                 i = (i + 1) % SpinFrames.Length;
                 await InvokeAsync(StateHasChanged);
                 await Task.Delay(90, ct);
             }
+
+            if (_docking || _docked)
+                return;
 
             _completedLines.Add(">_ Carregando... ok");
             _activeLine = ">_ ";
@@ -101,6 +190,8 @@
 
             foreach (var line in AfterLoadLines)
             {
+                if (_docking || _docked)
+                    return;
                 await TypeLineAsync(line, ct);
                 _completedLines.Add(line);
                 _activeLine = ">_ ";
@@ -117,15 +208,62 @@
         }
     }
 
+    private async Task RunDockTerminalAsync(CancellationToken ct)
+    {
+        try
+        {
+            foreach (var line in AfterDockLines)
+            {
+                ct.ThrowIfCancellationRequested();
+                await TypeLineAsync(line, ct);
+                _completedLines.Add(line);
+                _activeLine = ">_ ";
+                StateHasChanged();
+                await Task.Delay(320, ct);
+            }
+
+            _activeLine = ">_ ";
+            await InvokeAsync(StateHasChanged);
+        }
+        catch (OperationCanceledException)
+        {
+            // leaving
+        }
+    }
+
+    private async Task RunOpenTerminalAsync(CancellationToken ct)
+    {
+        try
+        {
+            foreach (var line in AfterOpenLines)
+            {
+                ct.ThrowIfCancellationRequested();
+                await TypeLineAsync(line, ct);
+                _completedLines.Add(line);
+                _activeLine = ">_ ";
+                StateHasChanged();
+                await Task.Delay(320, ct);
+            }
+
+            _activeLine = ">_ ";
+            await InvokeAsync(StateHasChanged);
+        }
+        catch (OperationCanceledException)
+        {
+            // leaving
+        }
+    }
+
     private async Task TypeLineAsync(string text, CancellationToken ct)
     {
         _activeLine = string.Empty;
-        await InvokeAsync(StateHasChanged);
+        StateHasChanged();
+        await Task.Delay(16, ct);
         foreach (var ch in text)
         {
             ct.ThrowIfCancellationRequested();
             _activeLine += ch;
-            await InvokeAsync(StateHasChanged);
+            StateHasChanged();
             await Task.Delay(38, ct);
         }
     }
@@ -152,6 +290,10 @@
 
     public async ValueTask DisposeAsync()
     {
+        try { _typeCts?.Cancel(); } catch { }
+        _typeCts?.Dispose();
+        _typeCts = null;
+
         if (_lifeCts != null)
         {
             await _lifeCts.CancelAsync();
