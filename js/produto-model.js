@@ -157,5 +157,32 @@ window.produtoModel = (function () {
         tick();
     }
 
-    return { mount: mount, dispose: dispose };
+    var loadSpinTimer = null;
+
+    function startLoadSpin(el) {
+        stopLoadSpin();
+        if (!el)
+            return;
+        var frames = ['|', '/', '-', '\\'];
+        var i = 0;
+        el.textContent = frames[0];
+        loadSpinTimer = setInterval(function () {
+            if (!el.isConnected) {
+                stopLoadSpin();
+                return;
+            }
+            i = (i + 1) % frames.length;
+            el.textContent = frames[i];
+        }, 90);
+    }
+
+    function stopLoadSpin() {
+        if (loadSpinTimer) {
+            clearInterval(loadSpinTimer);
+            loadSpinTimer = null;
+        }
+    }
+
+    return { mount: mount, dispose: dispose, startLoadSpin: startLoadSpin, stopLoadSpin: stopLoadSpin };
 })();
+

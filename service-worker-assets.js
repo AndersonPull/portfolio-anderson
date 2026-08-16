@@ -5,7 +5,7 @@
       "url": "3dModels\/CartuchoNitendo.glb"
     },
     {
-      "hash": "sha256-RBp21V87tUKf3cj65P\/Ho2yqhEgpSqtD3eFF\/dwCaig=",
+      "hash": "sha256-aJHGCf7nymVKCMBRqVe6dv3sB97OxT2F\/GBXw0m4HdE=",
       "url": "css\/app.css"
     },
     {
@@ -45,7 +45,7 @@
       "url": "css\/open-iconic\/README.md"
     },
     {
-      "hash": "sha256-EG+os82SgUAi\/vqQiSIcAtNrovoeCdp0L2tvsK9QZMc=",
+      "hash": "sha256-TVLz6BBV5TNgNxtxBOntghb3SUANWcT4+QUxcVQ2NuA=",
       "url": "css\/site-nav.css"
     },
     {
@@ -113,7 +113,7 @@
       "url": "Images\/whats.png"
     },
     {
-      "hash": "sha256-X7ZMLg3ErBQO8UzRQf306Fj8G7oeE2r5qGQbbVNilrg=",
+      "hash": "sha256-X1Uwq\/h9eQnYW7VwB0hY14eKJTn\/Dn5p\/R8zGp7og4A=",
       "url": "index.html"
     },
     {
@@ -121,7 +121,7 @@
       "url": "js\/emo\/emulator.js"
     },
     {
-      "hash": "sha256-1SEyjkgbA3saw7VKB7Qep3i8h0AHABOTXf1m9oggzT0=",
+      "hash": "sha256-bDxBeXOeGA5Sd6PdcKc6lvyEcCou9I0K4Zleg5P+Iyg=",
       "url": "js\/produto-model.js"
     },
     {
@@ -169,7 +169,7 @@
       "url": "_framework\/icudt_no_CJK.dat"
     },
     {
-      "hash": "sha256-YxHaaic3mZX2YZmMRGVSVxMg2VanbCU40rGoyejhDME=",
+      "hash": "sha256-+1iEMY63ZKvnYjyyk0pbkCMWpJWPfQ+6pP5fXbXtMF4=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -245,7 +245,7 @@
       "url": "_framework\/Newtonsoft.Json.wasm"
     },
     {
-      "hash": "sha256-vbImUoneRIcfhHWv3qk0P25QZBAGA8JcGoffWs3fCxs=",
+      "hash": "sha256-26o8m\/kQdqUtccI7x+PKI7nISy14k1R5BHfdY2Nvdn0=",
       "url": "_framework\/Portfolio.wasm"
     },
     {
@@ -421,7 +421,7 @@
       "url": "_framework\/System.Xml.XDocument.wasm"
     },
     {
-      "hash": "sha256-RLr2EH9OgIre+ScLaNhYALj8FcPiNRC9alzUy2Fp\/7I=",
+      "hash": "sha256-kfzvK9XsX8UBDW5rlFjwuRqrEPON1kTco08RK2xTWc4=",
       "url": "Portfolio.styles.css"
     },
     {
@@ -433,5 +433,5 @@
       "url": "_content\/Blazored.Modal\/blazored.modal.js"
     }
   ],
-  "version": "0ruAL2Jt"
+  "version": "yjHVQEW5"
 };

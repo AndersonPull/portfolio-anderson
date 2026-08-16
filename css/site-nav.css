@@ -175,34 +175,50 @@
     }
 }
 
-/* Em páginas de conteúdo: menu sempre visível; cards rolam só abaixo */
-.layout-sitenav .site-nav-root {
-    position: relative;
-    top: auto;
-    left: auto;
-    right: auto;
-    height: 4.25rem;
-    flex-shrink: 0;
-    z-index: 120;
-    background: #e2e2e2;
-    pointer-events: none;
+/* Desktop: mesmo slot da Home */
+@media (min-width: 1025px) {
+    .layout-sitenav .site-nav-root {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: auto;
+        background: transparent;
+        pointer-events: none;
+        z-index: 110;
+    }
+
+    .layout-sitenav .site-nav-root .site-topbar,
+    .layout-sitenav .site-nav-root .site-nav,
+    .layout-sitenav .site-nav-root .site-burger {
+        pointer-events: auto;
+    }
+
+    .layout-sitenav .site-nav-root .site-nav {
+        position: absolute;
+        top: clamp(1rem, 2.5vh, 1.75rem);
+        right: clamp(5.5rem, 16vw, 11rem);
+    }
 }
 
-.layout-sitenav .site-nav-root .site-topbar,
-.layout-sitenav .site-nav-root .site-nav,
-.layout-sitenav .site-nav-root .site-burger {
-    pointer-events: auto;
-}
-
-.layout-sitenav .site-nav-root .site-nav {
-    position: absolute;
-    top: 1rem;
-    right: 1.2rem;
-}
-
+/* Mobile: barra no fluxo para o conteúdo não ficar sob o burger */
 @media (max-width: 1024px), (max-height: 560px) and (max-width: 1200px) {
     .layout-sitenav .site-nav-root {
+        position: relative;
+        top: auto;
+        left: auto;
+        right: auto;
         height: 3.5rem;
+        flex-shrink: 0;
+        z-index: 120;
+        background: #e2e2e2;
+        pointer-events: none;
+    }
+
+    .layout-sitenav .site-nav-root .site-topbar,
+    .layout-sitenav .site-nav-root .site-nav,
+    .layout-sitenav .site-nav-root .site-burger {
+        pointer-events: auto;
     }
 
     .layout-sitenav .site-nav-root .site-topbar {

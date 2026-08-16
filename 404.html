@@ -8,8 +8,8 @@
         <base href="https://andersonbezerra.com/" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-        <link href="css/app.css" rel="stylesheet" />
-        <link href="css/site-nav.css?v=4" rel="stylesheet" />
+        <link href="css/app.css?v=2" rel="stylesheet" />
+        <link href="css/site-nav.css?v=5" rel="stylesheet" />
         <link href="Portfolio.styles.css" rel="stylesheet" />
         <link href="manifest.json" rel="manifest" />
         <link href="_content/Blazored.Modal/blazored-modal.css" rel="stylesheet" />
@@ -106,82 +106,30 @@
         @keyframes splash-caret-blink {
             50% { opacity: 0; }
         }
+        #splash-root {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #e2e2e2;
+        }
+        html.skip-splash #splash-root {
+            display: none !important;
+        }
     </style>
     <script>
-        window.openInNewTab = function (url) {
-            window.open(url, '_blank');
+        window.isDevHost = function () {
+            var port = location.port;
+            return port === '5000' || port === '5001' || port === '5173' || port === '7080';
         };
 
-        window.runSplashTerminal = function () {
-            return new Promise(function (resolve) {
-                var line1 = document.getElementById('splash-line-1');
-                var line2 = document.getElementById('splash-line-2');
-                var line3 = document.getElementById('splash-line-3');
-                var line4 = document.getElementById('splash-line-4');
-                var caret = document.getElementById('splash-caret');
+        if (window.isDevHost())
+            document.documentElement.classList.add('skip-splash');
 
-                if (!line1 || !line2 || !line3 || !line4 || !caret) {
-                    resolve();
-                    return;
-                }
-
-                function type(text, target) {
-                    return new Promise(function (done) {
-                        var i = 0;
-                        target.textContent = '';
-                        var timer = setInterval(function () {
-                            target.textContent += text.charAt(i);
-                            i += 1;
-                            if (i >= text.length) {
-                                clearInterval(timer);
-                                done();
-                            }
-                        }, 45);
-                    });
-                }
-
-                function pause(ms) {
-                    return new Promise(function (r) { setTimeout(r, ms); });
-                }
-
-                function spin(target, prefix, durationMs) {
-                    return new Promise(function (done) {
-                        var frames = ['|', '/', '-', '\\'];
-                        var i = 0;
-                        target.textContent = prefix + frames[0];
-                        var timer = setInterval(function () {
-                            i = (i + 1) % frames.length;
-                            target.textContent = prefix + frames[i];
-                        }, 90);
-                        setTimeout(function () {
-                            clearInterval(timer);
-                            target.textContent = prefix + 'ok';
-                            done();
-                        }, durationMs);
-                    });
-                }
-
-                type('>_ Carregando ', line1)
-                    .then(function () {
-                        return spin(line1, '>_ Carregando... ', 1400);
-                    })
-                    .then(function () { return pause(280); })
-                    .then(function () {
-                        line2.parentNode.appendChild(caret);
-                        return type('>_ Olá me chamo Anderson', line2);
-                    })
-                    .then(function () { return pause(280); })
-                    .then(function () {
-                        line3.parentNode.appendChild(caret);
-                        return type('>_ Bem vindo ao meu sistema.', line3);
-                    })
-                    .then(function () { return pause(220); })
-                    .then(function () {
-                        line4.textContent = '>_ ';
-                        line4.parentNode.appendChild(caret);
-                        resolve();
-                    });
-            });
+        window.openInNewTab = function (url) {
+            window.open(url, '_blank');
         };
 
         window.loadScript = function (src) {
@@ -195,17 +143,115 @@
         };
 
         window.bootApp = async function () {
-            try {
-                await window.runSplashTerminal();
-            } catch (e) {
-                console.warn('splash terminal:', e);
+            var line1 = document.getElementById('splash-line-1');
+            var line2 = document.getElementById('splash-line-2');
+            var line3 = document.getElementById('splash-line-3');
+            var caret = document.getElementById('splash-caret');
+            var splashRoot = document.getElementById('splash-root');
+            var spinTimer = null;
+
+            function type(text, target) {
+                return new Promise(function (done) {
+                    if (!target) {
+                        done();
+                        return;
+                    }
+                    var i = 0;
+                    target.textContent = '';
+                    var timer = setInterval(function () {
+                        target.textContent += text.charAt(i);
+                        i += 1;
+                        if (i >= text.length) {
+                            clearInterval(timer);
+                            done();
+                        }
+                    }, 45);
+                });
             }
+
+            function pause(ms) {
+                return new Promise(function (r) { setTimeout(r, ms); });
+            }
+
+            function startSpin() {
+                if (!line3)
+                    return;
+                if (caret)
+                    caret.style.display = 'none';
+                var frames = ['|', '/', '-', '\\'];
+                var i = 0;
+                line3.textContent = '>_ Carregando... ' + frames[0];
+                spinTimer = setInterval(function () {
+                    if (!line3.isConnected) {
+                        clearInterval(spinTimer);
+                        return;
+                    }
+                    i = (i + 1) % frames.length;
+                    line3.textContent = '>_ Carregando... ' + frames[i];
+                }, 90);
+            }
+
+            function waitForApp() {
+                var app = document.getElementById('app');
+                if (!app)
+                    return Promise.resolve();
+                if (app.childElementCount > 0)
+                    return Promise.resolve();
+
+                return new Promise(function (resolve) {
+                    var obs = new MutationObserver(function () {
+                        if (app.childElementCount > 0) {
+                            obs.disconnect();
+                            resolve();
+                        }
+                    });
+                    obs.observe(app, { childList: true, subtree: true });
+                    setTimeout(function () {
+                        obs.disconnect();
+                        resolve();
+                    }, 30000);
+                });
+            }
+
+            var skipSplash = window.isDevHost();
+            if (skipSplash && splashRoot)
+                splashRoot.remove();
+
+            var intro = skipSplash
+                ? Promise.resolve()
+                : (async function () {
+                    if (!line1 || !line2 || !line3)
+                        return;
+                    await type('>_ Olá me chamo Anderson', line1);
+                    await pause(280);
+                    if (caret)
+                        line2.parentNode.appendChild(caret);
+                    await type('>_ Bem vindo ao meu sistema.', line2);
+                    await pause(220);
+                    if (caret)
+                        line3.parentNode.appendChild(caret);
+                    await type('>_ Carregando...', line3);
+                    startSpin();
+                })();
 
             try {
                 await window.loadScript('_framework/blazor.webassembly.js');
+                await waitForApp();
             } catch (e) {
                 console.error('failed to start blazor:', e);
             }
+
+            if (!skipSplash) {
+                await intro;
+                await pause(1000);
+                if (spinTimer)
+                    clearInterval(spinTimer);
+                if (line3)
+                    line3.textContent = '>_ Carregando... ok';
+                await pause(520);
+            }
+            if (splashRoot && splashRoot.isConnected)
+                splashRoot.remove();
 
             if ('serviceWorker' in navigator) {
                 navigator.serviceWorker
@@ -215,34 +261,30 @@
         };
     </script>
     <body data-bs-theme="light">
-        <div id="app">
-            <div class="vh-100 d-flex align-items-center justify-content-center" style="background:#e2e2e2;">
-                <div class="splash-terminal" aria-live="polite">
-                    <div class="splash-terminal-chrome" aria-hidden="true">
-                        <span class="splash-terminal-title">terminal</span>
-                        <div class="splash-terminal-controls">
-                            <span class="splash-win-btn" title="Minimizar">─</span>
-                            <span class="splash-win-btn" title="Expandir">□</span>
-                            <span class="splash-win-btn close" title="Fechar">✕</span>
-                        </div>
+        <div id="splash-root">
+            <div class="splash-terminal" aria-live="polite">
+                <div class="splash-terminal-chrome" aria-hidden="true">
+                    <span class="splash-terminal-title">terminal</span>
+                    <div class="splash-terminal-controls">
+                        <span class="splash-win-btn" title="Minimizar">─</span>
+                        <span class="splash-win-btn" title="Expandir">□</span>
+                        <span class="splash-win-btn close" title="Fechar">✕</span>
                     </div>
-                    <div class="splash-terminal-body">
-                        <p class="splash-terminal-line">
-                            <span id="splash-line-1"></span><span id="splash-caret" class="splash-caret">&nbsp;</span>
-                        </p>
-                        <p class="splash-terminal-line">
-                            <span id="splash-line-2"></span>
-                        </p>
-                        <p class="splash-terminal-line">
-                            <span id="splash-line-3"></span>
-                        </p>
-                        <p class="splash-terminal-line">
-                            <span id="splash-line-4"></span>
-                        </p>
-                    </div>
+                </div>
+                <div class="splash-terminal-body">
+                    <p class="splash-terminal-line">
+                        <span id="splash-line-1"></span><span id="splash-caret" class="splash-caret">&nbsp;</span>
+                    </p>
+                    <p class="splash-terminal-line">
+                        <span id="splash-line-2"></span>
+                    </p>
+                    <p class="splash-terminal-line">
+                        <span id="splash-line-3"></span>
+                    </p>
                 </div>
             </div>
         </div>
+        <div id="app"></div>
         <div id="blazor-error-ui">
             An unhandled error has occurred.
             <a href="" class="reload">Reload</a>
@@ -256,7 +298,7 @@
             }
         }
         </script>
-        <script src="js/produto-model.js?v=4"></script>
+        <script src="js/produto-model.js?v=5"></script>
         <script src="js/emo/emulator.js?v=13"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <script>
