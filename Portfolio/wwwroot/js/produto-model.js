@@ -85,7 +85,8 @@ window.produtoModel = (function () {
             var fitH = modelSize.y;
             var fitW = modelSize.x / camera.aspect;
             var dist = (Math.max(fitH, fitW) * 0.5) / Math.tan(fov * 0.5);
-            camera.position.set(0, 0, Math.max(dist * 1.2, 0.01));
+            var zoom = window.matchMedia('(max-width: 1024px)').matches ? 2.85 : 3.7;
+            camera.position.set(0, 0, Math.max(dist * zoom, 0.01));
             camera.near = dist / 100;
             camera.far = Math.max(dist * 50, 10);
             camera.lookAt(0, 0, 0);

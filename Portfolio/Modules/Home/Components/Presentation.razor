@@ -1,5 +1,4 @@
 ﻿@using System.Threading
-@inject NavigationManager Navigation
 @inject HttpClient Http
 @implements IAsyncDisposable
 
@@ -33,14 +32,16 @@
                         </div>
                     </div>
                     <img src="Images/modelo.png" alt="Anderson" class="footer-image" />
-                    <div class="terminal @(moverTerminal ? "move-right" : null)">
+                    <div class="terminal">
+                        <div class="terminal-chrome" aria-hidden="true">
+                            <span class="terminal-chrome-title">terminal</span>
+                            <div class="terminal-chrome-controls">
+                                <span class="terminal-win-btn">─</span>
+                                <span class="terminal-win-btn">□</span>
+                                <span class="terminal-win-btn is-close">✕</span>
+                            </div>
+                        </div>
                         @TerminalLog
-                        <button type="button"
-                                class="terminal_button"
-                                @onclick="OnTerminalClick"
-                                aria-label="Ir para Newsletter">
-                            <img src="Images/arrow_green_right.png" class="terminal_button_image" alt="" />
-                        </button>
                     </div>
                 </div>
             </div>
@@ -59,14 +60,16 @@
 
             <img class="home-mobile-photo" src="Images/modelo.png" alt="Anderson" />
 
-            <div class="home-mobile-panel @(moverTerminal ? "move-right" : null)">
+            <div class="home-mobile-panel">
+                <div class="terminal-chrome" aria-hidden="true">
+                    <span class="terminal-chrome-title">terminal</span>
+                    <div class="terminal-chrome-controls">
+                        <span class="terminal-win-btn">─</span>
+                        <span class="terminal-win-btn">□</span>
+                        <span class="terminal-win-btn is-close">✕</span>
+                    </div>
+                </div>
                 @TerminalLog
-                <button type="button"
-                        class="home-mobile-cta"
-                        @onclick="OnTerminalClick"
-                        aria-label="Ir para Newsletter">
-                    <img src="Images/arrow_green_right.png" alt="" />
-                </button>
             </div>
         </div>
     </div>
@@ -76,7 +79,6 @@
     [CascadingParameter(Name = "PageLeavingHome")]
     private bool PageLeavingHome { get; set; }
 
-    private bool moverTerminal;
     private readonly List<string> _sourceLines = [];
     private readonly List<string> _completedLines = [];
     private string _currentTyped = string.Empty;
@@ -92,7 +94,7 @@
             }
             @if (_showCaret || !string.IsNullOrEmpty(_currentTyped))
             {
-                <p class="terminal-line terminal-line-active">@_currentTyped<span class="terminal-caret">|</span></p>
+                <p class="terminal-line terminal-line-active">@_currentTyped<span class="terminal-caret">&nbsp;</span></p>
             }
         </div>
     };
@@ -158,14 +160,6 @@
         {
             // disposed
         }
-    }
-
-    private async Task OnTerminalClick()
-    {
-        moverTerminal = true;
-        StateHasChanged();
-        await Task.Delay(700);
-        Navigation.NavigateTo("newsletter");
     }
 
     public async ValueTask DisposeAsync()

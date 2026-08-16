@@ -1,4 +1,5 @@
 @page "/produtos"
+@using System.Threading
 @implements IAsyncDisposable
 @inject IJSRuntime JS
 
@@ -7,21 +8,127 @@
     {
         <p class="produtos-error">@_error</p>
     }
-    else if (!_ready)
-    {
-        <p class="produtos-load" aria-live="polite">
-            >_ Carregando... <span @ref="_spin" class="produtos-load-spin" aria-hidden="true">|</span>
-        </p>
-    }
+
     <canvas @ref="_canvas" class="produtos-canvas @(_ready ? "is-ready" : null)"></canvas>
+
+    <h1 class="produtos-wordmark">NFC.</h1>
+
+    <aside class="produtos-rail" aria-label="Detalhes">
+        <p class="produtos-rail-index">— 01</p>
+        <div class="produtos-rail-block">
+            <p class="produtos-rail-kicker">Produto</p>
+            <p>Cartucho digital.<br>Software feito para<br>abrir e construir.</p>
+        </div>
+        <div class="produtos-rail-block">
+            <p class="produtos-rail-kicker">Stack</p>
+            <p>.NET, Visual Studio<br>e ferramenta no fluxo<br>do dia a dia.</p>
+        </div>
+    </aside>
+
+    <div class="produtos-modal" role="dialog" aria-label="Terminal">
+        <div class="produtos-modal-window">
+            <div class="produtos-modal-chrome" aria-hidden="true">
+                <span class="produtos-modal-title">terminal</span>
+                <div class="produtos-modal-controls">
+                    <span class="produtos-modal-btn">─</span>
+                    <span class="produtos-modal-btn">□</span>
+                    <span class="produtos-modal-btn is-close">✕</span>
+                </div>
+            </div>
+            <div class="produtos-modal-body">
+                @foreach (var line in _completedLines)
+                {
+                    <p class="produtos-modal-line">@line</p>
+                }
+                <p class="produtos-modal-line">
+                    @_activeLine<span class="produtos-modal-caret">&nbsp;</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <a class="produtos-scroll"
+       href="https://marketplace.visualstudio.com/items?itemName=AndersonOliveira.zoiodelula"
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="Abrir na loja">
+        <img src="Images/arrow_green_right.png" class="produtos-scroll-arrow" alt="" />
+    </a>
 </div>
 
 @code {
+    private static readonly string[] SpinFrames = new[] { "|", "/", "-", "\\" };
+    private static readonly string[] AfterLoadLines =
+    {
+        ">_ Zoio de Lula",
+        ">_ Extensão para Visual Studio",
+        ">_ Cartucho digital",
+        ">_ software for product"
+    };
+
     private ElementReference _canvas;
-    private ElementReference _spin;
     private bool _ready;
     private string _error;
     private bool _mounted;
+    private readonly List<string> _completedLines = new();
+    private string _activeLine = ">_ ";
+    private CancellationTokenSource _lifeCts;
+
+    protected override void OnInitialized()
+    {
+        _lifeCts = new CancellationTokenSource();
+        _ = RunTerminalAsync(_lifeCts.Token);
+    }
+
+    private async Task RunTerminalAsync(CancellationToken ct)
+    {
+        try
+        {
+            await TypeLineAsync(">_ Carregando...", ct);
+            var i = 0;
+            while (!ct.IsCancellationRequested && !_ready && string.IsNullOrEmpty(_error))
+            {
+                _activeLine = ">_ Carregando... " + SpinFrames[i];
+                i = (i + 1) % SpinFrames.Length;
+                await InvokeAsync(StateHasChanged);
+                await Task.Delay(90, ct);
+            }
+
+            _completedLines.Add(">_ Carregando... ok");
+            _activeLine = ">_ ";
+            await InvokeAsync(StateHasChanged);
+            await Task.Delay(280, ct);
+
+            foreach (var line in AfterLoadLines)
+            {
+                await TypeLineAsync(line, ct);
+                _completedLines.Add(line);
+                _activeLine = ">_ ";
+                await InvokeAsync(StateHasChanged);
+                await Task.Delay(320, ct);
+            }
+
+            _activeLine = ">_ ";
+            await InvokeAsync(StateHasChanged);
+        }
+        catch (OperationCanceledException)
+        {
+            // leaving
+        }
+    }
+
+    private async Task TypeLineAsync(string text, CancellationToken ct)
+    {
+        _activeLine = string.Empty;
+        await InvokeAsync(StateHasChanged);
+        foreach (var ch in text)
+        {
+            ct.ThrowIfCancellationRequested();
+            _activeLine += ch;
+            await InvokeAsync(StateHasChanged);
+            await Task.Delay(38, ct);
+        }
+    }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -31,7 +138,6 @@
         _mounted = true;
         try
         {
-            await JS.InvokeVoidAsync("produtoModel.startLoadSpin", _spin);
             await JS.InvokeVoidAsync("produtoModel.mount", _canvas, "3dModels/CartuchoNitendo.glb");
             _ready = true;
         }
@@ -40,17 +146,19 @@
             _error = "Não foi possível carregar o modelo 3D.";
             Console.WriteLine(ex);
         }
-        finally
-        {
-            try { await JS.InvokeVoidAsync("produtoModel.stopLoadSpin"); } catch { }
-        }
 
         await InvokeAsync(StateHasChanged);
     }
 
     public async ValueTask DisposeAsync()
     {
-        try { await JS.InvokeVoidAsync("produtoModel.stopLoadSpin"); } catch { }
+        if (_lifeCts != null)
+        {
+            await _lifeCts.CancelAsync();
+            _lifeCts.Dispose();
+            _lifeCts = null;
+        }
+
         try { await JS.InvokeVoidAsync("produtoModel.dispose"); } catch { }
     }
 }

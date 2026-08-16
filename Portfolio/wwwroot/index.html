@@ -8,9 +8,9 @@
         <base href="https://andersonbezerra.com/" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-        <link href="css/app.css?v=2" rel="stylesheet" />
+        <link href="css/app.css?v=10" rel="stylesheet" />
         <link href="css/site-nav.css?v=5" rel="stylesheet" />
-        <link href="Portfolio.styles.css" rel="stylesheet" />
+        <link href="Portfolio.styles.css?v=2" rel="stylesheet" />
         <link href="manifest.json" rel="manifest" />
         <link href="_content/Blazored.Modal/blazored-modal.css" rel="stylesheet" />
         <link href="Images/icon-512.png" rel="apple-touch-icon" sizes="512x512"/>
@@ -33,7 +33,7 @@
             min-height: 0;
             padding: 0;
             background: #111;
-            color: #7CFF6B;
+            color: #fff;
             font-family: "Courier New", Courier, monospace;
             font-size: clamp(0.65rem, 3.1vw, 0.82rem);
             line-height: 1.55;
@@ -100,7 +100,7 @@
             display: inline-block;
             width: 0.55ch;
             margin-left: 1px;
-            background: #7CFF6B;
+            background: #fff;
             animation: splash-caret-blink 0.9s step-end infinite;
         }
         @keyframes splash-caret-blink {
@@ -115,19 +115,8 @@
             justify-content: center;
             background: #e2e2e2;
         }
-        html.skip-splash #splash-root {
-            display: none !important;
-        }
     </style>
     <script>
-        window.isDevHost = function () {
-            var port = location.port;
-            return port === '5000' || port === '5001' || port === '5173' || port === '7080';
-        };
-
-        if (window.isDevHost())
-            document.documentElement.classList.add('skip-splash');
-
         window.openInNewTab = function (url) {
             window.open(url, '_blank');
         };
@@ -213,26 +202,20 @@
                 });
             }
 
-            var skipSplash = window.isDevHost();
-            if (skipSplash && splashRoot)
-                splashRoot.remove();
-
-            var intro = skipSplash
-                ? Promise.resolve()
-                : (async function () {
-                    if (!line1 || !line2 || !line3)
-                        return;
-                    await type('>_ Olá me chamo Anderson', line1);
-                    await pause(280);
-                    if (caret)
-                        line2.parentNode.appendChild(caret);
-                    await type('>_ Bem vindo ao meu sistema.', line2);
-                    await pause(220);
-                    if (caret)
-                        line3.parentNode.appendChild(caret);
-                    await type('>_ Carregando...', line3);
-                    startSpin();
-                })();
+            var intro = (async function () {
+                if (!line1 || !line2 || !line3)
+                    return;
+                await type('>_ Olá me chamo Anderson', line1);
+                await pause(280);
+                if (caret)
+                    line2.parentNode.appendChild(caret);
+                await type('>_ Bem vindo ao meu sistema.', line2);
+                await pause(220);
+                if (caret)
+                    line3.parentNode.appendChild(caret);
+                await type('>_ Carregando...', line3);
+                startSpin();
+            })();
 
             try {
                 await window.loadScript('_framework/blazor.webassembly.js');
@@ -241,15 +224,12 @@
                 console.error('failed to start blazor:', e);
             }
 
-            if (!skipSplash) {
-                await intro;
-                await pause(1000);
-                if (spinTimer)
-                    clearInterval(spinTimer);
-                if (line3)
-                    line3.textContent = '>_ Carregando... ok';
-                await pause(520);
-            }
+            await intro;
+            if (spinTimer)
+                clearInterval(spinTimer);
+            if (line3)
+                line3.textContent = '>_ Carregando... ok';
+            await pause(520);
             if (splashRoot && splashRoot.isConnected)
                 splashRoot.remove();
 
@@ -298,7 +278,7 @@
             }
         }
         </script>
-        <script src="js/produto-model.js?v=5"></script>
+        <script src="js/produto-model.js?v=10"></script>
         <script src="js/emo/emulator.js?v=13"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <script>
