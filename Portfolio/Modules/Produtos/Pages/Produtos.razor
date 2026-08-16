@@ -1,0 +1,54 @@
+@page "/produtos"
+@implements IAsyncDisposable
+@inject IJSRuntime JS
+
+<div class="produtos-page">
+    @if (!string.IsNullOrEmpty(_error))
+    {
+        <p class="produtos-error">@_error</p>
+    }
+    else if (!_ready)
+    {
+        <p class="produtos-status">Carregando modelo...</p>
+    }
+    <canvas @ref="_canvas" class="produtos-canvas @(_ready ? "is-ready" : null)"></canvas>
+</div>
+
+@code {
+    private ElementReference _canvas;
+    private bool _ready;
+    private string _error;
+    private bool _mounted;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender || _mounted)
+            return;
+
+        _mounted = true;
+        try
+        {
+            await JS.InvokeVoidAsync("produtoModel.mount", _canvas, "3dModels/CartuchoNitendo.glb");
+            _ready = true;
+        }
+        catch (Exception ex)
+        {
+            _error = "Não foi possível carregar o modelo 3D.";
+            Console.WriteLine(ex);
+        }
+
+        await InvokeAsync(StateHasChanged);
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        try
+        {
+            await JS.InvokeVoidAsync("produtoModel.dispose");
+        }
+        catch
+        {
+            // leaving the page
+        }
+    }
+}
