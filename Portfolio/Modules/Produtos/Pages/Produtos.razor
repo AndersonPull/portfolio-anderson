@@ -9,13 +9,16 @@
     }
     else if (!_ready)
     {
-        <p class="produtos-status">Carregando modelo...</p>
+        <p class="produtos-load" aria-live="polite">
+            >_ Carregando... <span @ref="_spin" class="produtos-load-spin" aria-hidden="true">|</span>
+        </p>
     }
     <canvas @ref="_canvas" class="produtos-canvas @(_ready ? "is-ready" : null)"></canvas>
 </div>
 
 @code {
     private ElementReference _canvas;
+    private ElementReference _spin;
     private bool _ready;
     private string _error;
     private bool _mounted;
@@ -28,6 +31,7 @@
         _mounted = true;
         try
         {
+            await JS.InvokeVoidAsync("produtoModel.startLoadSpin", _spin);
             await JS.InvokeVoidAsync("produtoModel.mount", _canvas, "3dModels/CartuchoNitendo.glb");
             _ready = true;
         }
@@ -36,19 +40,17 @@
             _error = "Não foi possível carregar o modelo 3D.";
             Console.WriteLine(ex);
         }
+        finally
+        {
+            try { await JS.InvokeVoidAsync("produtoModel.stopLoadSpin"); } catch { }
+        }
 
         await InvokeAsync(StateHasChanged);
     }
 
     public async ValueTask DisposeAsync()
     {
-        try
-        {
-            await JS.InvokeVoidAsync("produtoModel.dispose");
-        }
-        catch
-        {
-            // leaving the page
-        }
+        try { await JS.InvokeVoidAsync("produtoModel.stopLoadSpin"); } catch { }
+        try { await JS.InvokeVoidAsync("produtoModel.dispose"); } catch { }
     }
 }

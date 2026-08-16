@@ -234,6 +234,12 @@ span.item-menu {
     padding-bottom: 1.5rem;
 }
 
+@media (min-width: 1025px) {
+    .layout-sitenav .content {
+        padding-top: 4.5rem;
+    }
+}
+
 /* Transição entre páginas: sai uma, depois entra a outra */
 .page-stage {
     width: 100%;

@@ -29,6 +29,20 @@ a, .btn-link {
     padding-top: 1.1rem;
 }
 
+.layout-sitenav .content {
+    padding-top: 1.1rem;
+}
+
+.newsletter-page {
+    padding-top: 5.5rem;
+}
+
+@media (min-width: 1025px) {
+    .newsletter-page {
+        padding-top: 8rem;
+    }
+}
+
 .layout-home .main {
     margin-left: 0;
     margin-right: 0;

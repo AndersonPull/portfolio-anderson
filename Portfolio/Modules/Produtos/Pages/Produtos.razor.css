@@ -15,17 +15,31 @@
     opacity: 1;
 }
 
-.produtos-status,
+.produtos-load {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    color: #0a0a0a;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 0.95rem;
+    white-space: nowrap;
+}
+
+.produtos-load-spin {
+    display: inline-block;
+    width: 1ch;
+    text-align: center;
+}
+
 .produtos-error {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     margin: 0;
-    color: #6b6b6b;
-    font-size: 0.95rem;
-}
-
-.produtos-error {
     color: #8a3030;
+    font-size: 0.95rem;
 }

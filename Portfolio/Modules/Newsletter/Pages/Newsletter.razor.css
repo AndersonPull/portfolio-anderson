@@ -1,6 +1,7 @@
 .newsletter-page {
     min-height: auto;
-    padding-top: 0.5rem;
+    padding-top: 5.5rem;
+    box-sizing: border-box;
 }
 
 .newsletter-body {
@@ -10,7 +11,14 @@
 .newsletter-list {
     width: 100%;
     max-width: 700px;
+    margin-top: 0;
     padding: 0 1rem 2rem;
+}
+
+@media (min-width: 1025px) {
+    .newsletter-page {
+        padding-top: 8rem;
+    }
 }
 
 .newsletter-card {
