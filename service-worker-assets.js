@@ -13,7 +13,7 @@
       "url": "3dModels\/SmartPhone.glb"
     },
     {
-      "hash": "sha256-ts5EUsMfGsDCNjmmiPA3SEAo8Wjih5kwqt\/ZaZnEfKc=",
+      "hash": "sha256-UCizqAm2EjQSv+A6gqSBSiEe+ncPcXVwxV6mmFGihkY=",
       "url": "css\/app.css"
     },
     {
@@ -121,7 +121,7 @@
       "url": "Images\/whats.png"
     },
     {
-      "hash": "sha256-m6XtD6zq\/1famAIfx0TI4DHzBydhxI3mcuaXlm3Y10Y=",
+      "hash": "sha256-wJ4e6vitdq0WHwyFwBerDS9ZCbHq2\/jnRJuVP3z79Ac=",
       "url": "index.html"
     },
     {
@@ -129,7 +129,7 @@
       "url": "js\/emo\/emulator.js"
     },
     {
-      "hash": "sha256-AribcIJ7i6DNB3gwfIKm4TXd7Ws7evVg9+Qd9LZuAok=",
+      "hash": "sha256-rHXweWiXldNDQqANgJ1pWIUlgh2APn42DB1nCIUQ5PE=",
       "url": "js\/produto-model.js"
     },
     {
@@ -177,7 +177,7 @@
       "url": "_framework\/icudt_no_CJK.dat"
     },
     {
-      "hash": "sha256-w2S6Pz96hd3L3meSjBhxCJEK\/F2Lrp40aNiP8sLmQxU=",
+      "hash": "sha256-yxfa4SwWI0QXHABBI94ZGFIIArDM3k\/rzJKShz64DHE=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -253,7 +253,7 @@
       "url": "_framework\/Newtonsoft.Json.wasm"
     },
     {
-      "hash": "sha256-J08c\/c7U5zuCqoZlqCLoMx\/QqOupyqDCp4u8kU8+zgQ=",
+      "hash": "sha256-lBBK0ZOOoKuOaHnN7vO7wv5EeYz0lXYeM9d9Qq\/SD7o=",
       "url": "_framework\/Portfolio.wasm"
     },
     {
@@ -429,7 +429,7 @@
       "url": "_framework\/System.Xml.XDocument.wasm"
     },
     {
-      "hash": "sha256-4AK3n68RzoCesF0xLC55rnpI4MIbrRzrfoeL008H5p4=",
+      "hash": "sha256-rb2QgoOgeRhgvACqTkhm7XcUpAqFo4AJuYFAlLQed8M=",
       "url": "Portfolio.styles.css"
     },
     {
@@ -441,5 +441,5 @@
       "url": "_content\/Blazored.Modal\/blazored.modal.js"
     }
   ],
-  "version": "s28V6rre"
+  "version": "6pM2Yzs1"
 };
