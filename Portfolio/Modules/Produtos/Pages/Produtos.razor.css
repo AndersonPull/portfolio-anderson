@@ -1,45 +1,239 @@
 .produtos-page {
+    --prod-ink: #0a0a0a;
+    --prod-muted: #7a7a7a;
+    --prod-accent: #ff5a1f;
     position: fixed;
     inset: 0;
     z-index: 1;
+    background: #e2e2e2;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: var(--prod-ink);
+    overflow: hidden;
 }
 
 .produtos-canvas {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     display: block;
     opacity: 0;
+    z-index: 1;
 }
 
 .produtos-canvas.is-ready {
     opacity: 1;
 }
 
-.produtos-load {
+.produtos-wordmark {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    z-index: 2;
-    transform: translate(-50%, -50%);
+    left: clamp(1.1rem, 3vw, 2.4rem);
+    bottom: clamp(0.4rem, 2vh, 1.2rem);
+    z-index: 3;
     margin: 0;
-    color: #0a0a0a;
-    font-family: "Courier New", Courier, monospace;
-    font-size: 0.95rem;
-    white-space: nowrap;
+    font-size: clamp(4.25rem, 13vw, 8.75rem);
+    font-weight: 800;
+    line-height: 0.78;
+    letter-spacing: -0.06em;
+    pointer-events: none;
 }
 
-.produtos-load-spin {
+.produtos-rail {
+    position: absolute;
+    top: 42%;
+    left: clamp(1.1rem, 3vw, 2.4rem);
+    right: auto;
+    z-index: 3;
+    width: min(11.5rem, 28vw);
+    transform: translateY(-50%);
+}
+
+.produtos-rail-index {
+    margin: 0 0 1.4rem;
+    color: var(--prod-muted);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+}
+
+.produtos-rail-block + .produtos-rail-block {
+    margin-top: 1.35rem;
+}
+
+.produtos-rail-kicker {
+    margin: 0 0 0.35rem;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.produtos-rail p {
+    margin: 0;
+    color: #4a4a4a;
+    font-size: 0.78rem;
+    line-height: 1.45;
+}
+
+.produtos-modal {
+    position: absolute;
+    top: 42%;
+    left: 54%;
+    z-index: 6;
+    width: min(21rem, 52vw);
+}
+
+.produtos-modal-window {
+    width: 100%;
+    height: auto;
+    background: #111;
+    color: #fff;
+    font-family: "Courier New", Courier, monospace;
+    font-size: clamp(0.65rem, 3.1vw, 0.82rem);
+    line-height: 1.55;
+    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.produtos-modal-chrome {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 2rem;
+    padding: 0 0.65rem;
+    background: #1c1c1c;
+    border-bottom: 1px solid #2a2a2a;
+    flex-shrink: 0;
+    user-select: none;
+}
+
+.produtos-modal-title {
+    color: #9a9a9a;
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+}
+
+.produtos-modal-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.produtos-modal-btn {
+    width: 1.05rem;
+    height: 1.05rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #555;
+    background: #2a2a2a;
+    color: #c8c8c8;
+    font-size: 0.55rem;
+    line-height: 1;
+}
+
+.produtos-modal-btn.is-close {
+    border-color: #6a3030;
+    background: #3a2020;
+    color: #e0a0a0;
+}
+
+.produtos-modal-body {
+    padding: 0.85rem 1rem 0.85rem;
+}
+
+.produtos-modal-line {
+    margin: 0;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.produtos-modal-caret {
     display: inline-block;
-    width: 1ch;
-    text-align: center;
+    width: 0.55ch;
+    margin-left: 1px;
+    background: #fff;
+    animation: produtos-caret-blink 0.9s step-end infinite;
+}
+
+@keyframes produtos-caret-blink {
+    50% { opacity: 0; }
+}
+
+.produtos-scroll {
+    position: absolute;
+    right: clamp(1.1rem, 3vw, 2rem);
+    bottom: clamp(1.1rem, 3vh, 2rem);
+    z-index: 4;
+    width: 2.6rem;
+    height: 3.15rem;
+    display: inline-flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 0.7rem;
+    background: #1e1e1e;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 12px;
+}
+
+.produtos-scroll-arrow {
+    width: 9px;
+    height: auto;
+    display: block;
+    transform: rotate(90deg);
 }
 
 .produtos-error {
     position: absolute;
     top: 50%;
     left: 50%;
+    z-index: 5;
     transform: translate(-50%, -50%);
     margin: 0;
     color: #8a3030;
     font-size: 0.95rem;
+}
+
+@media (max-width: 1024px) {
+    .produtos-rail {
+        top: 4.4rem;
+        left: 1.1rem;
+        right: 1.1rem;
+        width: auto;
+        transform: none;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 1rem 1.35rem;
+    }
+
+    .produtos-rail-index {
+        width: 100%;
+        margin: 0;
+    }
+
+    .produtos-rail-block {
+        flex: 1 1 0;
+        min-width: 0;
+    }
+
+    .produtos-rail-block + .produtos-rail-block {
+        margin-top: 0;
+    }
+
+    .produtos-modal {
+        top: auto;
+        left: 50%;
+        bottom: 7.2rem;
+        width: min(21rem, calc(100vw - 2.4rem));
+        transform: translateX(-50%);
+    }
+
+    .produtos-wordmark {
+        font-size: clamp(3.4rem, 22vw, 5.5rem);
+        bottom: 0.35rem;
+    }
 }

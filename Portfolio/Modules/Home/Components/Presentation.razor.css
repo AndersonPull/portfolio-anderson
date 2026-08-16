@@ -105,27 +105,73 @@
     width: min(60rem, 100%);
     max-width: 100%;
     height: clamp(12rem, 34vh, 23.75rem);
-    background: linear-gradient(to bottom, #2fc12ca6, #006f1fa6);
+    background: #111;
+    color: #fff;
+    font-family: "Courier New", Courier, monospace;
     z-index: 10;
     position: absolute;
     right: 0;
     left: auto;
     bottom: 25px;
     margin-right: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
     transition: transform 0.7s ease-in-out;
     animation: home-in-right 0.95s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both;
 }
 
-.terminal.move-right {
-    transform: translateX(100%);
+.terminal-chrome {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 2rem;
+    padding: 0 0.65rem;
+    background: #1c1c1c;
+    border-bottom: 1px solid #2a2a2a;
+    flex-shrink: 0;
+    pointer-events: none;
+    user-select: none;
+}
+
+.terminal-chrome-title {
+    color: #9a9a9a;
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+}
+
+.terminal-chrome-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.terminal-win-btn {
+    width: 1.05rem;
+    height: 1.05rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #555;
+    background: #2a2a2a;
+    color: #c8c8c8;
+    font-size: 0.55rem;
+    line-height: 1;
+}
+
+.terminal-win-btn.is-close {
+    border-color: #6a3030;
+    background: #3a2020;
+    color: #e0a0a0;
 }
 
 .terminal-log {
     position: absolute;
-    top: 12px;
+    top: calc(2rem + 12px);
     left: 15px;
     right: 15px;
-    bottom: 70px;
+    bottom: 16px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -137,17 +183,19 @@
 .terminal-line {
     margin: 0;
     font-size: 14px;
-    font-weight: bold;
+    font-weight: 400;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    line-height: 1.35;
+    line-height: 1.55;
+    color: #fff;
 }
 
 .terminal-caret {
     display: inline-block;
+    width: 0.55ch;
     margin-left: 1px;
-    font-weight: 400;
+    background: #fff;
     animation: caret-blink 0.9s step-end infinite;
 }
 
@@ -155,35 +203,6 @@
     50% {
         opacity: 0;
     }
-}
-
-.terminal_button {
-    width: 90px;
-    height: 60px;
-    background-color: #1e1e1e;
-    border: none;
-    outline: none;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.2s ease, transform 0.2s ease;
-}
-
-.terminal_button:hover,
-.terminal_button:focus-visible {
-    background-color: #111;
-    transform: translateX(3px);
-    outline: none;
-}
-
-.terminal_button_image {
-    width: 15px;
-    height: auto;
-    display: block;
 }
 
 @keyframes home-in-left {
@@ -377,45 +396,22 @@
         max-width: none;
         max-height: 15rem;
         margin: 0;
-        background: linear-gradient(165deg, #2fc12cd9, #0a7a28d9);
+        background: #111;
+        color: #fff;
+        font-family: "Courier New", Courier, monospace;
+        overflow: hidden;
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
         transition: transform 0.7s ease-in-out;
         transform: none;
         pointer-events: auto;
         animation: home-in-right 0.95s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
     }
 
-    .home-mobile-panel.move-right {
-        transform: translateX(110%);
-    }
-
     .home-mobile-panel .terminal-log {
-        top: 12px;
+        top: calc(2rem + 12px);
         left: 15px;
         right: 15px;
-        bottom: 70px;
-    }
-
-    .home-mobile-cta {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        top: auto;
-        width: 90px;
-        height: 60px;
-        margin: 0;
-        padding: 0;
-        border: none;
-        background: #1e1e1e;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-    }
-
-    .home-mobile-cta img {
-        width: 15px;
-        height: auto;
-        display: block;
+        bottom: 16px;
     }
 }
 
@@ -452,15 +448,10 @@
     }
 
     .home-mobile-panel .terminal-log {
-        top: 8px;
+        top: calc(2rem + 8px);
         left: 12px;
         right: 12px;
-        bottom: 52px;
-    }
-
-    .home-mobile-cta {
-        width: 72px;
-        height: 48px;
+        bottom: 12px;
     }
 
     .terminal-line {
