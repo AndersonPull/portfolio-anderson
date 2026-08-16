@@ -1,6 +1,10 @@
 ﻿self.assetsManifest = {
   "assets": [
     {
+      "hash": "sha256-yRC6c4wq2okteXr05oemvDZbuFVCRciKJLgyaGMCEh4=",
+      "url": "3dModels\/CartuchoNitendo.glb"
+    },
+    {
       "hash": "sha256-RBp21V87tUKf3cj65P\/Ho2yqhEgpSqtD3eFF\/dwCaig=",
       "url": "css\/app.css"
     },
@@ -109,12 +113,16 @@
       "url": "Images\/whats.png"
     },
     {
-      "hash": "sha256-kA5zid8DFklWnJCMh9SCUdM1hlSiAcZgUUGibV2xroM=",
+      "hash": "sha256-X7ZMLg3ErBQO8UzRQf306Fj8G7oeE2r5qGQbbVNilrg=",
       "url": "index.html"
     },
     {
       "hash": "sha256-BEJOOXQcmT3rmxI8stRz8QX8Q2KQEHHlzAj\/VTXkkws=",
       "url": "js\/emo\/emulator.js"
+    },
+    {
+      "hash": "sha256-1SEyjkgbA3saw7VKB7Qep3i8h0AHABOTXf1m9oggzT0=",
+      "url": "js\/produto-model.js"
     },
     {
       "hash": "sha256-MhKxPtCALM0gIndWjnUo2CIe+fthd1HjRyPnFwGEPkY=",
@@ -161,7 +169,7 @@
       "url": "_framework\/icudt_no_CJK.dat"
     },
     {
-      "hash": "sha256-8pFASVTdqh+CoXjdRu3S916Sc4l490UGHXgU9dxTmIQ=",
+      "hash": "sha256-YxHaaic3mZX2YZmMRGVSVxMg2VanbCU40rGoyejhDME=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -237,7 +245,7 @@
       "url": "_framework\/Newtonsoft.Json.wasm"
     },
     {
-      "hash": "sha256-0cEhjuw2xzPxSRbN\/N4vanxoVfo9L9rhtDGE9l2gP78=",
+      "hash": "sha256-vbImUoneRIcfhHWv3qk0P25QZBAGA8JcGoffWs3fCxs=",
       "url": "_framework\/Portfolio.wasm"
     },
     {
@@ -269,7 +277,7 @@
       "url": "_framework\/System.ComponentModel.wasm"
     },
     {
-      "hash": "sha256-lyjCikVHQXQKT+eHYkbrXzGNsG3QzHVIp3yUjOOVUZM=",
+      "hash": "sha256-4HyBFgZDtHQyBE\/C9KguavHqj7UZDNnACp5+ti4NTk8=",
       "url": "_framework\/System.Console.wasm"
     },
     {
@@ -321,7 +329,7 @@
       "url": "_framework\/System.ObjectModel.wasm"
     },
     {
-      "hash": "sha256-M+xiOc8tm1wPSXx7w6\/SnyRIAXVa9RdDvfFve\/AHaT4=",
+      "hash": "sha256-ks64Qy8KiFIVDOG9qzU\/56sVcyrSjtezkzfk3Wj\/RtI=",
       "url": "_framework\/System.Private.CoreLib.wasm"
     },
     {
@@ -413,7 +421,7 @@
       "url": "_framework\/System.Xml.XDocument.wasm"
     },
     {
-      "hash": "sha256-wZzMGpCD71yANEFGzHj75kFUcCtTqzXF+yvErav\/tio=",
+      "hash": "sha256-RLr2EH9OgIre+ScLaNhYALj8FcPiNRC9alzUy2Fp\/7I=",
       "url": "Portfolio.styles.css"
     },
     {
@@ -425,5 +433,5 @@
       "url": "_content\/Blazored.Modal\/blazored.modal.js"
     }
   ],
-  "version": "NHfk2DLA"
+  "version": "0ruAL2Jt"
 };

@@ -1209,6 +1209,38 @@
         transform: none;
     }
 }
+/* /Modules/Produtos/Pages/Produtos.razor.rz.scp.css */
+.produtos-page[b-7nv52qb26i] {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+}
+
+.produtos-canvas[b-7nv52qb26i] {
+    width: 100%;
+    height: 100%;
+    display: block;
+    opacity: 0;
+}
+
+.produtos-canvas.is-ready[b-7nv52qb26i] {
+    opacity: 1;
+}
+
+.produtos-status[b-7nv52qb26i],
+.produtos-error[b-7nv52qb26i] {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    color: #6b6b6b;
+    font-size: 0.95rem;
+}
+
+.produtos-error[b-7nv52qb26i] {
+    color: #8a3030;
+}
 /* /Modules/Shared/MainLayout.razor.rz.scp.css */
 .page[b-k072sljkdw] {
     position: relative;
