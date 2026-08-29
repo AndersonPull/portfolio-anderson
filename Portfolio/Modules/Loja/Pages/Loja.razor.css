@@ -1,0 +1,67 @@
+.loja-page {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background: #e2e2e2;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #0a0a0a;
+    padding: 4.2rem 1rem 0.7rem;
+    box-sizing: border-box;
+}
+
+@media (min-width: 1025px) {
+    .loja-page {
+        padding: 5.5rem clamp(2rem, 6vw, 5rem) 1.5rem;
+    }
+}
+
+.loja-head {
+    flex: 0 0 auto;
+}
+
+.loja-kicker {
+    margin: 0 0 0.2rem;
+    color: #7a7a7a;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.loja-title {
+    margin: 0 0 0.7rem;
+    font-size: clamp(1.85rem, 7vw, 4.5rem);
+    font-weight: 800;
+    letter-spacing: -0.055em;
+    line-height: 0.9;
+}
+
+@media (min-width: 1025px) {
+    .loja-title {
+        margin: 0 0 1.25rem;
+    }
+}
+
+.loja-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 0.7rem;
+    max-width: 72rem;
+    width: 100%;
+    flex: 1 1 auto;
+    min-height: 16rem;
+    overflow: hidden;
+}
+
+@media (min-width: 800px) {
+    .loja-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: minmax(16rem, 1fr);
+        gap: 1.4rem;
+    }
+}

@@ -1,0 +1,71 @@
+@page "/loja/{Slug}"
+@implements IAsyncDisposable
+@inject IJSRuntime JS
+@inject NavigationManager Navigation
+
+<div class="loja-item-page @(_item?.Slug == "controle" ? "is-controle" : null)">
+    @if (_item == null)
+    {
+        <p class="loja-item-missing">Item não encontrado.</p>
+    }
+    else
+    {
+        <canvas @ref="_canvas" class="loja-item-canvas"></canvas>
+        @if (!_ready)
+        {
+            <p class="loja-item-loading">Carregando modelo…</p>
+        }
+        <a class="loja-item-back" href="loja" @onclick="GoBack" @onclick:preventDefault>← Loja</a>
+        <aside class="loja-item-copy">
+            <p class="loja-item-index">@_item.Index</p>
+            <p class="loja-item-kicker">@_item.Kicker</p>
+            <h1>@_item.Title</h1>
+            <p>@_item.Description</p>
+            <p class="loja-item-hint">Arraste para girar.</p>
+        </aside>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public string Slug { get; set; }
+
+    private LojaProduct _item;
+    private ElementReference _canvas;
+    private bool _ready;
+    private bool _mounted;
+
+    protected override void OnParametersSet()
+    {
+        _item = LojaCatalog.Find(Slug);
+        if (_item == null)
+            Navigation.NavigateTo("loja");
+    }
+
+    private void GoBack()
+        => Navigation.NavigateTo("loja");
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (_mounted || _item == null)
+            return;
+
+        _mounted = true;
+        try
+        {
+            await JS.InvokeVoidAsync("lojaViewer.dispose");
+            await JS.InvokeVoidAsync("lojaViewer.mount", _canvas, _item.ModelUrl, _item.Kind, false);
+            _ready = true;
+            await InvokeAsync(StateHasChanged);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        try { await JS.InvokeVoidAsync("lojaViewer.dispose"); } catch { }
+    }
+}

@@ -18,10 +18,9 @@
         <a class="site-nav-link" href="produtos" @onclick="GoProdutos" @onclick:preventDefault>Produtos</a>
         <a class="site-nav-link" href="newsletter" @onclick="GoNewsletter" @onclick:preventDefault>Newsletter</a>
         <a class="site-nav-loja"
-           href="https://marketplace.visualstudio.com/items?itemName=AndersonOliveira.zoiodelula"
-           target="_blank"
-           rel="noopener noreferrer"
-           @onclick="CloseMenu">
+           href="loja"
+           @onclick="GoLoja"
+           @onclick:preventDefault>
             Loja
             <img src="Images/arrow_green_right.png" class="site-nav-loja-arrow" alt="" />
         </a>
@@ -65,6 +64,12 @@
     {
         CloseMenu();
         Navigation.NavigateTo("newsletter");
+    }
+
+    private void GoLoja()
+    {
+        CloseMenu();
+        Navigation.NavigateTo("loja");
     }
 
     public void Dispose()
