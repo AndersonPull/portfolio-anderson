@@ -1,0 +1,51 @@
+@implements IAsyncDisposable
+@inject IJSRuntime JS
+@inject NavigationManager Navigation
+
+<article class="loja-card" @onclick="Open">
+    <p class="loja-card-index">@Item.Index</p>
+    <div class="loja-card-stage">
+        <canvas @ref="_canvas" class="loja-card-canvas"></canvas>
+    </div>
+    <div class="loja-card-copy">
+        <p class="loja-card-kicker">@Item.Kicker</p>
+        <h2>@Item.Title</h2>
+        <p>@Item.Description</p>
+    </div>
+</article>
+
+@code {
+    [Parameter, EditorRequired]
+    public LojaProduct Item { get; set; }
+
+    private ElementReference _canvas;
+    private bool _mounted;
+    private bool _disposed;
+
+    private void Open()
+        => Navigation.NavigateTo($"loja/{Item.Slug}");
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (_mounted || Item == null)
+            return;
+
+        _mounted = true;
+        try
+        {
+            if (_disposed)
+                return;
+            await JS.InvokeVoidAsync("lojaViewer.mount", _canvas, Item.ModelUrl, Item.Kind, true);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        _disposed = true;
+        try { await JS.InvokeVoidAsync("lojaViewer.dispose", _canvas); } catch { }
+    }
+}

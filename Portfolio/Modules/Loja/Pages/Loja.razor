@@ -1,0 +1,41 @@
+@page "/loja"
+@implements IAsyncDisposable
+@inject IJSRuntime JS
+
+<div class="loja-page">
+    <header class="loja-head">
+        <p class="loja-kicker">Loja</p>
+        <h1 class="loja-title">Hardware</h1>
+    </header>
+
+    <div class="loja-grid">
+        @foreach (var item in LojaCatalog.Items)
+        {
+            <LojaCard @key="item.Slug" Item="item" />
+        }
+    </div>
+</div>
+
+@code {
+    private bool _preloaded;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (_preloaded)
+            return;
+        _preloaded = true;
+        try
+        {
+            await JS.InvokeVoidAsync("lojaViewer.preload", "3dModels/MobileController.glb");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        try { await JS.InvokeVoidAsync("lojaViewer.dispose"); } catch { }
+    }
+}

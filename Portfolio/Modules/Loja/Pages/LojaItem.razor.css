@@ -1,0 +1,101 @@
+.loja-item-page {
+    position: fixed;
+    inset: 0;
+    z-index: 2;
+    width: auto;
+    height: auto;
+    overflow: hidden;
+    background: #e2e2e2;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #0a0a0a;
+}
+
+.loja-item-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    touch-action: none;
+    background: #e2e2e2;
+}
+
+.loja-item-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 4;
+    margin: 0;
+    transform: translate(-50%, -50%);
+    color: #7a7a7a;
+    font-size: 0.9rem;
+}
+
+.loja-item-back {
+    position: absolute;
+    top: 4.4rem;
+    left: clamp(1.1rem, 3vw, 2.4rem);
+    z-index: 4;
+    color: #0a0a0a;
+    font-size: 0.92rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.loja-item-copy {
+    position: absolute;
+    left: clamp(1.1rem, 3vw, 2.4rem);
+    bottom: clamp(1.2rem, 4vh, 2.4rem);
+    z-index: 4;
+    width: min(18rem, calc(100vw - 2.4rem));
+    pointer-events: none;
+}
+
+.loja-item-index {
+    margin: 0 0 0.55rem;
+    color: #7a7a7a;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+}
+
+.loja-item-kicker {
+    margin: 0 0 0.3rem;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.loja-item-copy h1 {
+    margin: 0 0 0.4rem;
+    font-size: clamp(2rem, 7vw, 3.4rem);
+    font-weight: 800;
+    letter-spacing: -0.05em;
+    line-height: 0.9;
+}
+
+.loja-item-copy p {
+    margin: 0;
+    color: #4a4a4a;
+    font-size: 0.88rem;
+    line-height: 1.45;
+}
+
+.loja-item-hint {
+    margin-top: 0.85rem !important;
+    color: #7a7a7a !important;
+    font-size: 0.75rem !important;
+}
+
+.loja-item-missing {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@media (min-width: 1025px) {
+    .loja-item-back {
+        top: 2.1rem;
+    }
+}

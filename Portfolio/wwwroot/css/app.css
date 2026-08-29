@@ -5,6 +5,11 @@ html, body {
     background-color: #e2e2e2;
 }
 
+.layout-sitenav {
+    height: 100dvh;
+    overflow: hidden;
+}
+
 html.emo-zoom-lock,
 html.emo-zoom-lock body {
     touch-action: none;
@@ -134,6 +139,21 @@ a, .btn-link {
     height: 100dvh;
     overflow: hidden;
     background: #e2e2e2;
+}
+
+.page-stage.is-entering .loja-page,
+.page-stage.is-exiting .loja-page {
+    overflow: hidden;
+}
+
+.loja-item-page {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 2 !important;
+    overflow: hidden !important;
+    height: auto !important;
+    width: auto !important;
+    min-height: 0 !important;
 }
 
 #blazor-error-ui {
