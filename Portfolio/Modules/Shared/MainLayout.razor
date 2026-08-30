@@ -17,7 +17,7 @@
             <SiteNav />
         }
 
-        <div class="content @(IsHome ? "content-home" : "px-4")">
+        <div class="content @(IsHome ? "content-home" : IsLoja ? "content-loja" : "px-4")">
             <CascadingValue Name="PageLeavingHome" Value="@(_isExiting && _leavingHome)" IsFixed="false">
                 <div class="page-stage @PageStageClass">
                     @Body
@@ -29,6 +29,7 @@
 
 @code {
     private bool IsHome { get; set; }
+    private bool IsLoja { get; set; }
     private bool _isExiting;
     private bool _isEntering;
     private bool _leavingHome;
@@ -82,6 +83,9 @@
         _isEntering = false;
         await InvokeAsync(StateHasChanged);
         await Task.Delay(_leavingHome ? 700 : 420);
+
+        IsHome = string.IsNullOrEmpty(target);
+        IsLoja = IsLojaPath(target);
     }
 
     private void OnLocationChanged(object sender, LocationChangedEventArgs e)
@@ -118,8 +122,14 @@
 
     private void SyncRouteState()
     {
-        IsHome = string.IsNullOrEmpty(NormalizePath(new Uri(NavigationManager.Uri).AbsolutePath));
+        var path = NormalizePath(new Uri(NavigationManager.Uri).AbsolutePath);
+        IsHome = string.IsNullOrEmpty(path);
+        IsLoja = IsLojaPath(path);
     }
+
+    private static bool IsLojaPath(string path)
+        => path.Equals("loja", StringComparison.OrdinalIgnoreCase)
+            || path.StartsWith("loja/", StringComparison.OrdinalIgnoreCase);
 
     private static string NormalizePath(string path)
         => (path ?? string.Empty).TrimEnd('/');

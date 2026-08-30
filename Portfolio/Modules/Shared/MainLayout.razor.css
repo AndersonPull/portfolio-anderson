@@ -234,6 +234,28 @@ span.item-menu {
     padding-bottom: 1.5rem;
 }
 
+.layout-sitenav .content-loja {
+    padding: 0 !important;
+    overflow: hidden;
+    height: 100%;
+}
+
+.layout-sitenav .content-loja .page-stage {
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.page-stage.is-entering .loja-page,
+.page-stage.is-exiting .loja-page {
+    overflow: hidden;
+}
+
+.page-stage.is-entering,
+.page-stage.is-exiting {
+    will-change: transform, opacity;
+}
+
 @media (min-width: 1025px) {
     .layout-sitenav .content {
         padding-top: 4.5rem;
