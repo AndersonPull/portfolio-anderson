@@ -4,35 +4,287 @@
     "title": "Super Mario World",
     "system": "snes",
     "core": "snes9x",
-    "rom": "emo/roms/Super Mario World (USA).sfc",
+    "rom": "emo/roms/snes/Super Mario World (USA).sfc",
+    "cover": null,
+    "buttons": ["y", "b", "a", "x", "l", "r", "select", "start"]
+  },
+  {
+    "id": "super-mario-kart",
+    "title": "Super Mario Kart",
+    "system": "snes",
+    "core": "snes9x",
+    "rom": "emo/roms/snes/Super Mario Kart (USA).sfc",
+    "cover": null,
+    "buttons": ["y", "b", "a", "x", "l", "r", "select", "start"]
+  },
+  {
+    "id": "star-fox",
+    "title": "Star Fox",
+    "system": "snes",
+    "core": "snes9x",
+    "rom": "emo/roms/snes/Star Fox (USA).sfc",
+    "cover": null,
+    "buttons": ["y", "b", "a", "x", "l", "r", "select", "start"]
+  },
+  {
+    "id": "donkey-kong-country",
+    "title": "Donkey Kong Country",
+    "system": "snes",
+    "core": "snes9x",
+    "rom": "emo/roms/snes/Donkey Kong Country (USA).sfc",
+    "cover": null,
+    "buttons": ["y", "b", "a", "x", "l", "r", "select", "start"]
+  },
+  {
+    "id": "mega-man-x",
+    "title": "Mega Man X",
+    "system": "snes",
+    "core": "snes9x",
+    "rom": "emo/roms/snes/Mega Man X (USA).sfc",
+    "cover": null,
+    "buttons": ["y", "b", "a", "x", "l", "r", "select", "start"]
+  },
+  {
+    "id": "aladdin-snes",
+    "title": "Aladdin",
+    "system": "snes",
+    "core": "snes9x",
+    "rom": "emo/roms/snes/Aladdin (USA).sfc",
+    "cover": null,
+    "buttons": ["y", "b", "a", "x", "l", "r", "select", "start"]
+  },
+  {
+    "id": "contra-iv",
+    "title": "Contra IV: The Alien Wars",
+    "system": "snes",
+    "core": "snes9x",
+    "rom": "emo/roms/snes/Contra IV - The Alien Wars (USA) (Beta).sfc",
+    "cover": null,
+    "buttons": ["y", "b", "a", "x", "l", "r", "select", "start"]
+  },
+  {
+    "id": "street-fighter-ii-turbo",
+    "title": "Street Fighter II Turbo",
+    "system": "snes",
+    "core": "snes9x",
+    "rom": "emo/roms/snes/Street Fighter II Turbo (USA).sfc",
+    "cover": null,
+    "buttons": ["y", "b", "a", "x", "l", "r", "select", "start"]
+  },
+  {
+    "id": "final-fantasy-vi",
+    "title": "Final Fantasy VI",
+    "system": "snes",
+    "core": "snes9x",
+    "rom": "emo/roms/snes/Final Fantasy VI (Japan) [T-En by RPGOne v1.2b] [All Bugs Fix].sfc",
+    "cover": null,
+    "buttons": ["y", "b", "a", "x", "l", "r", "select", "start"]
+  },
+  {
+    "id": "link-to-the-past",
+    "title": "The Legend of Zelda: A Link to the Past",
+    "system": "snes",
+    "core": "snes9x",
+    "rom": "emo/roms/snes/Legend of Zelda, The - A Link to the Past (USA).sfc",
     "cover": null,
     "buttons": ["y", "b", "a", "x", "l", "r", "select", "start"]
   },
   {
     "id": "sonic-1",
-    "title": "Sonic 1 in Sonic 3 SCE",
+    "title": "Sonic the Hedgehog",
     "system": "genesis",
     "core": "genesis_plus_gx",
-    "rom": "emo/roms/Sonic 1 in Sonic 3 SCE.gen",
+    "rom": "emo/roms/sega/Sonic 1.gen",
     "cover": null,
-    "buttons": ["a", "b", "start"]
+    "buttons": ["a", "b", "c", "start"]
+  },
+  {
+    "id": "sonic-2",
+    "title": "Sonic the Hedgehog 2",
+    "system": "genesis",
+    "core": "genesis_plus_gx",
+    "rom": "emo/roms/sega/Sonic The Hedgehog 2 (World).md",
+    "cover": null,
+    "buttons": ["a", "b", "c", "start"]
+  },
+  {
+    "id": "streets-of-rage",
+    "title": "Streets of Rage",
+    "system": "genesis",
+    "core": "genesis_plus_gx",
+    "rom": "emo/roms/sega/Streets of Rage (World).md",
+    "cover": null,
+    "buttons": ["a", "b", "c", "start"]
   },
   {
     "id": "golden-axe-arcade-colors",
     "title": "Golden Axe - Arcade Colors",
     "system": "genesis",
     "core": "genesis_plus_gx",
-    "rom": "emo/roms/Golden Axe - Arcade Colors (V1.4).md",
+    "rom": "emo/roms/sega/Golden Axe - Arcade Colors (V1.4).md",
     "cover": null,
-    "buttons": ["a", "b", "Y", "start"]
+    "buttons": ["a", "b", "c", "x", "y", "z", "start"]
   },
   {
     "id": "ultimate-mortal-kombat-3",
     "title": "Ultimate Mortal Kombat 3",
     "system": "genesis",
     "core": "genesis_plus_gx",
-    "rom": "emo/roms/Ultimate Mortal Kombat 3 (USA).md",
+    "rom": "emo/roms/sega/Ultimate Mortal Kombat 3 (USA).md",
     "cover": null,
     "buttons": ["a", "b", "c", "x", "y", "z", "start"]
+  },
+  {
+    "id": "altered-beast",
+    "title": "Altered Beast",
+    "system": "genesis",
+    "core": "genesis_plus_gx",
+    "rom": "emo/roms/sega/Altered Beast (USA, Europe).md",
+    "cover": null,
+    "buttons": ["a", "b", "c", "start"]
+  },
+  {
+    "id": "road-rash-3",
+    "title": "Road Rash 3",
+    "system": "genesis",
+    "core": "genesis_plus_gx",
+    "rom": "emo/roms/sega/Road Rash 3 (USA, Europe).md",
+    "cover": null,
+    "buttons": ["a", "b", "c", "start"]
+  },
+  {
+    "id": "lion-king",
+    "title": "The Lion King",
+    "system": "genesis",
+    "core": "genesis_plus_gx",
+    "rom": "emo/roms/sega/Lion King, The (World).md",
+    "cover": null,
+    "buttons": ["a", "b", "c", "start"]
+  },
+  {
+    "id": "moonwalker",
+    "title": "Michael Jackson's Moonwalker",
+    "system": "genesis",
+    "core": "genesis_plus_gx",
+    "rom": "emo/roms/sega/Michael Jackson's Moonwalker (World).md",
+    "cover": null,
+    "buttons": ["a", "b", "c", "start"]
+  },
+  {
+    "id": "revenge-of-shinobi",
+    "title": "The Revenge of Shinobi",
+    "system": "genesis",
+    "core": "genesis_plus_gx",
+    "rom": "emo/roms/sega/Revenge of Shinobi, The (USA, Europe) (Rev A).md",
+    "cover": null,
+    "buttons": ["a", "b", "c", "start"]
+  },
+  {
+    "id": "tiny-toon-adventures",
+    "title": "Tiny Toon Adventures",
+    "system": "genesis",
+    "core": "genesis_plus_gx",
+    "rom": "emo/roms/sega/Tiny Toon Adventures - Buster's Hidden Treasure (USA).md",
+    "cover": null,
+    "buttons": ["a", "b", "c", "start"]
+  },
+  {
+    "id": "x-men",
+    "title": "X-Men",
+    "system": "genesis",
+    "core": "genesis_plus_gx",
+    "rom": "emo/roms/sega/X-Men (USA).md",
+    "cover": null,
+    "buttons": ["a", "b", "c", "x", "y", "z", "start"]
+  },
+  {
+    "id": "metroid-zero-mission",
+    "title": "Metroid: Zero Mission",
+    "system": "gba",
+    "core": "mgba",
+    "rom": "emo/roms/GBA/Metroid - Zero Mission (USA).gba",
+    "cover": null,
+    "buttons": ["a", "b", "l", "r", "select", "start"]
+  },
+  {
+    "id": "metroid-fusion",
+    "title": "Metroid Fusion",
+    "system": "gba",
+    "core": "mgba",
+    "rom": "emo/roms/GBA/Metroid Fusion (USA).gba",
+    "cover": null,
+    "buttons": ["a", "b", "l", "r", "select", "start"]
+  },
+  {
+    "id": "minish-cap",
+    "title": "The Legend of Zelda: The Minish Cap",
+    "system": "gba",
+    "core": "mgba",
+    "rom": "emo/roms/GBA/Legend of Zelda, The - The Minish Cap (USA).gba",
+    "cover": null,
+    "buttons": ["a", "b", "l", "r", "select", "start"]
+  },
+  {
+    "id": "castlevania-aria-of-sorrow",
+    "title": "Castlevania: Aria of Sorrow",
+    "system": "gba",
+    "core": "mgba",
+    "rom": "emo/roms/GBA/Castlevania - Aria of Sorrow (USA).gba",
+    "cover": null,
+    "buttons": ["a", "b", "l", "r", "select", "start"]
+  },
+  {
+    "id": "mario-luigi-superstar-saga",
+    "title": "Mario & Luigi: Superstar Saga",
+    "system": "gba",
+    "core": "mgba",
+    "rom": "emo/roms/GBA/Mario & Luigi - Superstar Saga (USA).gba",
+    "cover": null,
+    "buttons": ["a", "b", "l", "r", "select", "start"]
+  },
+  {
+    "id": "mario-kart-super-circuit",
+    "title": "Mario Kart: Super Circuit",
+    "system": "gba",
+    "core": "mgba",
+    "rom": "emo/roms/GBA/Mario Kart - Super Circuit (USA).gba",
+    "cover": null,
+    "buttons": ["a", "b", "l", "r", "select", "start"]
+  },
+  {
+    "id": "metal-slug-advance",
+    "title": "Metal Slug Advance",
+    "system": "gba",
+    "core": "mgba",
+    "rom": "emo/roms/GBA/Metal Slug Advance (USA).gba",
+    "cover": null,
+    "buttons": ["a", "b", "l", "r", "select", "start"]
+  },
+  {
+    "id": "golden-sun",
+    "title": "Golden Sun",
+    "system": "gba",
+    "core": "mgba",
+    "rom": "emo/roms/GBA/Golden Sun (USA, Europe).gba",
+    "cover": null,
+    "buttons": ["a", "b", "l", "r", "select", "start"]
+  },
+  {
+    "id": "pokemon-emerald",
+    "title": "Pokémon Emerald",
+    "system": "gba",
+    "core": "mgba",
+    "rom": "emo/roms/GBA/Pokemon - Emerald Version (USA, Europe).gba",
+    "cover": null,
+    "buttons": ["a", "b", "l", "r", "select", "start"]
+  },
+  {
+    "id": "dragon-ball-z-legacy-of-goku",
+    "title": "Dragon Ball Z: The Legacy of Goku",
+    "system": "gba",
+    "core": "mgba",
+    "rom": "emo/roms/GBA/Dragon Ball Z - The Legacy of Goku (USA).gba",
+    "cover": null,
+    "buttons": ["a", "b", "l", "r", "select", "start"]
   }
 ]
