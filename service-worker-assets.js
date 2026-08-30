@@ -61,7 +61,7 @@
       "url": "emo\/covers\/.gitkeep"
     },
     {
-      "hash": "sha256-BxTveG9Pqly6bFj0ZORgSrLHKlHJ6h66HYI49dpvmXs=",
+      "hash": "sha256-Vv\/N\/\/64kGCygns\/znBsDs\/vwfqZeZVhOb9jgKo2Q7s=",
       "url": "emo\/games.json"
     },
     {
@@ -69,20 +69,132 @@
       "url": "emo\/roms\/.gitkeep"
     },
     {
+      "hash": "sha256-kQ+I03AebJ+ZwNY2YMFMYdi3mwwXv9ezWhUYW+NkMKU=",
+      "url": "emo\/roms\/GBA\/Castlevania - Aria of Sorrow (USA).gba"
+    },
+    {
+      "hash": "sha256-O6mRniZwSw9f3Cv6vH96BATHFBN2HTirzZQiTDvUsbk=",
+      "url": "emo\/roms\/GBA\/Dragon Ball Z - The Legacy of Goku (USA).gba"
+    },
+    {
+      "hash": "sha256-wU8RUYl+jXPyX\/3WfiHuu23FeXP\/JFiHLuifqQYKrKE=",
+      "url": "emo\/roms\/GBA\/Golden Sun (USA, Europe).gba"
+    },
+    {
+      "hash": "sha256-vtx032J1X3BTmCc96O07xZvmEM9Vdg0LmqJ38fUDXnM=",
+      "url": "emo\/roms\/GBA\/Legend of Zelda, The - The Minish Cap (USA).gba"
+    },
+    {
+      "hash": "sha256-r5Bm5+rNq5Gekph9uIVtA45LddTtARJZyJNwIIWohr4=",
+      "url": "emo\/roms\/GBA\/Mario & Luigi - Superstar Saga (USA).gba"
+    },
+    {
+      "hash": "sha256-qtyLnzyUf\/b2ELbI1\/3aqpvqmLS9Q1dt+E8mxFeuH5A=",
+      "url": "emo\/roms\/GBA\/Mario Kart - Super Circuit (USA).gba"
+    },
+    {
+      "hash": "sha256-Mul3HQXmuIokYJDBB9MTcdImuUCOvVVbKgJ3twOxqow=",
+      "url": "emo\/roms\/GBA\/Metal Slug Advance (USA).gba"
+    },
+    {
+      "hash": "sha256-\/JT2U4C2W4cKMLmwSznModxj1uRqSjc9OQStwJEuvDc=",
+      "url": "emo\/roms\/GBA\/Metroid - Zero Mission (USA).gba"
+    },
+    {
+      "hash": "sha256-pWzj1\/jz9PTQRo1CH\/9d0+467JmlgkQ3fkOq52ncP+g=",
+      "url": "emo\/roms\/GBA\/Metroid Fusion (USA).gba"
+    },
+    {
+      "hash": "sha256-qd7ITf5\/YqsiILr673R52gkp0Gbs4WpohfYibbGQha8=",
+      "url": "emo\/roms\/GBA\/Pokemon - Emerald Version (USA, Europe).gba"
+    },
+    {
+      "hash": "sha256-y+i66rLv5TGmdPU7\/d0MeUTP4tzaZEbvMA+YJU+OgLw=",
+      "url": "emo\/roms\/sega\/Altered Beast (USA, Europe).md"
+    },
+    {
       "hash": "sha256-hHtHSRfO6Z6hG4IjwAMoNt9\/mv39aIFLRtAB6Mzjs4M=",
-      "url": "emo\/roms\/Golden Axe - Arcade Colors (V1.4).md"
+      "url": "emo\/roms\/sega\/Golden Axe - Arcade Colors (V1.4).md"
+    },
+    {
+      "hash": "sha256-4RLRgRiTBLLSkAvcDW1hUhHVR6VEEhkhh4wZnkEhcPU=",
+      "url": "emo\/roms\/sega\/Lion King, The (World).md"
+    },
+    {
+      "hash": "sha256-HwmxBRW8uV6WJKTqMQPOdsg0\/fD4T5ukRwoxplfUBlc=",
+      "url": "emo\/roms\/sega\/Michael Jackson's Moonwalker (World).md"
+    },
+    {
+      "hash": "sha256-bWeMpV7AD5ZqO2WNnqASX6TgIV9JoIfAgiPVAD2r5mU=",
+      "url": "emo\/roms\/sega\/Revenge of Shinobi, The (USA, Europe) (Rev A).md"
+    },
+    {
+      "hash": "sha256-HaajfAmrhzcDNMsm3AM5vuhaa1gdPcchbciApxpSquY=",
+      "url": "emo\/roms\/sega\/Road Rash 3 (USA, Europe).md"
     },
     {
       "hash": "sha256-DSoJB1QC7KtwdxkMmN4\/7\/2FpQOJ55Gnknh4QHpCT7Y=",
-      "url": "emo\/roms\/Sonic 1 in Sonic 3 SCE.gen"
+      "url": "emo\/roms\/sega\/Sonic 1.gen"
     },
     {
-      "hash": "sha256-CDjlMf4iwHdSj+vhTLP\/fEkvH1+o3jVBkr3\/cTfCf1s=",
-      "url": "emo\/roms\/Super Mario World (USA).sfc"
+      "hash": "sha256-BzKfRWEESlBJI+sHQolEhcYfxC67CJHuv\/JHyi4IbWE=",
+      "url": "emo\/roms\/sega\/Sonic The Hedgehog 2 (World).md"
+    },
+    {
+      "hash": "sha256-3UTxIERmVLuRxEh2Lz4M0NmwNPNdDjJmpNw0QCralcA=",
+      "url": "emo\/roms\/sega\/Streets of Rage (World).md"
+    },
+    {
+      "hash": "sha256-3kquMyiYytaXfillvP9DKF1MA1U6ULDst8WtfhByKAs=",
+      "url": "emo\/roms\/sega\/Tiny Toon Adventures - Buster's Hidden Treasure (USA).md"
     },
     {
       "hash": "sha256-dd1+DBgqdZp+W+q7ynWB\/xEzbEFvpHEYBM9vFI+8RcA=",
-      "url": "emo\/roms\/Ultimate Mortal Kombat 3 (USA).md"
+      "url": "emo\/roms\/sega\/Ultimate Mortal Kombat 3 (USA).md"
+    },
+    {
+      "hash": "sha256-SfYBq\/ph8j9wQgoswMTMkCc1QLTRmfth1Rb2NE6QZ+8=",
+      "url": "emo\/roms\/sega\/X-Men (USA).md"
+    },
+    {
+      "hash": "sha256-qnaLiwASNxfI1J8sZzHNv9gKtqVBKLrnWU6T9F44oZ4=",
+      "url": "emo\/roms\/snes\/Aladdin (USA).sfc"
+    },
+    {
+      "hash": "sha256-8PD8r5eSBseW3a6fPgiyQQ2aRkHPU5rUmaaPRzO6bYM=",
+      "url": "emo\/roms\/snes\/Contra IV - The Alien Wars (USA) (Beta).sfc"
+    },
+    {
+      "hash": "sha256-+oys9bv8Oe5ruqVXrfiRM9YNQvbPnh2zDVo2pGn3TRU=",
+      "url": "emo\/roms\/snes\/Donkey Kong Country (USA).sfc"
+    },
+    {
+      "hash": "sha256-+MxLEhHrr4r6Sd0AVwSgSxVyvfr6HFF8TWcsUPyba6U=",
+      "url": "emo\/roms\/snes\/Final Fantasy VI (Japan) [T-En by RPGOne v1.2b] [All Bugs Fix].sfc"
+    },
+    {
+      "hash": "sha256-ZocdZr4ZrSw0ySfWsUzY62\/DGBlltuUXyzYfcxYAnPs=",
+      "url": "emo\/roms\/snes\/Legend of Zelda, The - A Link to the Past (USA).sfc"
+    },
+    {
+      "hash": "sha256-PhIJ9HO\/+M1Ly\/cdBx5\/jfF6LVZOmlxMQn7oGYzrthU=",
+      "url": "emo\/roms\/snes\/Mega Man X (USA).sfc"
+    },
+    {
+      "hash": "sha256-OFe1KU6o90aISUN7stgnFWTooP8wd0Yi6chyvL1TqE0=",
+      "url": "emo\/roms\/snes\/Star Fox (USA).sfc"
+    },
+    {
+      "hash": "sha256-Pkh\/i6SMC14xdE4ygda843UInbYHXI6z2akpN2uBc4E=",
+      "url": "emo\/roms\/snes\/Street Fighter II Turbo (USA).sfc"
+    },
+    {
+      "hash": "sha256-KtqJGWiAh75gpqSMrOj4d63WDEXS5dCeJEL6pVvmKkk=",
+      "url": "emo\/roms\/snes\/Super Mario Kart (USA).sfc"
+    },
+    {
+      "hash": "sha256-CDjlMf4iwHdSj+vhTLP\/fEkvH1+o3jVBkr3\/cTfCf1s=",
+      "url": "emo\/roms\/snes\/Super Mario World (USA).sfc"
     },
     {
       "hash": "sha256-e64LV5uz8kVqiqPMBuMZuxdJz7NpMqKp+3eTy9QO3zc=",
@@ -181,7 +293,7 @@
       "url": "_framework\/icudt_no_CJK.dat"
     },
     {
-      "hash": "sha256-XLSZ0F8x8NDeKpHJD\/nJIAjI6pLNKg1pgoHe+OSLlvs=",
+      "hash": "sha256-m3NArgcf5Yb+bTFnsxZLD4lHlXqG77wDdXLIVvbJNAs=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -257,7 +369,7 @@
       "url": "_framework\/Newtonsoft.Json.wasm"
     },
     {
-      "hash": "sha256-PTS0VYpvnFMIixd86U6\/Bk3+YYKwuf0aKforYXUlMdY=",
+      "hash": "sha256-LOUSdD5I9lqMRTSMn3vKl9+cSZkCtSpZKOSi9opkTEg=",
       "url": "_framework\/Portfolio.wasm"
     },
     {
@@ -445,5 +557,5 @@
       "url": "_content\/Blazored.Modal\/blazored.modal.js"
     }
   ],
-  "version": "egcmFQKZ"
+  "version": "wYFIfmgp"
 };
