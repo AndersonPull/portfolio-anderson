@@ -1,8 +1,16 @@
 ﻿self.assetsManifest = {
   "assets": [
     {
+      "hash": "sha256-kTWDFKdtMhyYBaD+AggAfyMBwZv90ao9KfrljoATYP8=",
+      "url": "3dModels\/Cartucho-lite.glb"
+    },
+    {
       "hash": "sha256-qvJustukgrK\/r1F3dum0qkmVPMR70IdB3GsJQwXaOAU=",
       "url": "3dModels\/Cartucho.glb"
+    },
+    {
+      "hash": "sha256-lODWUYLR6wjwKQOgyW1yCiZxmdYAq5ge7q4DoKBKkc8=",
+      "url": "3dModels\/MobileController-lite.glb"
     },
     {
       "hash": "sha256-mdcadjHHZXG0VvpZuo4aBY+tFxa7bQR8snNmS5w4BlQ=",
@@ -233,7 +241,7 @@
       "url": "Images\/whats.png"
     },
     {
-      "hash": "sha256-nFh8KhGY0N8\/FUWuNvU2nNb3lToATtrY3AQg\/SFlhH0=",
+      "hash": "sha256-2IZQWnF1S\/Y5hof1fiSU4GrhXwz1jMhMn2dZJmDtHMM=",
       "url": "index.html"
     },
     {
@@ -241,7 +249,7 @@
       "url": "js\/emo\/emulator.js"
     },
     {
-      "hash": "sha256-o6nmGp8R5UvqtxefQHUq+vtVm54gULqLycm10PnXuPA=",
+      "hash": "sha256-08lrDm3SFa+sfkSTlr6F5Ir4N+EwoiUV4k6NmrutzLw=",
       "url": "js\/loja-viewer.js"
     },
     {
@@ -293,7 +301,7 @@
       "url": "_framework\/icudt_no_CJK.dat"
     },
     {
-      "hash": "sha256-m3NArgcf5Yb+bTFnsxZLD4lHlXqG77wDdXLIVvbJNAs=",
+      "hash": "sha256-fxHjScJHIUXm0xQxVwavkq3Lp28wmQZhLNxPnM3g3F4=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -369,7 +377,7 @@
       "url": "_framework\/Newtonsoft.Json.wasm"
     },
     {
-      "hash": "sha256-LOUSdD5I9lqMRTSMn3vKl9+cSZkCtSpZKOSi9opkTEg=",
+      "hash": "sha256-aIqsv9SGOMBVpHeDdXXqGGzZ2rxpdmWAQ6Zn59CSEfU=",
       "url": "_framework\/Portfolio.wasm"
     },
     {
@@ -429,7 +437,7 @@
       "url": "_framework\/System.Linq.Expressions.wasm"
     },
     {
-      "hash": "sha256-rncmi8Xy5KiDca9KMHNAydR22UkE3vmlknH6S65h4BI=",
+      "hash": "sha256-asxZ3tKCz0esZM0BH3\/Dz0KpncC44l823GAvclSLRrU=",
       "url": "_framework\/System.Linq.wasm"
     },
     {
@@ -545,7 +553,7 @@
       "url": "_framework\/System.Xml.XDocument.wasm"
     },
     {
-      "hash": "sha256-mVjt+cgjZeOhZXFeHsKYYZ26EJfAD7pvqqiq+TG6jac=",
+      "hash": "sha256-suTcxQLK72mJZpPHgnG1UeTiCb0SdHaKRSTh7eR1jTY=",
       "url": "Portfolio.styles.css"
     },
     {
@@ -557,5 +565,5 @@
       "url": "_content\/Blazored.Modal\/blazored.modal.js"
     }
   ],
-  "version": "wYFIfmgp"
+  "version": "2UhBKg2r"
 };

@@ -375,6 +375,89 @@
     -webkit-touch-callout: none;
     -webkit-tap-highlight-color: transparent;
 }
+/* /Modules/Emo/Pages/EmoGames.razor.rz.scp.css */
+.emo-games[b-e1w9the7q7] {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    overflow: auto;
+    background: #e2e2e2;
+    color: #0a0a0a;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    padding: 4.2rem 1.15rem 2rem;
+    box-sizing: border-box;
+}
+
+@media (min-width: 1025px) {
+    .emo-games[b-e1w9the7q7] {
+        padding: 5.5rem clamp(2rem, 6vw, 5rem) 2.5rem;
+    }
+}
+
+.emo-games-kicker[b-e1w9the7q7] {
+    margin: 0 0 0.2rem;
+    color: #7a7a7a;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.emo-games-title[b-e1w9the7q7] {
+    margin: 0 0 1.4rem;
+    font-size: clamp(1.85rem, 7vw, 4.5rem);
+    font-weight: 800;
+    letter-spacing: -0.055em;
+    line-height: 0.9;
+}
+
+.emo-games-status[b-e1w9the7q7] {
+    margin: 0;
+    color: #555;
+}
+
+.emo-games-list[b-e1w9the7q7] {
+    display: grid;
+    gap: 1.75rem;
+    max-width: 42rem;
+}
+
+.emo-games-group h2[b-e1w9the7q7] {
+    margin: 0 0 0.55rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #7a7a7a;
+}
+
+.emo-games-group ul[b-e1w9the7q7] {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid #c8c8c8;
+}
+
+.emo-games-group li[b-e1w9the7q7] {
+    border-bottom: 1px solid #c8c8c8;
+}
+
+.emo-games-group a[b-e1w9the7q7] {
+    display: block;
+    padding: 0.7rem 0;
+    color: #0a0a0a;
+    text-decoration: none;
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+.emo-games-group a:hover[b-e1w9the7q7],
+.emo-games-group a:focus[b-e1w9the7q7] {
+    color: #0a0a0a;
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+}
 /* /Modules/Emo/Pages/EmoPlay.razor.rz.scp.css */
 .emo-play[b-6vdfjd5pvu] {
     display: flex;
@@ -706,6 +789,25 @@
     line-height: 1.5;
     font-size: clamp(0.8rem, 1.1vw, 0.875rem);
     animation: home-in-top-b-fx4s4655nz 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.12s both;
+}
+
+.home-secret[b-fx4s4655nz],
+.text1 a.home-secret[b-fx4s4655nz],
+.home-mobile-rail a.home-secret[b-fx4s4655nz] {
+    color: inherit;
+    text-decoration: none;
+    cursor: text;
+    pointer-events: auto;
+}
+
+.home-secret:hover[b-fx4s4655nz],
+.home-secret:focus[b-fx4s4655nz],
+.home-secret:visited[b-fx4s4655nz],
+.text1 a.home-secret:hover[b-fx4s4655nz],
+.text1 a.home-secret:focus[b-fx4s4655nz],
+.home-mobile-rail a.home-secret:hover[b-fx4s4655nz] {
+    color: inherit;
+    text-decoration: none;
 }
 
 .text2[b-fx4s4655nz] {
