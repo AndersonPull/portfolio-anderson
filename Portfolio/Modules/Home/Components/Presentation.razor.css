@@ -84,6 +84,25 @@
     animation: home-in-top 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.12s both;
 }
 
+.home-secret,
+.text1 a.home-secret,
+.home-mobile-rail a.home-secret {
+    color: inherit;
+    text-decoration: none;
+    cursor: text;
+    pointer-events: auto;
+}
+
+.home-secret:hover,
+.home-secret:focus,
+.home-secret:visited,
+.text1 a.home-secret:hover,
+.text1 a.home-secret:focus,
+.home-mobile-rail a.home-secret:hover {
+    color: inherit;
+    text-decoration: none;
+}
+
 .text2 {
     margin-top: clamp(2rem, 14vh, 9.4rem);
     float: right;

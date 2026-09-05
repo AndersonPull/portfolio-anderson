@@ -1,0 +1,65 @@
+@page "/emo"
+@using System.Collections.Generic
+@using System.Linq
+@using Portfolio.Modules.Emo.Models
+@inject IGameCatalogService GameCatalogService
+
+<div class="emo-games">
+    <header class="emo-games-head">
+        <p class="emo-games-kicker">Emo</p>
+        <h1 class="emo-games-title">Jogos</h1>
+    </header>
+
+    @if (_games is null)
+    {
+        <p class="emo-games-status">Carregando...</p>
+    }
+    else if (_games.Count == 0)
+    {
+        <p class="emo-games-status">Nenhum jogo no catálogo.</p>
+    }
+    else
+    {
+        <div class="emo-games-list">
+            @foreach (var group in _groups)
+            {
+                <section @key="group.Key" class="emo-games-group">
+                    <h2>@group.Label</h2>
+                    <ul>
+                        @foreach (var game in group.Games)
+                        {
+                            <li @key="game.Id">
+                                <a href="emo/play/@game.Id">@game.Title</a>
+                            </li>
+                        }
+                    </ul>
+                </section>
+            }
+        </div>
+    }
+</div>
+
+@code {
+    private List<GameEntry> _games;
+    private List<GameGroup> _groups = [];
+
+    protected override async Task OnInitializedAsync()
+    {
+        _games = await GameCatalogService.GetGamesAsync();
+        _groups = _games
+            .GroupBy(g => g.System, StringComparer.OrdinalIgnoreCase)
+            .Select(g => new GameGroup(g.Key, SystemLabel(g.Key), g.ToList()))
+            .ToList();
+    }
+
+    private static string SystemLabel(string system)
+        => system?.Trim().ToLowerInvariant() switch
+        {
+            "snes" => "SNES",
+            "genesis" or "megadrive" or "sega" => "Sega",
+            "gba" => "GBA",
+            _ => system ?? ""
+        };
+
+    private sealed record GameGroup(string Key, string Label, List<GameEntry> Games);
+}
