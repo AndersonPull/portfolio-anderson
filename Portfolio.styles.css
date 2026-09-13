@@ -528,6 +528,15 @@
     color: #F1BC03;
 }
 
+.emo-xr-status[b-6vdfjd5pvu] {
+    max-width: 11rem;
+    margin-right: 0.2rem;
+    color: #f1bc03;
+    font-size: 0.68rem;
+    line-height: 1.2;
+    text-align: right;
+}
+
 .emo-play:fullscreen .emo-fullscreen-btn[b-6vdfjd5pvu],
 .emo-play:-webkit-full-screen .emo-fullscreen-btn[b-6vdfjd5pvu] {
     display: none;
