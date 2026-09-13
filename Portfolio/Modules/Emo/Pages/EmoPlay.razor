@@ -90,6 +90,18 @@
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
+        if (firstRender)
+        {
+            try
+            {
+                await JSRuntime.InvokeVoidAsync("emoEmulator.applyPlayChrome", true);
+            }
+            catch
+            {
+                // Ignore if the helper is not ready yet.
+            }
+        }
+
         if (_emulatorInitialized || Game is null || !string.IsNullOrEmpty(ErrorMessage))
             return;
 

@@ -11,11 +11,21 @@ html, body {
 }
 
 html.emo-zoom-lock,
-html.emo-zoom-lock body {
+html.emo-zoom-lock body,
+html.emo-play-running,
+html.emo-play-running body,
+html.emo-play-running #app {
     touch-action: none;
     overscroll-behavior: none;
     -webkit-text-size-adjust: 100%;
     overflow: hidden;
+    background-color: #000;
+    color-scheme: dark;
+}
+
+html.emo-play-running .emo-layout,
+html.emo-play-running .emo-play {
+    background: #000;
 }
 
 html.emo-zoom-lock #app,
