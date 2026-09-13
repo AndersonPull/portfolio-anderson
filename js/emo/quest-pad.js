@@ -2,7 +2,7 @@ window.emoQuestPad = (function () {
     var raf = 0;
     var pressed = {};
     var notify = null;
-    var connected = false;
+    var active = false;
     var inlineSession = null;
     var inlineStarted = false;
     var onPointer = null;
@@ -10,7 +10,7 @@ window.emoQuestPad = (function () {
 
     function isQuest() {
         var ua = navigator.userAgent || '';
-        return /OculusBrowser|Quest|Pacific|HorizonOS|Miramar/i.test(ua);
+        return /OculusBrowser|Oculus|Quest|Pacific|HorizonOS|Miramar|Mobile VR/i.test(ua);
     }
 
     function setKey(code, down) {
@@ -29,64 +29,95 @@ window.emoQuestPad = (function () {
         });
     }
 
-    function buttonDown(buttons, index) {
+    function btn(buttons, index) {
         var button = buttons && buttons[index];
-        return !!(button && (button.pressed || button.value > 0.55));
+        return !!(button && (button.pressed || button.value > 0.5));
+    }
+
+    function axis(axes, index) {
+        return (axes && axes.length > index) ? (axes[index] || 0) : 0;
+    }
+
+    function padHasInput(pad) {
+        if (!pad)
+            return false;
+        var buttons = pad.buttons || [];
+        var axes = pad.axes || [];
+        var i;
+        for (i = 0; i < buttons.length; i++) {
+            if (btn(buttons, i))
+                return true;
+        }
+        for (i = 0; i < axes.length; i++) {
+            if (Math.abs(axes[i] || 0) > 0.4)
+                return true;
+        }
+        return false;
     }
 
     function applyDpad(x, y) {
-        var dead = 0.45;
+        var dead = 0.4;
         setKey('left', x < -dead);
         setKey('right', x > dead);
         setKey('up', y < -dead);
         setKey('down', y > dead);
     }
 
-    function isQuestPad(pad) {
-        if (!pad)
-            return false;
-        var id = String(pad.id || '').toLowerCase();
-        return pad.mapping === 'xr-standard'
-            || /oculus|meta|quest|touch|horizon|gear vr/.test(id);
+    function stickFrom(pad) {
+        var x0 = axis(pad.axes, 0);
+        var y0 = axis(pad.axes, 1);
+        var x1 = axis(pad.axes, 2);
+        var y1 = axis(pad.axes, 3);
+        if (Math.abs(x1) + Math.abs(y1) > Math.abs(x0) + Math.abs(y0))
+            return { x: x1, y: y1 };
+        return { x: x0, y: y0 };
     }
 
     function applyStandard(pad) {
         var b = pad.buttons || [];
-        var a = pad.axes || [];
-        applyDpad(a[0] || 0, a[1] || 0);
-        if (a.length > 6) {
-            setKey('left', buttonDown(b, 14) || a[0] < -0.45);
-            setKey('right', buttonDown(b, 15) || a[0] > 0.45);
-            setKey('up', buttonDown(b, 12) || a[1] < -0.45);
-            setKey('down', buttonDown(b, 13) || a[1] > 0.45);
-        }
-        setKey('a', buttonDown(b, 0));
-        setKey('b', buttonDown(b, 1));
-        setKey('x', buttonDown(b, 2));
-        setKey('y', buttonDown(b, 3));
-        setKey('l', buttonDown(b, 4));
-        setKey('r', buttonDown(b, 5));
-        setKey('select', buttonDown(b, 8));
-        setKey('start', buttonDown(b, 9));
-        return true;
+        var stick = stickFrom(pad);
+        applyDpad(stick.x, stick.y);
+        setKey('up', btn(b, 12) || pressed.up);
+        setKey('down', btn(b, 13) || pressed.down);
+        setKey('left', btn(b, 14) || pressed.left);
+        setKey('right', btn(b, 15) || pressed.right);
+        setKey('a', btn(b, 0) || btn(b, 7));
+        setKey('b', btn(b, 1) || btn(b, 6));
+        setKey('x', btn(b, 2));
+        setKey('y', btn(b, 3));
+        setKey('l', btn(b, 4));
+        setKey('r', btn(b, 5));
+        setKey('select', btn(b, 8));
+        setKey('start', btn(b, 9) || btn(b, 11));
     }
 
-    function applyXrStandard(pad, handedness) {
+    function applyXr(pad, handedness, single) {
         var b = pad.buttons || [];
-        var a = pad.axes || [];
-        var trigger = buttonDown(b, 0);
-        var squeeze = buttonDown(b, 1);
-        var faceA = buttonDown(b, 4);
-        var faceB = buttonDown(b, 5);
-        var x = a.length > 2 ? a[2] : a[0];
-        var y = a.length > 3 ? a[3] : a[1];
-        var left = handedness === 'left' || (!handedness && pad.index === 0);
+        var stick = stickFrom(pad);
+        var trigger = btn(b, 0);
+        var squeeze = btn(b, 1);
+        var thumb = btn(b, 3);
+        var faceA = btn(b, 4);
+        var faceB = btn(b, 5);
+        var left = handedness === 'left';
+
+        if (single) {
+            applyDpad(stick.x, stick.y);
+            setKey('a', trigger || faceA);
+            setKey('b', squeeze || faceB);
+            setKey('x', faceA && !trigger);
+            setKey('y', faceB && !squeeze);
+            setKey('l', squeeze && left);
+            setKey('r', squeeze && !left);
+            setKey('start', thumb || btn(b, 2));
+            return;
+        }
 
         if (left) {
-            applyDpad(x || 0, y || 0);
+            applyDpad(stick.x, stick.y);
             setKey('b', trigger);
             setKey('l', squeeze);
-            setKey('select', faceA);
+            setKey('select', faceA || thumb);
             setKey('start', faceB);
             return;
         }
@@ -95,82 +126,76 @@ window.emoQuestPad = (function () {
         setKey('r', squeeze);
         setKey('x', faceA);
         setKey('y', faceB);
+        setKey('start', thumb || pressed.start);
     }
 
-    function applyPad(pad, handedness) {
-        if (!pad || !pad.connected)
-            return false;
-        if (pad.mapping === 'xr-standard' || isQuestPad(pad))
-            applyXrStandard(pad, handedness);
-        else if (isQuest() && pad.mapping === 'standard')
-            applyStandard(pad);
-        else if (isQuest())
-            applyXrStandard(pad, handedness);
-        else
-            return false;
-        return true;
-    }
-
-    function pollGamepads() {
-        if (!navigator.getGamepads)
-            return false;
-        var pads = navigator.getGamepads();
-        var used = false;
+    function listPads() {
+        var found = [];
         var i;
         var pad;
-        var hand;
-        for (i = 0; i < pads.length; i++) {
-            pad = pads[i];
-            if (!pad || !pad.connected)
-                continue;
-            if (!isQuest() && !isQuestPad(pad))
-                continue;
-            hand = /left/i.test(pad.id || '') ? 'left'
-                : /right/i.test(pad.id || '') ? 'right'
-                : (i === 0 ? 'left' : 'right');
-            if (pads.length === 1 && pad.mapping === 'standard')
-                hand = 'standard';
-            if (hand === 'standard')
-                used = applyStandard(pad) || used;
-            else
-                used = applyPad(pad, hand) || used;
+        if (navigator.getGamepads) {
+            var pads = navigator.getGamepads();
+            for (i = 0; i < pads.length; i++) {
+                pad = pads[i];
+                if (pad && pad.connected)
+                    found.push({ pad: pad, handedness: guessHand(pad, found.length) });
+            }
         }
-        return used;
+        if (inlineSession && inlineSession.inputSources) {
+            for (i = 0; i < inlineSession.inputSources.length; i++) {
+                var source = inlineSession.inputSources[i];
+                if (source && source.gamepad)
+                    found.push({ pad: source.gamepad, handedness: source.handedness || guessHand(source.gamepad, found.length) });
+            }
+        }
+        return found;
     }
 
-    function pollInlineSources() {
-        if (!inlineSession || !inlineSession.inputSources)
-            return false;
-        var sources = inlineSession.inputSources;
-        var used = false;
+    function guessHand(pad, index) {
+        var id = String(pad.id || '');
+        if (/left/i.test(id))
+            return 'left';
+        if (/right/i.test(id))
+            return 'right';
+        return index === 0 ? 'left' : 'right';
+    }
+
+    function poll() {
+        var items = listPads();
+        var sawInput = false;
         var i;
-        var source;
-        for (i = 0; i < sources.length; i++) {
-            source = sources[i];
-            if (source && source.gamepad)
-                used = applyPad(source.gamepad, source.handedness) || used;
+        var item;
+        var single = items.length <= 1;
+
+        for (i = 0; i < items.length; i++) {
+            item = items[i];
+            if (padHasInput(item.pad))
+                sawInput = true;
+            if (item.pad.mapping === 'standard' || single)
+                applyStandard(item.pad);
+            applyXr(item.pad, item.handedness, single);
         }
-        return used;
+
+        if (!sawInput)
+            releaseAll();
+        return sawInput;
     }
 
-    function setConnected(next) {
-        if (connected === next)
+    function setActive(next) {
+        if (active === next)
             return;
-        connected = next;
+        active = next;
         if (typeof notify === 'function')
             notify(next);
     }
 
     function tick() {
-        var active = pollGamepads() || pollInlineSources();
-        if (!active)
-            releaseAll();
-        setConnected(active);
+        setActive(poll());
         raf = window.requestAnimationFrame(tick);
     }
 
     function tryInline() {
-        if (inlineStarted || !isQuest() || !navigator.xr || !navigator.xr.requestSession)
+        if (inlineStarted || !navigator.xr || !navigator.xr.requestSession)
             return;
         inlineStarted = true;
         navigator.xr.requestSession('inline').then(function (session) {
@@ -178,9 +203,7 @@ window.emoQuestPad = (function () {
             session.addEventListener('end', function () {
                 inlineSession = null;
             });
-        }).catch(function () {
-            // Browser kept Touch as pointer only.
-        });
+        }).catch(function () {});
     }
 
     function start(onChange) {
@@ -189,8 +212,12 @@ window.emoQuestPad = (function () {
         root = document.getElementById('emo-play-root') || document.body;
         onPointer = function () {
             tryInline();
+            if (navigator.getGamepads)
+                navigator.getGamepads();
         };
         root.addEventListener('pointerdown', onPointer, { passive: true });
+        if (isQuest())
+            tryInline();
         raf = window.requestAnimationFrame(tick);
     }
 
@@ -209,11 +236,12 @@ window.emoQuestPad = (function () {
         inlineStarted = false;
         releaseAll();
         notify = null;
-        connected = false;
+        active = false;
     }
 
     return {
         isQuest: isQuest,
+        isActive: function () { return active; },
         start: start,
         stop: stop
     };

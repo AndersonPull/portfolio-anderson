@@ -526,6 +526,9 @@ window.emoEmulator = {
     },
 
     hasActiveGamepad() {
+        if (window.emoQuestPad && window.emoQuestPad.isQuest())
+            return !!window.emoQuestPad.isActive();
+
         if (!navigator.getGamepads) {
             return false;
         }
