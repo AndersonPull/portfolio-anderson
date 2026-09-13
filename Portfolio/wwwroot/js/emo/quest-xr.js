@@ -9,14 +9,40 @@ window.emoQuestXr = (function () {
     var pressed = {};
     var dotNet = null;
     var onSessionEnd = null;
+    var threePromise = null;
+    var entering = false;
 
     function resolveCanvas(canvasId) {
+        if (window.emoEmulator && window.emoEmulator.targetElement instanceof HTMLCanvasElement)
+            return window.emoEmulator.targetElement;
         var el = document.getElementById(canvasId);
         if (!el)
             return null;
         if (el instanceof HTMLCanvasElement)
             return el;
         return el.querySelector ? el.querySelector('canvas') : null;
+    }
+
+    function preloadThree() {
+        if (!threePromise)
+            threePromise = import('three');
+        return threePromise;
+    }
+
+    function flashStatus(text) {
+        var el = document.getElementById('emo-xr-status');
+        if (!el) {
+            el = document.createElement('span');
+            el.id = 'emo-xr-status';
+            el.className = 'emo-xr-status';
+            var bar = document.querySelector('.emo-top-right');
+            if (bar)
+                bar.insertBefore(el, bar.firstChild);
+            else
+                return;
+        }
+        el.textContent = text || '';
+        el.hidden = !text;
     }
 
     function setKey(code, down) {
@@ -131,6 +157,7 @@ window.emoQuestXr = (function () {
     }
 
     function teardown(fromEndEvent) {
+        entering = false;
         releaseAll();
         if (session && onSessionEnd)
             session.removeEventListener('end', onSessionEnd);
@@ -149,33 +176,63 @@ window.emoQuestXr = (function () {
         }
 
         notify(false);
-        dotNet = null;
+    }
+
+    function bind(dotNetRef) {
+        dotNet = dotNetRef;
+        preloadThree();
     }
 
     async function isSupported() {
         if (!navigator.xr || !navigator.xr.isSessionSupported)
             return false;
         try {
-            return await navigator.xr.isSessionSupported('immersive-vr');
+            var ok = await navigator.xr.isSessionSupported('immersive-vr');
+            if (ok)
+                preloadThree();
+            return ok;
         } catch (err) {
             return false;
         }
     }
 
-    async function enter(canvasId, dotNetRef) {
-        if (session)
-            return true;
+    function enter(canvasId) {
+        if (session || entering)
+            return false;
 
-        var supported = await isSupported();
-        if (!supported)
-            throw new Error('WebXR não suportado');
+        if (!navigator.xr || !navigator.xr.requestSession) {
+            flashStatus('WebXR indisponível');
+            return false;
+        }
 
-        var gameCanvas = resolveCanvas(canvasId);
+        entering = true;
+        flashStatus('');
+
+        // Must run in the same tap. Do not await anything before this.
+        var sessionPromise = navigator.xr.requestSession('immersive-vr', {
+            optionalFeatures: ['local-floor']
+        });
+
+        sessionPromise.then(function (xrSession) {
+            return finishEnter(xrSession, canvasId).catch(function (err) {
+                try { xrSession.end(); } catch (endErr) { }
+                throw err;
+            });
+        }).catch(function (err) {
+            entering = false;
+            console.error('emoQuestXr.enter:', err);
+            flashStatus(err && err.message ? err.message : 'Falha ao entrar em VR');
+        });
+
+        return false;
+    }
+
+    async function finishEnter(xrSession, canvasId) {
+        var gameCanvas = resolveCanvas(canvasId || 'emo-canvas');
         if (!(gameCanvas instanceof HTMLCanvasElement))
             throw new Error('Canvas do jogo não encontrado');
 
-        dotNet = dotNetRef;
-        var THREE = await import('three');
+        var THREE = await preloadThree();
 
         renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
         renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
@@ -203,10 +260,7 @@ window.emoQuestXr = (function () {
         plane.position.set(0, 1.35, -2.15);
         scene.add(plane);
 
-        session = await navigator.xr.requestSession('immersive-vr', {
-            optionalFeatures: ['local-floor']
-        });
-
+        session = xrSession;
         onSessionEnd = function () {
             teardown(true);
         };
@@ -222,12 +276,15 @@ window.emoQuestXr = (function () {
                 renderer.render(scene, camera);
         });
 
+        entering = false;
+        flashStatus('');
         notify(true);
         return true;
     }
 
     async function exit() {
         if (!session) {
+            entering = false;
             disposeScene();
             releaseAll();
             return;
@@ -237,6 +294,7 @@ window.emoQuestXr = (function () {
 
     return {
         isSupported: isSupported,
+        bind: bind,
         enter: enter,
         exit: exit
     };

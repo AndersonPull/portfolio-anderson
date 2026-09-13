@@ -18,8 +18,7 @@
         {
             <button type="button"
                     class="emo-fullscreen-btn"
-                    @onclick="EnterVrAsync"
-                    disabled="@_xrBusy"
+                    onclick="emoQuestXr.enter('emo-canvas')"
                     aria-label="Entrar em VR"
                     title="Entrar em VR">
                 <i class="bi bi-headset-vr"></i>
@@ -125,6 +124,7 @@
 
             _dotNetRef ??= DotNetObjectReference.Create(this);
             await JSRuntime.InvokeVoidAsync("emoEmulator.startGamepadWatch", _dotNetRef);
+            await JSRuntime.InvokeVoidAsync("emoQuestXr.bind", _dotNetRef);
             _gamepadWatchStarted = true;
             try
             {
@@ -163,24 +163,6 @@
         _xrActive = active;
         _xrBusy = false;
         InvokeAsync(StateHasChanged);
-    }
-
-    private async Task EnterVrAsync()
-    {
-        if (_xrBusy || _xrActive)
-            return;
-
-        _xrBusy = true;
-        try
-        {
-            _dotNetRef ??= DotNetObjectReference.Create(this);
-            await JSRuntime.InvokeVoidAsync("emoQuestXr.enter", "emo-canvas", _dotNetRef);
-        }
-        catch (Exception ex)
-        {
-            _xrBusy = false;
-            Console.WriteLine(ex);
-        }
     }
 
     private async Task StopGamepadWatchAsync()
