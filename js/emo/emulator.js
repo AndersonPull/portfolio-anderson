@@ -163,6 +163,7 @@ window.emoEmulator = {
             element: canvas,
             respondToGlobalEvents: true,
             retroarchConfig: {
+                input_player1_joypad_index: (window.emoQuestPad && window.emoQuestPad.isQuest()) ? '-1' : '0',
                 input_player1_up: 'up',
                 input_player1_down: 'down',
                 input_player1_left: 'left',
@@ -553,8 +554,8 @@ window.emoEmulator = {
         this._gamepadDotNet = dotNetRef;
         this._gamepadConnected = false;
 
-        const notify = () => {
-            const connected = this.hasActiveGamepad();
+        const notify = (forced) => {
+            const connected = forced === true || this.hasActiveGamepad();
             if (connected === this._gamepadConnected) {
                 return;
             }
@@ -564,6 +565,12 @@ window.emoEmulator = {
                 this._gamepadDotNet.invokeMethodAsync('OnGamepadChanged', connected).catch(() => {});
             }
         };
+
+        if (window.emoQuestPad) {
+            window.emoQuestPad.start(function (on) {
+                notify(on);
+            });
+        }
 
         this._onGamepadConnected = () => notify();
         this._onGamepadDisconnected = () => {
@@ -595,6 +602,8 @@ window.emoEmulator = {
 
         this._gamepadDotNet = null;
         this._gamepadConnected = false;
+        if (window.emoQuestPad)
+            window.emoQuestPad.stop();
     },
 
     lockZoom() {
@@ -679,13 +688,8 @@ window.emoEmulator = {
         this.stopVolumeWatch();
         this.stopGamepadWatch();
         this.unlockZoom();
-        if (window.emoQuestXr) {
-            try {
-                await window.emoQuestXr.exit();
-            } catch (error) {
-                console.warn('emoEmulator.stop xr:', error);
-            }
-        }
+        if (window.emoQuestPad)
+            window.emoQuestPad.stop();
 
         if (this.instance) {
             try {

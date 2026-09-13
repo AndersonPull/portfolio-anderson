@@ -241,12 +241,16 @@
       "url": "Images\/whats.png"
     },
     {
-      "hash": "sha256-nLNkwa2BPyUK0JDc+3SNfMa2xwu3VH+efTzXWNTKdnw=",
+      "hash": "sha256-blrOptKvvr6XPeLdWqidOK7dcHawG\/bEOKT+w9GvQm0=",
       "url": "index.html"
     },
     {
-      "hash": "sha256-\/mOoJALQGSnQxjbn5zVdplHYdD9MW2mMQGF7uHlMX10=",
+      "hash": "sha256-xZW8VHxw22wQe8RuPFLx9QE+v3ogiK+1aaPw3wfONSc=",
       "url": "js\/emo\/emulator.js"
+    },
+    {
+      "hash": "sha256-p9YQ2bLrp5P5tAb1lvB8uistGgJ\/Uy6p7l7urOMHEqI=",
+      "url": "js\/emo\/quest-pad.js"
     },
     {
       "hash": "sha256-FgAaZ4o5O8EOW6vQgJ4zweZwAqGXeRb9+Sn\/E2dlx04=",
@@ -305,7 +309,7 @@
       "url": "_framework\/icudt_no_CJK.dat"
     },
     {
-      "hash": "sha256-rCBEPyHr4NtdMwu3fDR5He2SBq5rh3yDq2Se4oh9Cz0=",
+      "hash": "sha256-qkSZeerx1ZLDQYtsWL8YnTUe42E87SdZYrmpHqykhHE=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -381,7 +385,7 @@
       "url": "_framework\/Newtonsoft.Json.wasm"
     },
     {
-      "hash": "sha256-B8P+DlVay7XmKbh8pj\/rDKXM6jeA\/8Vhv+6maegmmOY=",
+      "hash": "sha256-1u6HnNi673Cw70Hm+g8PvPcS4K8GNJ+egXNwR2yABnM=",
       "url": "_framework\/Portfolio.wasm"
     },
     {
@@ -569,5 +573,5 @@
       "url": "_content\/Blazored.Modal\/blazored.modal.js"
     }
   ],
-  "version": "KJ4hirPf"
+  "version": "pz8Aa6Uc"
 };
