@@ -664,6 +664,13 @@ window.emoEmulator = {
         this.stopVolumeWatch();
         this.stopGamepadWatch();
         this.unlockZoom();
+        if (window.emoQuestXr) {
+            try {
+                await window.emoQuestXr.exit();
+            } catch (error) {
+                console.warn('emoEmulator.stop xr:', error);
+            }
+        }
 
         if (this.instance) {
             try {
