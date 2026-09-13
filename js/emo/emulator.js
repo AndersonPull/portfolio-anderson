@@ -17,7 +17,6 @@ window.emoEmulator = {
     _onZoomTouchMove: null,
     _onZoomTouchEnd: null,
     _onZoomGesture: null,
-    _glHooked: false,
 
     readStoredVolume() {
         const raw = localStorage.getItem('emo.volume');
@@ -117,23 +116,17 @@ window.emoEmulator = {
         }
     },
 
-    installGlPreserveHook() {
-        if (this._glHooked)
-            return;
-
-        this._glHooked = true;
-        const original = HTMLCanvasElement.prototype.getContext;
-        HTMLCanvasElement.prototype.getContext = function (type, attrs) {
-            if (type === 'webgl' || type === 'webgl2' || type === 'experimental-webgl')
-                attrs = Object.assign({}, attrs || {}, { preserveDrawingBuffer: true });
-            return original.call(this, type, attrs);
-        };
+    resolveRomUrl(romUrl) {
+        try {
+            return new URL(romUrl, window.location.origin + '/').href;
+        } catch {
+            return romUrl;
+        }
     },
 
     async init(elementId, romUrl, core) {
         await this.stop();
         await this.ensureNostalgist();
-        this.installGlPreserveHook();
 
         const canvas = document.getElementById(elementId);
         if (!(canvas instanceof HTMLCanvasElement)) {
@@ -159,11 +152,10 @@ window.emoEmulator = {
 
         this.instance = await Nostalgist.launch({
             core: core,
-            rom: romUrl,
+            rom: this.resolveRomUrl(romUrl),
             element: canvas,
             respondToGlobalEvents: true,
             retroarchConfig: {
-                input_player1_joypad_index: (window.emoQuestPad && window.emoQuestPad.isQuest()) ? '-1' : '0',
                 input_player1_up: 'up',
                 input_player1_down: 'down',
                 input_player1_left: 'left',

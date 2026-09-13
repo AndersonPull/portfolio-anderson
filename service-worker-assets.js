@@ -205,7 +205,7 @@
       "url": "emo\/roms\/snes\/Super Mario World (USA).sfc"
     },
     {
-      "hash": "sha256-e64LV5uz8kVqiqPMBuMZuxdJz7NpMqKp+3eTy9QO3zc=",
+      "hash": "sha256-aqD75kqVmL2szV7zDM+SH0OXKELT+1Lj07aEnRERSko=",
       "url": "home\/terminal.json"
     },
     {
@@ -241,11 +241,11 @@
       "url": "Images\/whats.png"
     },
     {
-      "hash": "sha256-blrOptKvvr6XPeLdWqidOK7dcHawG\/bEOKT+w9GvQm0=",
+      "hash": "sha256-2G5U37Xo1vu1CVYCHWRGr2\/kgG5\/LN9TK59unDS3BmQ=",
       "url": "index.html"
     },
     {
-      "hash": "sha256-xZW8VHxw22wQe8RuPFLx9QE+v3ogiK+1aaPw3wfONSc=",
+      "hash": "sha256-y25Jjb2mUTIFgZekgdUyam2MRtRaxiapWxGkceAYTMA=",
       "url": "js\/emo\/emulator.js"
     },
     {
@@ -309,7 +309,7 @@
       "url": "_framework\/icudt_no_CJK.dat"
     },
     {
-      "hash": "sha256-qkSZeerx1ZLDQYtsWL8YnTUe42E87SdZYrmpHqykhHE=",
+      "hash": "sha256-D54JibHMYVZd69s4ogTxxVLe6WEXAzZ1VPphaq1VYog=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -385,7 +385,7 @@
       "url": "_framework\/Newtonsoft.Json.wasm"
     },
     {
-      "hash": "sha256-1u6HnNi673Cw70Hm+g8PvPcS4K8GNJ+egXNwR2yABnM=",
+      "hash": "sha256-rQo\/Mmg3WMS5XvSJlHNQgqSjAIsqJ9gKuUxQ6bFsI5E=",
       "url": "_framework\/Portfolio.wasm"
     },
     {
@@ -573,5 +573,5 @@
       "url": "_content\/Blazored.Modal\/blazored.modal.js"
     }
   ],
-  "version": "pz8Aa6Uc"
+  "version": "BpjGF\/aV"
 };
