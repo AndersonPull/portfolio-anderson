@@ -17,6 +17,7 @@ window.emoEmulator = {
     _onZoomTouchMove: null,
     _onZoomTouchEnd: null,
     _onZoomGesture: null,
+    _glHooked: false,
 
     readStoredVolume() {
         const raw = localStorage.getItem('emo.volume');
@@ -116,9 +117,23 @@ window.emoEmulator = {
         }
     },
 
+    installGlPreserveHook() {
+        if (this._glHooked)
+            return;
+
+        this._glHooked = true;
+        const original = HTMLCanvasElement.prototype.getContext;
+        HTMLCanvasElement.prototype.getContext = function (type, attrs) {
+            if (type === 'webgl' || type === 'webgl2' || type === 'experimental-webgl')
+                attrs = Object.assign({}, attrs || {}, { preserveDrawingBuffer: true });
+            return original.call(this, type, attrs);
+        };
+    },
+
     async init(elementId, romUrl, core) {
         await this.stop();
         await this.ensureNostalgist();
+        this.installGlPreserveHook();
 
         const canvas = document.getElementById(elementId);
         if (!(canvas instanceof HTMLCanvasElement)) {

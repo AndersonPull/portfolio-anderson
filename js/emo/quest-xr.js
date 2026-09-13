@@ -5,22 +5,56 @@ window.emoQuestXr = (function () {
     var camera = null;
     var texture = null;
     var plane = null;
+    var frameMesh = null;
     var xrCanvas = null;
+    var blitCanvas = null;
+    var blitCtx = null;
+    var gameCanvas = null;
     var pressed = {};
     var dotNet = null;
     var onSessionEnd = null;
     var threePromise = null;
     var entering = false;
 
+    function isXrCanvas(canvas) {
+        return !!(canvas && canvas.getAttribute && canvas.getAttribute('data-emo-xr') === '1');
+    }
+
     function resolveCanvas(canvasId) {
-        if (window.emoEmulator && window.emoEmulator.targetElement instanceof HTMLCanvasElement)
-            return window.emoEmulator.targetElement;
+        var hinted = window.emoEmulator && window.emoEmulator.targetElement;
+        var root = hinted instanceof HTMLElement ? hinted.parentElement : null;
+        var nodes = (root || document).querySelectorAll('canvas');
+        var i;
+        var canvas;
+        for (i = 0; i < nodes.length; i++) {
+            canvas = nodes[i];
+            if (isXrCanvas(canvas))
+                continue;
+            if ((canvas.width > 8 && canvas.height > 8) || canvas.clientWidth > 8)
+                return canvas;
+        }
+        if (hinted instanceof HTMLCanvasElement && !isXrCanvas(hinted))
+            return hinted;
         var el = document.getElementById(canvasId);
-        if (!el)
-            return null;
-        if (el instanceof HTMLCanvasElement)
+        if (el instanceof HTMLCanvasElement && !isXrCanvas(el))
             return el;
-        return el.querySelector ? el.querySelector('canvas') : null;
+        return el && el.querySelector ? el.querySelector('canvas') : null;
+    }
+
+    function syncBlit() {
+        if (!gameCanvas || !blitCtx)
+            return;
+        var w = Math.max(gameCanvas.width || 0, 320);
+        var h = Math.max(gameCanvas.height || 0, 240);
+        if (blitCanvas.width !== w)
+            blitCanvas.width = w;
+        if (blitCanvas.height !== h)
+            blitCanvas.height = h;
+        try {
+            blitCtx.drawImage(gameCanvas, 0, 0, w, h);
+        } catch (err) {
+            // Cross-origin or empty WebGL buffer.
+        }
     }
 
     function preloadThree() {
@@ -132,15 +166,17 @@ window.emoQuestXr = (function () {
         if (renderer)
             renderer.setAnimationLoop(null);
 
-        if (plane) {
-            if (plane.geometry)
-                plane.geometry.dispose();
-            if (plane.material) {
-                if (plane.material.map)
-                    plane.material.map.dispose();
-                plane.material.dispose();
+        [plane, frameMesh].forEach(function (mesh) {
+            if (!mesh)
+                return;
+            if (mesh.geometry)
+                mesh.geometry.dispose();
+            if (mesh.material) {
+                if (mesh.material.map)
+                    mesh.material.map.dispose();
+                mesh.material.dispose();
             }
-        }
+        });
 
         if (renderer)
             renderer.dispose();
@@ -153,7 +189,11 @@ window.emoQuestXr = (function () {
         camera = null;
         texture = null;
         plane = null;
+        frameMesh = null;
         xrCanvas = null;
+        blitCanvas = null;
+        blitCtx = null;
+        gameCanvas = null;
     }
 
     function teardown(fromEndEvent) {
@@ -228,9 +268,18 @@ window.emoQuestXr = (function () {
     }
 
     async function finishEnter(xrSession, canvasId) {
-        var gameCanvas = resolveCanvas(canvasId || 'emo-canvas');
+        gameCanvas = resolveCanvas(canvasId || 'emo-canvas');
         if (!(gameCanvas instanceof HTMLCanvasElement))
             throw new Error('Canvas do jogo não encontrado');
+
+        if (gameCanvas.width < 64 || gameCanvas.height < 64) {
+            gameCanvas.width = 960;
+            gameCanvas.height = 720;
+        }
+
+        blitCanvas = document.createElement('canvas');
+        blitCtx = blitCanvas.getContext('2d', { alpha: false });
+        syncBlit();
 
         var THREE = await preloadThree();
 
@@ -244,21 +293,30 @@ window.emoQuestXr = (function () {
         document.body.appendChild(xrCanvas);
 
         scene = new THREE.Scene();
-        scene.background = new THREE.Color(0x050505);
+        scene.background = new THREE.Color(0x1a1a1a);
         camera = new THREE.PerspectiveCamera(70, 1, 0.05, 50);
 
-        texture = new THREE.CanvasTexture(gameCanvas);
+        texture = new THREE.CanvasTexture(blitCanvas);
         texture.colorSpace = THREE.SRGBColorSpace;
         texture.minFilter = THREE.NearestFilter;
         texture.magFilter = THREE.NearestFilter;
         texture.generateMipmaps = false;
+        texture.flipY = true;
+
+        frameMesh = new THREE.Mesh(
+            new THREE.PlaneGeometry(1.68, 1.28),
+            new THREE.MeshBasicMaterial({ color: 0x2a2a2a })
+        );
+        frameMesh.position.set(0, 0, -2.02);
 
         plane = new THREE.Mesh(
             new THREE.PlaneGeometry(1.6, 1.2),
             new THREE.MeshBasicMaterial({ map: texture })
         );
-        plane.position.set(0, 1.35, -2.15);
-        scene.add(plane);
+        plane.position.set(0, 0, -2);
+        camera.add(frameMesh);
+        camera.add(plane);
+        scene.add(camera);
 
         session = xrSession;
         onSessionEnd = function () {
@@ -268,6 +326,7 @@ window.emoQuestXr = (function () {
         await renderer.xr.setSession(session);
 
         renderer.setAnimationLoop(function (_time, frame) {
+            syncBlit();
             if (texture)
                 texture.needsUpdate = true;
             if (frame && session)
