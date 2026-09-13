@@ -26,6 +26,10 @@ html.emo-play-running #app {
 html.emo-play-running .emo-layout,
 html.emo-play-running .emo-play {
     background: #000;
+    inset: 0;
+    width: auto;
+    height: auto;
+    min-height: 100%;
 }
 
 html.emo-zoom-lock #app,
