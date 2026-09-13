@@ -14,6 +14,17 @@
         {
             <EmoSettingsMenu GameId="@Game.Id" Core="@Game.Core" />
         }
+        @if (_xrSupported && _emulatorInitialized)
+        {
+            <button type="button"
+                    class="emo-fullscreen-btn"
+                    @onclick="EnterVrAsync"
+                    disabled="@_xrBusy"
+                    aria-label="Entrar em VR"
+                    title="Entrar em VR">
+                <i class="bi bi-headset-vr"></i>
+            </button>
+        }
         <button type="button"
                 class="emo-fullscreen-btn"
                 onclick="emoEmulator.enterFullscreen('emo-play-root')"
@@ -41,7 +52,13 @@
             <div class="emo-stage">
                 <canvas id="emo-canvas" class="emo-canvas"></canvas>
             </div>
-            @if (_gamepadConnected)
+            @if (_xrActive)
+            {
+                <div class="emo-gamepad-badge" aria-live="polite" title="VR ativo" aria-label="VR ativo">
+                    <i class="bi bi-headset-vr"></i>
+                </div>
+            }
+            else if (_gamepadConnected)
             {
                 <div class="emo-gamepad-badge" aria-live="polite" title="Controle conectado" aria-label="Controle conectado">
                     <i class="bi bi-controller"></i>
@@ -66,6 +83,9 @@
     private bool _emulatorInitialized;
     private bool _gamepadConnected;
     private bool _gamepadWatchStarted;
+    private bool _xrSupported;
+    private bool _xrActive;
+    private bool _xrBusy;
     private string? ErrorMessage;
     private DotNetObjectReference<EmoPlay>? _dotNetRef;
 
@@ -81,6 +101,8 @@
         _emulatorInitialized = false;
         _gamepadConnected = false;
         _gamepadWatchStarted = false;
+        _xrActive = false;
+        _xrBusy = false;
 
         Game = await GameCatalogService.GetGameByIdAsync(GameId);
         if (Game is null)
@@ -104,6 +126,14 @@
             _dotNetRef ??= DotNetObjectReference.Create(this);
             await JSRuntime.InvokeVoidAsync("emoEmulator.startGamepadWatch", _dotNetRef);
             _gamepadWatchStarted = true;
+            try
+            {
+                _xrSupported = await JSRuntime.InvokeAsync<bool>("emoQuestXr.isSupported");
+            }
+            catch
+            {
+                _xrSupported = false;
+            }
 
             StateHasChanged();
         }
@@ -122,6 +152,35 @@
 
         _gamepadConnected = connected;
         InvokeAsync(StateHasChanged);
+    }
+
+    [JSInvokable]
+    public void OnXrChanged(bool active)
+    {
+        if (_xrActive == active)
+            return;
+
+        _xrActive = active;
+        _xrBusy = false;
+        InvokeAsync(StateHasChanged);
+    }
+
+    private async Task EnterVrAsync()
+    {
+        if (_xrBusy || _xrActive)
+            return;
+
+        _xrBusy = true;
+        try
+        {
+            _dotNetRef ??= DotNetObjectReference.Create(this);
+            await JSRuntime.InvokeVoidAsync("emoQuestXr.enter", "emo-canvas", _dotNetRef);
+        }
+        catch (Exception ex)
+        {
+            _xrBusy = false;
+            Console.WriteLine(ex);
+        }
     }
 
     private async Task StopGamepadWatchAsync()
