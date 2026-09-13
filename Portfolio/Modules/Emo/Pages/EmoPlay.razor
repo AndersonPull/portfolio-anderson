@@ -5,7 +5,6 @@
 @implements IAsyncDisposable
 
 @inject IGameCatalogService GameCatalogService
-@inject NavigationManager NavigationManager
 @inject IJSRuntime JSRuntime
 
 <div id="emo-play-root" class="emo-play">
@@ -96,9 +95,8 @@
 
         try
         {
-            var romUrl = new Uri(new Uri(NavigationManager.BaseUri), Game.Rom).ToString();
             await JSRuntime.InvokeVoidAsync("emoEmulator.lockZoom");
-            await JSRuntime.InvokeAsync<bool>("emoEmulator.init", "emo-canvas", romUrl, Game.Core);
+            await JSRuntime.InvokeAsync<bool>("emoEmulator.init", "emo-canvas", Game.Rom, Game.Core);
             _emulatorInitialized = true;
 
             _dotNetRef ??= DotNetObjectReference.Create(this);
