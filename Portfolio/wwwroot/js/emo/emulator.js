@@ -604,6 +604,7 @@ window.emoEmulator = {
     lockZoom() {
         if (this._zoomLocked) {
             this.refreshViewportLock();
+            this.applyPlayChrome(true);
             return;
         }
 
@@ -611,6 +612,7 @@ window.emoEmulator = {
         document.documentElement.classList.add('emo-zoom-lock');
         document.body.classList.add('emo-zoom-lock');
         this.refreshViewportLock();
+        this.applyPlayChrome(true);
 
         this._onZoomGesture = (event) => event.preventDefault();
         this._onZoomTouchStart = (event) => {
@@ -635,12 +637,14 @@ window.emoEmulator = {
 
     unlockZoom() {
         if (!this._zoomLocked) {
+            this.applyPlayChrome(false);
             return;
         }
 
         this._zoomLocked = false;
         document.documentElement.classList.remove('emo-zoom-lock');
         document.body.classList.remove('emo-zoom-lock');
+        this.applyPlayChrome(false);
 
         const opts = { capture: true };
         if (this._onZoomGesture) {
@@ -677,6 +681,43 @@ window.emoEmulator = {
         // Some iOS versions only re-apply the lock if the content string changes.
         meta.setAttribute('content', `${content}, emo-lock=${Date.now()}`);
         meta.setAttribute('content', content);
+    },
+
+    applyPlayChrome(active) {
+        const color = active ? '#000000' : '#e2e2e2';
+        const root = document.documentElement;
+        const body = document.body;
+
+        root.classList.toggle('emo-play-running', active);
+        if (body)
+            body.classList.toggle('emo-play-running', active);
+
+        // Safari 26 tints the status/toolbar from the page background, not theme-color.
+        root.style.backgroundColor = active ? color : '';
+        if (body)
+            body.style.backgroundColor = active ? color : '';
+
+        this.setThemeColor(color, active);
+    },
+
+    setThemeColor(color, splitSchemes) {
+        document.querySelectorAll('meta[name="theme-color"]').forEach((meta) => meta.remove());
+
+        const add = (media) => {
+            const meta = document.createElement('meta');
+            meta.setAttribute('name', 'theme-color');
+            meta.setAttribute('content', color);
+            if (media)
+                meta.setAttribute('media', media);
+            document.head.appendChild(meta);
+        };
+
+        if (splitSchemes) {
+            add('(prefers-color-scheme: light)');
+            add('(prefers-color-scheme: dark)');
+        }
+
+        add();
     },
 
     async stop() {
