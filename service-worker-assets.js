@@ -69,7 +69,7 @@
       "url": "emo\/covers\/.gitkeep"
     },
     {
-      "hash": "sha256-Vv\/N\/\/64kGCygns\/znBsDs\/vwfqZeZVhOb9jgKo2Q7s=",
+      "hash": "sha256-qvIJxSRLY2ot5EnZguYDrYpan28XEbfqqgS4mDnE0Xk=",
       "url": "emo\/games.json"
     },
     {
@@ -309,7 +309,7 @@
       "url": "_framework\/icudt_no_CJK.dat"
     },
     {
-      "hash": "sha256-a64lGFlCfvV7os0XEeOKa4GS9ugsMlC2ppJORIc1UuQ=",
+      "hash": "sha256-fsvMVySLYZ1lDJiAi1vfwgpBllULddywMHwoz68kc\/o=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -385,7 +385,7 @@
       "url": "_framework\/Newtonsoft.Json.wasm"
     },
     {
-      "hash": "sha256-X9Uar2RRCVvsvma4UeWIRR6fEDx0CTONDen6vzzxaP4=",
+      "hash": "sha256-NUy3SupnK5+BaQE0pvXx6diunB6a40eZgMEfSvgF2Cc=",
       "url": "_framework\/Portfolio.wasm"
     },
     {
@@ -573,5 +573,5 @@
       "url": "_content\/Blazored.Modal\/blazored.modal.js"
     }
   ],
-  "version": "xayiquHH"
+  "version": "Mq6U5vrM"
 };
