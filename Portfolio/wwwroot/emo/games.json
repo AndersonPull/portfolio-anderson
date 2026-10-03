@@ -96,7 +96,7 @@
     "core": "genesis_plus_gx",
     "rom": "emo/roms/sega/Sonic 1.gen",
     "cover": null,
-    "buttons": ["a", "b", "c", "start"]
+    "buttons": ["a", "b", "start"]
   },
   {
     "id": "sonic-2",
@@ -105,7 +105,7 @@
     "core": "genesis_plus_gx",
     "rom": "emo/roms/sega/Sonic The Hedgehog 2 (World).md",
     "cover": null,
-    "buttons": ["a", "b", "c", "start"]
+    "buttons": ["a", "b", "start"]
   },
   {
     "id": "streets-of-rage",
