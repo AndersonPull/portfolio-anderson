@@ -1,0 +1,349 @@
+@page "/stories"
+@layout StoryLayout
+@using Portfolio.Modules.Stories
+@using Portfolio.Modules.Stories.Layout
+@using System.Globalization
+@implements IAsyncDisposable
+@inject IJSRuntime JS
+@inject NavigationManager Navigation
+
+<PageTitle>Stories</PageTitle>
+<HeadContent>
+    <meta name="robots" content="noindex, nofollow" />
+</HeadContent>
+
+<div class="story-player @(_holding ? "is-holding" : null)"
+     tabindex="0"
+     role="region"
+     aria-label="Stories"
+     @ref="_root"
+     @onkeydown="OnKeyDown">
+    @if (_videos.Count == 0)
+    {
+        <div class="story-empty">
+            <h1>Nenhum vídeo ainda</h1>
+            <p>Coloca os vídeos em <code>wwwroot/stories</code> e sobe o projeto de novo. Formatos: mp4, webm, mov e m4v.</p>
+        </div>
+    }
+    else if (_failed)
+    {
+        <div class="story-failed">
+            <h1>Não deu para passar os vídeos</h1>
+            <p>Confere se os arquivos nessa pasta abrem no navegador. mp4 com H.264 costuma funcionar melhor.</p>
+        </div>
+    }
+    else
+    {
+        <div class="story-frame">
+            <div class="story-bars" aria-hidden="true">
+                @for (var i = 0; i < _videos.Count; i++)
+                {
+                    var fill = i < _index ? 100d : i > _index ? 0d : _progress * 100d;
+                    <div class="story-bar" @key="i">
+                        <span style="width:@(fill.ToString("0.###", CultureInfo.InvariantCulture))%"></span>
+                    </div>
+                }
+            </div>
+
+            <video @ref="_video"
+                   class="story-video"
+                   playsinline
+                   preload="auto"
+                   disablepictureinpicture></video>
+
+            <div class="story-gestures"
+                 @ref="_gestures"
+                 @onpointerdown="OnPointerDown"
+                 @onpointerdown:preventDefault
+                 @onpointerup="OnPointerUp"
+                 @onpointercancel="OnPointerCancel"
+                 @oncontextmenu:preventDefault></div>
+
+            <div class="story-tools">
+                <button type="button"
+                        class="story-icon-btn"
+                        aria-label="Fechar"
+                        @onclick="Close"
+                        @onpointerdown:stopPropagation
+                        @onpointerup:stopPropagation>
+                    <i class="bi bi-x-lg"></i>
+                </button>
+                <button type="button"
+                        class="story-icon-btn"
+                        aria-label="@(_soundOn ? "Silenciar" : "Ativar som")"
+                        @onclick="ToggleMute"
+                        @onpointerdown:stopPropagation
+                        @onpointerup:stopPropagation>
+                    <i class="bi @(_soundOn ? "bi-volume-up" : "bi-volume-mute")"></i>
+                </button>
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    private readonly List<string> _videos = new();
+    private ElementReference _root;
+    private ElementReference _video;
+    private ElementReference _gestures;
+    private DotNetObjectReference<Stories> _dotNetRef;
+    private int _index;
+    private double _progress;
+    private double _currentTime;
+    private int _errors;
+    private bool _needsPlay;
+    private bool _soundOn;
+    private bool _pressed;
+    private bool _holding;
+    private bool _failed;
+    private bool _disposed;
+    private bool _attached;
+
+    protected override void OnInitialized()
+    {
+        _videos.AddRange(StoryCatalog.Videos.Where(src => !string.IsNullOrWhiteSpace(src)));
+        for (var i = _videos.Count - 1; i > 0; i--)
+        {
+            var j = Random.Shared.Next(i + 1);
+            (_videos[i], _videos[j]) = (_videos[j], _videos[i]);
+        }
+
+        _needsPlay = _videos.Count > 0;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            try
+            {
+                await _root.FocusAsync();
+            }
+            catch (Exception)
+            {
+                // focus is optional
+            }
+        }
+
+        if (_videos.Count == 0 || _failed)
+            return;
+
+        if (!_attached)
+        {
+            _attached = true;
+            _dotNetRef = DotNetObjectReference.Create(this);
+            await JS.InvokeVoidAsync("storyPlayer.attach", _video, _dotNetRef);
+        }
+
+        if (!_needsPlay)
+            return;
+
+        _needsPlay = false;
+        try
+        {
+            var audible = await JS.InvokeAsync<bool>("storyPlayer.setSource", _videos[_index], !_soundOn);
+            if (audible != _soundOn)
+            {
+                _soundOn = audible;
+                StateHasChanged();
+            }
+        }
+        catch (Exception)
+        {
+            _failed = true;
+            StateHasChanged();
+        }
+    }
+
+    [JSInvokable]
+    public void OnProgress(double ratio, double currentTime)
+    {
+        _errors = 0;
+        _progress = Math.Clamp(ratio, 0, 1);
+        _currentTime = currentTime;
+        StateHasChanged();
+    }
+
+    [JSInvokable]
+    public void OnEnded()
+    {
+        if (_disposed || _videos.Count == 0 || _failed)
+            return;
+
+        if (_videos.Count == 1)
+        {
+            _progress = 0;
+            _currentTime = 0;
+            _ = JS.InvokeVoidAsync("storyPlayer.restart");
+            StateHasChanged();
+            return;
+        }
+
+        Advance();
+        StateHasChanged();
+    }
+
+    [JSInvokable]
+    public void OnError()
+    {
+        if (_disposed || _failed)
+            return;
+
+        _errors++;
+        if (_errors >= _videos.Count)
+        {
+            _failed = true;
+            _needsPlay = false;
+            StateHasChanged();
+            return;
+        }
+
+        Advance();
+        StateHasChanged();
+    }
+
+    private async Task OnPointerDown(PointerEventArgs e)
+    {
+        if (e.PointerType == "mouse" && e.Button != 0)
+            return;
+
+        _pressed = true;
+        _holding = false;
+        try
+        {
+            await JS.InvokeVoidAsync("storyPlayer.capture", _gestures, e.PointerId);
+        }
+        catch (Exception)
+        {
+            // capture is optional
+        }
+
+        _ = HoldAsync();
+    }
+
+    private async Task HoldAsync()
+    {
+        await Task.Delay(200);
+        if (_disposed || !_pressed)
+            return;
+
+        _holding = true;
+        await JS.InvokeVoidAsync("storyPlayer.pause");
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private async Task OnPointerUp(PointerEventArgs e)
+    {
+        if (!_pressed)
+            return;
+
+        var wasHolding = _holding;
+        _pressed = false;
+        _holding = false;
+
+        if (wasHolding)
+        {
+            await JS.InvokeVoidAsync("storyPlayer.resume");
+            StateHasChanged();
+            return;
+        }
+
+        var width = await JS.InvokeAsync<double>("storyPlayer.frameWidth", _gestures);
+        if (e.OffsetX <= width * 0.3)
+            await GoBack();
+        else
+            GoNext();
+    }
+
+    private async Task OnPointerCancel(PointerEventArgs _)
+    {
+        if (!_pressed && !_holding)
+            return;
+
+        _pressed = false;
+        _holding = false;
+        await JS.InvokeVoidAsync("storyPlayer.resume");
+        StateHasChanged();
+    }
+
+    private async Task OnKeyDown(KeyboardEventArgs e)
+    {
+        if (_videos.Count == 0 || _failed)
+            return;
+
+        if (e.Key == "ArrowRight")
+            GoNext();
+        else if (e.Key == "ArrowLeft")
+            await GoBack();
+        else if (e.Key == " ")
+        {
+            _holding = !_holding;
+            if (_holding)
+                await JS.InvokeVoidAsync("storyPlayer.pause");
+            else
+                await JS.InvokeVoidAsync("storyPlayer.resume");
+            StateHasChanged();
+        }
+    }
+
+    private async Task GoBack()
+    {
+        if (_videos.Count == 0)
+            return;
+
+        if (_currentTime > 1)
+        {
+            _progress = 0;
+            _currentTime = 0;
+            await JS.InvokeVoidAsync("storyPlayer.restart");
+            StateHasChanged();
+            return;
+        }
+
+        _index = (_index - 1 + _videos.Count) % _videos.Count;
+        _progress = 0;
+        _currentTime = 0;
+        _needsPlay = true;
+        StateHasChanged();
+    }
+
+    private void GoNext()
+    {
+        Advance();
+        StateHasChanged();
+    }
+
+    private void Advance()
+    {
+        if (_videos.Count == 0)
+            return;
+
+        _index = (_index + 1) % _videos.Count;
+        _progress = 0;
+        _currentTime = 0;
+        _needsPlay = true;
+    }
+
+    private async Task ToggleMute()
+    {
+        _soundOn = !_soundOn;
+        await JS.InvokeVoidAsync("storyPlayer.setMuted", !_soundOn);
+    }
+
+    private void Close() => Navigation.NavigateTo("/");
+
+    public async ValueTask DisposeAsync()
+    {
+        _disposed = true;
+        try
+        {
+            await JS.InvokeVoidAsync("storyPlayer.detach");
+        }
+        catch (Exception)
+        {
+            // page is already going away
+        }
+
+        _dotNetRef?.Dispose();
+    }
+}

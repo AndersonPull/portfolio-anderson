@@ -35,4 +35,60 @@
     <Content Remove="wwwroot\Images\" />
     <Content Remove="wwwroot\Videos\" />
   </ItemGroup>
+
+  <Target Name="GenerateStoryCatalog" BeforeTargets="CoreCompile">
+    <GenerateStoryCatalogCode
+        StoriesDir="$(MSBuildProjectDirectory)\wwwroot\stories"
+        OutputPath="$(IntermediateOutputPath)StoryCatalog.g.cs" />
+    <ItemGroup>
+      <Compile Include="$(IntermediateOutputPath)StoryCatalog.g.cs" />
+    </ItemGroup>
+  </Target>
+
+  <UsingTask TaskName="GenerateStoryCatalogCode" TaskFactory="RoslynCodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
+    <ParameterGroup>
+      <StoriesDir ParameterType="System.String" Required="true" />
+      <OutputPath ParameterType="System.String" Required="true" />
+    </ParameterGroup>
+    <Task>
+      <Using Namespace="System" />
+      <Using Namespace="System.IO" />
+      <Using Namespace="System.Linq" />
+      <Using Namespace="System.Text" />
+      <Code Type="Fragment" Language="cs"><![CDATA[
+        var exts = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { ".mp4", ".webm", ".mov", ".m4v" };
+        var names = Directory.Exists(StoriesDir)
+            ? Directory.GetFiles(StoriesDir)
+                .Where(path => exts.Contains(Path.GetExtension(path)))
+                .Select(Path.GetFileName)
+                .OrderBy(name => name, StringComparer.OrdinalIgnoreCase)
+                .ToArray()
+            : Array.Empty<string>();
+
+        var sb = new StringBuilder();
+        sb.AppendLine("namespace Portfolio.Modules.Stories");
+        sb.AppendLine("{");
+        sb.AppendLine("    internal static class StoryCatalog");
+        sb.AppendLine("    {");
+        sb.AppendLine("        public static readonly string[] Videos = new string[]");
+        sb.AppendLine("        {");
+        foreach (var name in names)
+        {
+            var encoded = Uri.EscapeDataString(name);
+            sb.AppendLine("            \"stories/" + encoded + "\",");
+        }
+        sb.AppendLine("        };");
+        sb.AppendLine("    }");
+        sb.AppendLine("}");
+
+        var code = sb.ToString();
+        var dir = Path.GetDirectoryName(OutputPath);
+        if (!string.IsNullOrEmpty(dir))
+            Directory.CreateDirectory(dir);
+
+        if (!File.Exists(OutputPath) || File.ReadAllText(OutputPath) != code)
+            File.WriteAllText(OutputPath, code);
+      ]]></Code>
+    </Task>
+  </UsingTask>
 </Project>
